@@ -48,18 +48,21 @@ xml.div(:id=>'content-travel') do
     end
   end
 
-  xml.fieldset do
-    xml.legend local('accommodation')
-    xml.table do
-      xml << text_field_row( @conference_person_travel, :accommodation_name )
-      xml << text_field_row( @conference_person_travel, :accommodation_phone )
-      xml << text_field_row( @conference_person_travel, :accommodation_phone_room )
-      xml << text_field_row( @conference_person_travel, :accommodation_street )
-      xml << text_field_row( @conference_person_travel, :accommodation_postcode )
-      xml << text_field_row( @conference_person_travel, :accommodation_city )
-      xml << check_box_row( @conference_person_travel, :need_accommodation )
-      xml << check_box_row( @conference_person_travel, :need_accommodation_cost )
-      xml << money_currency_row( @conference_person_travel, :accommodation_cost, :accommodation_currency )
+  if 1 == 2 do
+      xml.fieldset do
+        xml.legend local('accommodation')
+        xml.table do
+          xml << text_field_row( @conference_person_travel, :accommodation_name )
+          xml << text_field_row( @conference_person_travel, :accommodation_phone )
+          xml << text_field_row( @conference_person_travel, :accommodation_phone_room )
+          xml << text_field_row( @conference_person_travel, :accommodation_street )
+          xml << text_field_row( @conference_person_travel, :accommodation_postcode )
+          xml << text_field_row( @conference_person_travel, :accommodation_city )
+          xml << check_box_row( @conference_person_travel, :need_accommodation )
+          xml << check_box_row( @conference_person_travel, :need_accommodation_cost )
+          xml << money_currency_row( @conference_person_travel, :accommodation_cost, :accommodation_currency )
+        end
+      end
     end
   end
 

@@ -8,5 +8,6 @@
 	(PentabarfController::person): Add @dc_conference_person
 
 	* rails/app/views/pentabarf/_person_travel.rxml: Add f_public_data checkbox
-	Add accommodation select box
+	Add accommodation select box, remove upstreams accom fields.
+	
 
