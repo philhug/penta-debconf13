@@ -8,9 +8,9 @@ xml.div({:id=>:data}) do
     xml.thead do
       xml.tr do
         xml.th( local( "Name" ), {:colspan=>2} )
-        xml.th( local( "Fee" ), {:colspan=>2} )
+        xml.th( local( "Requested Sponsorship" ), {:colspan=>2} )
         xml.th( local( "Travel Cost" ), {:colspan=>2} )
-        xml.th( local( "Accommodation Cost" ), {:colspan=>2} )
+        xml.th( local( "Arrival" ), {:colspan=>2} )
       end
     end
 
