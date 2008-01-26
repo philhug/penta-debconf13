@@ -4,6 +4,10 @@ xml.div(:id=>'content-contact') do
     xml.legend local('email')
 
     xml.table do
+      xml.tr do
+        xml.td("")
+        xml.td("Please use your Debian email address if applicable")
+      end
       xml << text_field_row( @person, :email )
       xml << text_field_row( @conference_person, :email )
       xml << check_box_row( @person, :spam )
@@ -88,4 +92,12 @@ xml.div(:id=>'content-contact') do
     end
   end
 
+  xml.fieldset do
+    xml.legend local('emergency contact')
+
+    xml.table do
+      xml << text_field_row( @dc_person, :emergency_name )
+      xml << text_field_row( @dc_person, :emergency_contact )
+    end
+  end
 end
