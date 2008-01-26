@@ -128,6 +128,7 @@ class PentabarfController < ApplicationController
     end
     @conference = @current_conference
     @conference_person = Conference_person.select_or_new({:conference_id=>@conference.conference_id, :person_id=>@person.person_id})
+    @dc_conference_person = DebConf::Dc_conference_person.select_or_new({:conference_id=>@conference.conference_id, :person_id=>@person.person_id})
     @conference_person_travel = Conference_person_travel.select_or_new({:conference_person_id=>@conference_person.conference_person_id.to_i})
     @person_rating = Person_rating.select_or_new({:person_id=>@person.person_id,:evaluator_id=>POPE.user.person_id})
     @person_image = Person_image.select_or_new({:person_id=>@person.person_id})

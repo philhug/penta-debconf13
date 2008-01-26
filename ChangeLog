@@ -1,0 +1,9 @@
+2008-01-26  Joerg Jaspert  <joerg@debian.org>
+
+	* rails/app/models/debconf.rb: Add a model for the debconf schema
+
+	* app/controllers/pentabarf_controller.rb
+	(PentabarfController::person): Add @dc_conference_person
+
+	* app/views/pentabarf/_person_travel.rxml: Add f_public_data checkbox
+
