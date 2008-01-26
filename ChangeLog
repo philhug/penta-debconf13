@@ -1,7 +1,7 @@
 2008-01-26  Joerg Jaspert  <joerg@debian.org>
 
 	* rails/app/views/pentabarf/_event_general.rxml: Add event license
-
+	
 	* rails/app/views/submission/_event_general.rxml: Add event license
 
 	* rails/app/views/pentabarf/_sidebar.rxml: Add dc7/8 links
@@ -22,6 +22,7 @@
 
 	* rails/app/controllers/pentabarf_controller.rb
 	(PentabarfController::person): Add @dc_conference_person
+	(PentabarfController::event): Add event license field
 
 	* rails/app/views/pentabarf/_person_travel.rxml: Add f_public_data checkbox
 	Add accommodation select box, remove upstreams accom fields.

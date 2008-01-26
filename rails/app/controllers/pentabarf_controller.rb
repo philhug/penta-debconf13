@@ -98,6 +98,7 @@ class PentabarfController < ApplicationController
     @current_conference = @conference
     @attachments = View_event_attachment.select({:event_id=>@event.event_id,:translated=>@current_language})
     @transaction = Event_transaction.select_single({:event_id=>@event.event_id}) rescue Event_transaction.new
+    @dc_event = DebConf::Dc_event.select_single({:event_id=>@event.event_id})
   end
 
   def save_event
