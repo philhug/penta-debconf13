@@ -1,5 +1,8 @@
 2008-01-26  Joerg Jaspert  <joerg@debian.org>
 
+	* rails/app/views/submission/_person_account.rxml: Add
+	subscription links to debconf-{announce,discuss}
+
 	* rails/app/controllers/submission_controller.rb
 	(SubmissionController::event): Add @dc_event
 

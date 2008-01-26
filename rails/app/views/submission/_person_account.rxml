@@ -17,4 +17,22 @@ xml.div(:id=>'content-account') do
     end
   end
 
+      xml.a( 'DebConf8', {:href=>"http://debconf8.debconf.org/", :class => 'menu-item'} )
+
+  xml.fieldset do
+    xml.legend local('Mailing Lists')
+
+    xml << "You can subscribe yourself to the following mailing lists by clicking on the links in the right column:"
+
+    xml.table do
+      xml.tr do
+        xml.td ( local('debconf-announce') )
+        xml.td do xml.a( 'debconf-announce', {:href=>"http://lists.debconf.org/mailman/subscribe/debconf-announce?email=#{@conference_person.email || @person.email}&fullname=#{@person.name}"} ) end
+      end
+      xml.tr do
+        xml.td ( local('debconf-discuss') )
+        xml.td do xml.a( 'debconf-discuss', {:href=>"http://lists.debconf.org/mailman/subscribe/debconf-discuss?email=#{@conference_person.email || @person.email}&fullname=#{@person.name}"} ) end
+      end
+    end
+  end
 end
