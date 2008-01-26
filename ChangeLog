@@ -1,5 +1,9 @@
 2008-01-26  Joerg Jaspert  <joerg@debian.org>
 
+	* rails/app/views/pentabarf/_sidebar.rxml: Add dc7/8 links
+
+	* TODO: Added
+
 	* rails/app/views/report/expenses.rxml: Rename columns
 
 	* rails/lib/token.rb (Token): Add missing require 'digest/sha1'
