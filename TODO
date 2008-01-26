@@ -1,3 +1,9 @@
 - add reports from us in old pentabarf:
   _report_people.rhtml
 
+- schedule controller/view changes arent merged into dc8 yet.
+
+- Localisation changes need to be merged using the localisation
+  interface
+
+
