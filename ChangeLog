@@ -6,6 +6,7 @@
 	* rails/app/views/pentabarf/_event_general.rxml: Add event license
 	
 	* rails/app/views/submission/_event_general.rxml: Add event license
+	Add information about multiple speakers
 
 	* rails/app/views/pentabarf/_sidebar.rxml: Add dc7/8 links
 

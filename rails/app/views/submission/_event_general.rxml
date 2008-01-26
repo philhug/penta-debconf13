@@ -18,5 +18,14 @@ xml.div(:id=>'content-general') do
     end
   end
 
+  xml.fieldset do
+    xml.legend local('view::pentabarf::event::tab::general::explanation')
+
+    xml.p do
+      xml << "An event can have multiple speakers. If you want to have other people added, please contact "
+      xml.a( 'pentabarf@penta.debconf.org', {:href=>"mailto:pentabarf@penta.debconf.org"})
+      xml << "and tell us the event name (or even better - the id) and the names of the person(s) to add."
+    end
+  end
 
 end
