@@ -4,8 +4,9 @@
 
 	* rails/app/models/deb_conf.rb: Add a model for the debconf schema
 
-	* app/controllers/pentabarf_controller.rb
+	* rails/app/controllers/pentabarf_controller.rb
 	(PentabarfController::person): Add @dc_conference_person
 
-	* app/views/pentabarf/_person_travel.rxml: Add f_public_data checkbox
+	* rails/app/views/pentabarf/_person_travel.rxml: Add f_public_data checkbox
+	Add accommodation select box
 
