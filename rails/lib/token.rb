@@ -1,6 +1,7 @@
 # class that handles token generation
 class Token
   class << self
+    require 'digest/sha1'
 
     def generate( url )
       salt = POPE.user.password[0..15] rescue ""

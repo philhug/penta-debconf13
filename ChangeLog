@@ -1,5 +1,7 @@
 2008-01-26  Joerg Jaspert  <joerg@debian.org>
 
+	* rails/lib/token.rb (Token): Add missing require 'digest/sha1'
+
 	* rails/app/models/deb_conf.rb: Add a model for the debconf schema
 
 	* app/controllers/pentabarf_controller.rb
