@@ -2,6 +2,12 @@
 
 	* rails/app/views/pentabarf/_sidebar.rxml: Add dc7/8 links
 
+	* rails/app/views/user/_sidebar.rxml: dito
+
+	* rails/app/views/submission/_sidebar.rxml: dito
+
+	* rails/app/views/admin/_sidebar.rxml: dito
+
 	* TODO: Added
 
 	* rails/app/views/report/expenses.rxml: Rename columns
