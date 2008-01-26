@@ -1,5 +1,7 @@
 2008-01-26  Joerg Jaspert  <joerg@debian.org>
 
+	* rails/app/views/pentabarf/_event_general.rxml: Add event license
+
 	* rails/app/views/submission/_event_general.rxml: Add event license
 
 	* rails/app/views/pentabarf/_sidebar.rxml: Add dc7/8 links
