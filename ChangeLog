@@ -30,6 +30,8 @@
 	(PentabarfController::person): Add @dc_person
 	(PentabarfController::save_event): Save event license
 	(PentabarfController::save_person): Save dc_person and dc_conference_person
+	(PentabarfController::save_person): Make sure boolean fields get
+	saved if toggled off
 
 	* rails/app/views/submission/_person_travel.rxml: Add
 	f_public_data and accommodation selection, hide upstreams
@@ -40,6 +42,8 @@
 	(SubmissionController::person): Add @dc_conference_person
 	(SubmissionController::save_event): save event_license.
 	(SubmissionController::save_person): Save dc_person and dc_conference_person
+	(SubmissionController::save_person): Make sure boolean fields get
+	saved if toggled off
 
 2008-01-26  Joerg Jaspert  <joerg@debian.org>
 

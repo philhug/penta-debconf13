@@ -154,7 +154,7 @@ class PentabarfController < ApplicationController
       end
     end
     options = {:preset=>{:person_id => person.person_id,:conference_id=>@current_conference.conference_id}}
-    conference_person = write_row( Conference_person, params[:conference_person], {:always=>[:reconfirmed],:preset=>{:person_id => person.person_id,:conference_id=>@current_conference.conference_id}})
+    conference_person = write_row( Conference_person, params[:conference_person], {:always=>[:arrived,:reconfirmed],:preset=>{:person_id => person.person_id,:conference_id=>@current_conference.conference_id}})
     write_row( Conference_person_travel, params[:conference_person_travel], {:preset=>{:conference_person_id => conference_person.conference_person_id}})
     write_row( Person_rating, params[:person_rating], {:preset=>{:person_id => person.person_id,:evaluator_id=>POPE.user.person_id}})
     write_rows( Person_language, params[:person_language], {:preset=>{:person_id => person.person_id}})
@@ -164,7 +164,8 @@ class PentabarfController < ApplicationController
     write_rows( Person_phone, params[:person_phone], {:preset=>{:person_id => person.person_id},:ignore_empty=>:phone_number})
     write_rows( Event_person, params[:event_person], {:preset=>{:person_id => person.person_id}})
 
-    dc_options = {:preset=>{:person_id => person.person_id,:conference_id=>@conference.conference_id}}
+    dc_options = {:preset=>{:person_id => person.person_id,:conference_id=>@current_conference.conference_id},
+      :always=>[:assassins,:public_data,:proceedings]}
     write_row (DebConf::Dc_conference_person, params[:dc_conference_person], dc_options)
     write_row (DebConf::Dc_person, params[:dc_person], {:preset=>{:person_id => person.person_id}})
 
