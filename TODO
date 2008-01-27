@@ -11,3 +11,18 @@
 - +++
   www_0.2.10/pentabarf/app/views/submission/_person_availability.rhtml
   2007-04-17 20:57:37.000000000 +0000
+
+- submission sidebar:
+-      <%= link_to( 'Person', {:action => :person,:conference=>@conference.acronym}, { :class => 'menu-item' } ) %>
+-      <%= link_to( 'New Event', {:action => :event,:conference=>@conference.acronym, :id => nil }, { :class => 'menu-item' } ) %>
+-      <%= link_to( 'Events', {:action => :events,:conference=>@conference.acronym }, { :class => 'menu-item' } ) %>
++      <%= link_to( 'Registration details', {:action => :person,:conference=>@conference.acronym}, { :class => 'menu-item' } ) %>
++      <%= link_to( 'New Event/Paper', {:action => :event,:conference=>@conference.acronym, :id => nil }, { :class => 'menu-item' } ) %>
++      <%= link_to( 'Own Events/Papers', {:action => :events,:conference=>@conference.acronym }, { :class => 'menu-item' } ) %>
++      <%= link_to( 'Visitor system', {:controller => 'visitor', :action => :index,:conference=>@conference.acronym }, { :class => 'menu-item' } ) %>
++      <%= link_to( 'Attendee list (name sort)', {:action => :attendee,:conference=>@conference.acronym }, { :class => 'menu-item' } ) %>
++      <%= link_to( 'Attendee list (a. time sort)', {:action => :attendee_time,:conference=>@conference.acronym }, { :class => 'menu-item' } ) %>
++      <%= link_to( 'Attendee list (d. time sort)', {:action => :attendee_dep,:conference=>@conference.acronym }, { :class => 'menu-item' } ) %>
++      <%= link_to( 'Rooms by attendee', {:action => :rooms_byname,:conference=>@conference.acronym }, { :class => 'menu-item' } ) %>
++      <%= link_to( 'Rooms Cowgate', {:action => :rooms_cg,:conference=>@conference.acronym }, { :class => 'menu-item' } ) %>
++      <%= link_to( 'Rooms Budget Backpackers', {:action => :rooms_bb,:conference=>@conference.acronym }, { :class => 'menu-item' } ) %>
