@@ -1,5 +1,11 @@
 2008-01-27  Joerg Jaspert  <joerg@debian.org>
 
+	* rails/app/views/pentabarf/_person_contact.rxml: Add emergency
+	contact
+
+	* rails/app/controllers/pentabarf_controller.rb
+	(PentabarfController::person): Add @dc_person
+
 	* rails/app/views/submission/_person_travel.rxml: Add
 	f_public_data and accommodation selection, hide upstreams
 	accommodation box.

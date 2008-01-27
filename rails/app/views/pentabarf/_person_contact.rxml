@@ -88,4 +88,13 @@ xml.div(:id=>'content-contact') do
     end
   end
 
+  xml.fieldset do
+    xml.legend local('emergency contact')
+
+    xml.table do
+      xml << text_field_row( @dc_person, :emergency_name )
+      xml << text_field_row( @dc_person, :emergency_contact )
+    end
+  end
+
 end
