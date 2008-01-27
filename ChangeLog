@@ -28,6 +28,7 @@
 
 	* rails/app/controllers/pentabarf_controller.rb
 	(PentabarfController::person): Add @dc_person
+	(PentabarfController::save_event): Save event license
 
 	* rails/app/views/submission/_person_travel.rxml: Add
 	f_public_data and accommodation selection, hide upstreams
@@ -36,6 +37,7 @@
 
 	* rails/app/controllers/submission_controller.rb
 	(SubmissionController::person): Add @dc_conference_person
+	(SubmissionController::save_event): save event_license.
 
 2008-01-26  Joerg Jaspert  <joerg@debian.org>
 

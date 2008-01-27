@@ -49,6 +49,8 @@ class SubmissionController < ApplicationController
     write_rows( Event_attachment, params[:event_attachment], {:always=>[:public]} )
     write_file_rows( Event_attachment, params[:attachment_upload], {:preset=>{:event_id=>event.event_id}})
 
+    write_row (DebConf::Dc_event, params[:dc_event], {:preset=>{:event_id => event.event_id}})
+
     Event_transaction.new({:event_id=>event.event_id,:changed_by=>POPE.user.person_id}).write
 
     redirect_to( :action => :event, :id => event.event_id )
