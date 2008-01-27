@@ -1,5 +1,7 @@
 2008-01-27  Joerg Jaspert  <joerg@debian.org>
 
+	* sql/functions/log/activate_logging.sql: Also log in schema debconf
+
 	* rails/app/views/pentabarf/_person_contact.rxml: Add emergency
 	contact
 

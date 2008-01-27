@@ -15,10 +15,10 @@ CREATE OR REPLACE FUNCTION log.activate_logging() RETURNS VOID AS $$
     columns_new TEXT;
   BEGIN
     FOR logtable IN
-      SELECT table_name FROM information_schema.tables WHERE table_schema = 'log' AND EXISTS( SELECT 1 FROM information_schema.tables AS interior WHERE table_schema IN ('auth','public') AND interior.table_name = tables.table_name )
+      SELECT table_name FROM information_schema.tables WHERE table_schema = 'log' AND EXISTS( SELECT 1 FROM information_schema.tables AS interior WHERE table_schema IN ('auth','public','debconf') AND interior.table_name = tables.table_name )
     LOOP
       tablename = logtable.table_name;
-      SELECT INTO tableschema table_schema FROM information_schema.tables WHERE table_schema IN ('auth','public') AND table_name = tablename;
+      SELECT INTO tableschema table_schema FROM information_schema.tables WHERE table_schema IN ('auth','public','debconf') AND table_name = tablename;
       RAISE NOTICE 'Creating log function for table %', tablename;
       -- (re)creating trigger function
       procname = tablename || '_log_function';
