@@ -87,6 +87,10 @@ class SubmissionController < ApplicationController
     write_rows( Person_im, params[:person_im], {:preset=>{:person_id => person.person_id},:ignore_empty=>:im_address})
     write_rows( Person_phone, params[:person_phone], {:preset=>{:person_id => person.person_id},:ignore_empty=>:phone_number})
 
+    dc_options = {:preset=>{:person_id => person.person_id,:conference_id=>@conference.conference_id}}
+    write_row (DebConf::Dc_conference_person, params[:dc_conference_person], dc_options)
+    write_row (DebConf::Dc_person, params[:dc_person], {:preset=>{:person_id => person.person_id}})
+
     write_file_row( Person_image, params[:person_image], {:preset=>{:person_id => person.person_id},:always=>[:public],:image=>true})
     write_person_availability( @conference, person, params[:person_availability])
 
