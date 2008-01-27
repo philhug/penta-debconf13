@@ -1,3 +1,12 @@
+2008-01-27  Joerg Jaspert  <joerg@debian.org>
+
+	* rails/app/views/submission/_person_travel.rxml: Add
+	f_public_data and accommodation selection, hide upstreams
+	accommodation box.
+
+	* rails/app/controllers/submission_controller.rb
+	(SubmissionController::person): Add @dc_conference_person
+
 2008-01-26  Joerg Jaspert  <joerg@debian.org>
 
 	* rails/app/views/submission/_person_contact.rxml: add

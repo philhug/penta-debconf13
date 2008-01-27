@@ -62,6 +62,7 @@ class SubmissionController < ApplicationController
     @person_image = Person_image.select_or_new({:person_id=>@person.person_id})
     @transaction = Person_transaction.select_single({:person_id=>@person.person_id}) rescue Person_transaction.new
     @dc_person = DebConf::Dc_person.select_or_new({:person_id=>@person.person_id})
+    @dc_conference_person = DebConf::Dc_conference_person.select_or_new({:conference_id=>@conference.conference_id, :person_id=>@person.person_id})
   end
 
   def save_person

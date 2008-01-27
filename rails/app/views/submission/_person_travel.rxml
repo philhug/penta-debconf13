@@ -36,22 +36,33 @@ xml.div(:id=>'content-travel') do
       xml << check_box_row( @conference_person_travel, :need_travel_cost )
       xml << money_currency_row( @conference_person_travel, :travel_cost, :travel_currency )
       xml << money_currency_row( @conference_person_travel, :fee, :fee_currency )
+      xml << check_box_row( @dc_conference_person, :f_public_data )
     end
 
   end
 
   xml.fieldset do
-    xml.legend local('accommodation')
+    xml.legend local('accommodation_sponsored')
+
     xml.table do
-      xml << text_field_row( @conference_person_travel, :accommodation_name )
-      xml << text_field_row( @conference_person_travel, :accommodation_phone )
-      xml << text_field_row( @conference_person_travel, :accommodation_phone_room )
-      xml << text_field_row( @conference_person_travel, :accommodation_street )
-      xml << text_field_row( @conference_person_travel, :accommodation_postcode )
-      xml << text_field_row( @conference_person_travel, :accommodation_city )
-      xml << check_box_row( @conference_person_travel, :need_accommodation )
-      xml << check_box_row( @conference_person_travel, :need_accommodation_cost )
-      xml << money_currency_row( @conference_person_travel, :accommodation_cost, :accommodation_currency )
+      xml << select_row(  @dc_conference_person, :accom_id, DebConf::Dc_accomodation.select.map{|e| [e.accom_id,e.accom]} )
+    end
+  end
+
+  if 1 == 2
+    xml.fieldset do
+      xml.legend local('accommodation')
+      xml.table do
+        xml << text_field_row( @conference_person_travel, :accommodation_name )
+        xml << text_field_row( @conference_person_travel, :accommodation_phone )
+        xml << text_field_row( @conference_person_travel, :accommodation_phone_room )
+        xml << text_field_row( @conference_person_travel, :accommodation_street )
+        xml << text_field_row( @conference_person_travel, :accommodation_postcode )
+        xml << text_field_row( @conference_person_travel, :accommodation_city )
+        xml << check_box_row( @conference_person_travel, :need_accommodation )
+        xml << check_box_row( @conference_person_travel, :need_accommodation_cost )
+        xml << money_currency_row( @conference_person_travel, :accommodation_cost, :accommodation_currency )
+      end
     end
   end
 
