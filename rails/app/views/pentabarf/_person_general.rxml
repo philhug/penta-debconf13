@@ -16,6 +16,7 @@ xml.div(:id=>'content-general') do
       xml << check_box_row( @conference_person, :reconfirmed )
 
       xml << select_row(  @dc_person, :person_type_id, DebConf::Dc_person_type.select.map{|e| [e.person_type_id,e.description]} )
+      xml << select_row(  @dc_conference_person, :t_shirt_sizes_id, DebConf::Dc_t_shirt_sizes.select.map{|e| [e.t_shirt_sizes_id,e.t_shirt_size]} )
 
       xml << check_box_row( @dc_conference_person, :proceedings )
       xml << check_box_row( @dc_conference_person, :assassins )

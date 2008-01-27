@@ -3,10 +3,12 @@
 	* rails/app/views/submission/_person_general.rxml: Add proceedings flag
 	Add assassins flag
 	Add person_type
+	Add t_shirt_sizes
 
 	* rails/app/views/pentabarf/_person_general.rxml: dito
 	dito
 	Add person_type
+	Add t_shirt_sizes
 
 	* sql/functions/log/activate_logging.sql: Also log in schema debconf
 
