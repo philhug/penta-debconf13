@@ -1,3 +1,7 @@
+Base file for differences between 0.2.10 and our 0.2.10 is in
+~joerg/old/0.2.10_changes.diff
+
+
 - SAVE of all the displayed data that I add.
 
 - add reports from us in old pentabarf:
@@ -26,3 +30,15 @@
 +      <%= link_to( 'Rooms by attendee', {:action => :rooms_byname,:conference=>@conference.acronym }, { :class => 'menu-item' } ) %>
 +      <%= link_to( 'Rooms Cowgate', {:action => :rooms_cg,:conference=>@conference.acronym }, { :class => 'menu-item' } ) %>
 +      <%= link_to( 'Rooms Budget Backpackers', {:action => :rooms_bb,:conference=>@conference.acronym }, { :class => 'menu-item' } ) %>
+
+- error page in users controller
+
+- various views, including some for entrance controller
+
+- script/add_event_link
+
+- script/timetable.rb
+
+- all the additions to mail sending
+
+- added reports

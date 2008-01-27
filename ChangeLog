@@ -1,5 +1,10 @@
 2008-01-27  Joerg Jaspert  <joerg@debian.org>
 
+	* rails/app/views/user/new_account.rxml: Add "Please use Debian
+	email" text.
+
+	* rails/app/views/user/index.rxml: Language changes
+
 	* rails/app/views/submission/_person_general.rxml: Add proceedings flag
 	Add assassins flag
 	Add person_type

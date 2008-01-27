@@ -1,5 +1,9 @@
 xml.div(:id=>:data) do
   xml.p "Enter your data to create an account. All fields are mandatory. The email address will be used for activating your account."
+  xml.p do
+    xml.b "Please use your Debian email address if applicable."
+  end
+
   xml.form(:action=>url_for(:action=>:save_account,:id=>params[:id])) do
     xml.table do
       xml.tr do
@@ -7,7 +11,11 @@ xml.div(:id=>:data) do
         xml.td do xml.input({:type=>:text,:name=>'account[login_name]'}) end
       end
       xml.tr do
-        xml.td( "Email address" )
+        xml.td do
+          xml.text! "Email address"
+          xml.br
+          xml.text! "Please use your Debian email address if applicable."
+        end
         xml.td do xml.input({:type=>:text,:name=>'account[email]'}) end
       end
       xml.tr do
