@@ -1,8 +1,10 @@
 2008-01-27  Joerg Jaspert  <joerg@debian.org>
 
 	* rails/app/views/submission/_person_general.rxml: Add proceedings flag
-
+	Add assassins flag
+	
 	* rails/app/views/pentabarf/_person_general.rxml: dito
+	dito
 
 	* sql/functions/log/activate_logging.sql: Also log in schema debconf
 

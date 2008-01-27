@@ -16,6 +16,7 @@ xml.div(:id=>'content-general') do
       xml << check_box_row( @conference_person, :reconfirmed ) if @conference.f_reconfirmation_enabled
 
       xml << check_box_row( @dc_conference_person, :proceedings )
+      xml << check_box_row( @dc_conference_person, :assassins )
     end
   end
 
