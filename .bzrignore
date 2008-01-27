@@ -1,0 +1,7 @@
+rails/config/database.yml
+rails/config/jabber.yml
+rails/config/mail.yml
+rails/config/mongrel_cluster.yml
+rails/log/production.log
+rails/public/.htaccess
+rails/public/stylesheets/main.css
