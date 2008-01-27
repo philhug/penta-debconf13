@@ -17,6 +17,7 @@
 	* rails/app/views/submission/_person_travel.rxml: Add
 	f_public_data and accommodation selection, hide upstreams
 	accommodation box.
+	Rename f_public_data to public_data
 
 	* rails/app/controllers/submission_controller.rb
 	(SubmissionController::person): Add @dc_conference_person

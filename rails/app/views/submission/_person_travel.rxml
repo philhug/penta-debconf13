@@ -36,7 +36,7 @@ xml.div(:id=>'content-travel') do
       xml << check_box_row( @conference_person_travel, :need_travel_cost )
       xml << money_currency_row( @conference_person_travel, :travel_cost, :travel_currency )
       xml << money_currency_row( @conference_person_travel, :fee, :fee_currency )
-      xml << check_box_row( @dc_conference_person, :f_public_data )
+      xml << check_box_row( @dc_conference_person, :public_data )
     end
 
   end
