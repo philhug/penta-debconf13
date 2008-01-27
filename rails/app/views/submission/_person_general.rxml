@@ -14,6 +14,8 @@ xml.div(:id=>'content-general') do
       xml << file_row( :person_image, :image )
       xml << check_box_row( @person_image, :public )
       xml << check_box_row( @conference_person, :reconfirmed ) if @conference.f_reconfirmation_enabled
+
+      xml << check_box_row( @dc_conference_person, :proceedings )
     end
   end
 

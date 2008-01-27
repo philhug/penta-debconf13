@@ -1,5 +1,9 @@
 2008-01-27  Joerg Jaspert  <joerg@debian.org>
 
+	* rails/app/views/submission/_person_general.rxml: Add proceedings flag
+
+	* rails/app/views/pentabarf/_person_general.rxml: dito
+
 	* sql/functions/log/activate_logging.sql: Also log in schema debconf
 
 	* rails/app/views/pentabarf/_person_contact.rxml: Add emergency
