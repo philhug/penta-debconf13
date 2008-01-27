@@ -6,6 +6,7 @@
 	Add t_shirt_sizes
 	Add food selection
 	Add daytrip select
+	Add computer select
 
 	* rails/app/views/pentabarf/_person_general.rxml: dito
 	dito
@@ -13,6 +14,7 @@
 	Add t_shirt_sizes
 	Add food selection
 	Add daytrip select
+	Add computer select
 
 	* sql/functions/log/activate_logging.sql: Also log in schema debconf
 
