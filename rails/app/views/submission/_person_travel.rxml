@@ -34,6 +34,9 @@ xml.div(:id=>'content-travel') do
           end
         end
       end
+      xml.tr do
+        xml << check_box_row( @dc_conference_person, :travel_to_venue )
+      end
     end
 
     xml.table do
