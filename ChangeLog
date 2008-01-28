@@ -1,5 +1,7 @@
 2008-01-28  Joerg Jaspert  <joerg@debian.org>
 
+	* rails/app/views/submission/person.rxml: restructure tabs a bit
+
 	* rails/app/views/submission/_person_travel.rxml: Add
 	"travel_to_venue" checkbox
 
