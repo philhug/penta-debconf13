@@ -5,8 +5,10 @@
 	conference knows about
 
 	* rails/app/views/pentabarf/_person_general.rxml: Add attend checkbox
+	person_type_id moved to @dc_conference_person
 
 	* rails/app/views/submission/_person_general.rxml: Add attend checkbox
+	person_type_id moved to @dc_conference_person
 
 	* rails/app/views/pentabarf/_conference_export.rxml: Add
 	reconfirmation toggle
