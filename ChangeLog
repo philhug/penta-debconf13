@@ -1,5 +1,9 @@
 2008-01-28  Joerg Jaspert  <joerg@debian.org>
 
+	* rails/lib/builder_helper.rb
+	(Builder_helper::money_currency_row): Only show currencies the
+	conference knows about
+
 	* rails/app/views/pentabarf/_person_general.rxml: Add attend checkbox
 
 	* rails/app/views/submission/_person_general.rxml: Add attend checkbox
