@@ -1,5 +1,9 @@
 2008-01-28  Joerg Jaspert  <joerg@debian.org>
 
+	* rails/app/views/pentabarf/_person_general.rxml: Add attend checkbox
+
+	* rails/app/views/submission/_person_general.rxml: Add attend checkbox
+
 	* rails/app/views/pentabarf/_conference_export.rxml: Add
 	reconfirmation toggle
 

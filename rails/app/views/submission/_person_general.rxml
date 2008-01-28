@@ -15,6 +15,8 @@ xml.div(:id=>'content-general') do
       xml << check_box_row( @person_image, :public )
       xml << check_box_row( @conference_person, :reconfirmed ) if @conference.f_reconfirmation_enabled
 
+      xml << check_box_row ( @dc_conference_person, :attend )
+
       xml << select_row(  @dc_person, :person_type_id, DebConf::Dc_person_type.select.map{|e| [e.person_type_id,e.description]} )
       xml << select_row(  @dc_conference_person, :t_shirt_sizes_id, DebConf::Dc_t_shirt_sizes.select.map{|e| [e.t_shirt_sizes_id,e.t_shirt_size]} )
       xml << select_row(  @dc_conference_person, :food_id, DebConf::Dc_food_preferences.select.map{|e| [e.food_id,e.food]} )

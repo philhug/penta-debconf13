@@ -112,7 +112,7 @@ class PentabarfController < ApplicationController
     write_rows( Event_attachment, params[:event_attachment], {:always=>[:public]} )
     write_file_rows( Event_attachment, params[:attachment_upload], {:preset=>{:event_id=>event.event_id}})
 
-    write_row (DebConf::Dc_event, params[:dc_event], {:preset=>{:event_id => event.event_id}})
+    write_row(DebConf::Dc_event, params[:dc_event], {:preset=>{:event_id => event.event_id}})
 
     Event_transaction.new({:event_id=>event.event_id,:changed_by=>POPE.user.person_id}).write
 
@@ -166,8 +166,8 @@ class PentabarfController < ApplicationController
 
     dc_options = {:preset=>{:person_id => person.person_id,:conference_id=>@current_conference.conference_id},
       :always=>[:assassins,:public_data,:proceedings,:attend]}
-    write_row (DebConf::Dc_conference_person, params[:dc_conference_person], dc_options)
-    write_row (DebConf::Dc_person, params[:dc_person], {:preset=>{:person_id => person.person_id}})
+    write_row(DebConf::Dc_conference_person, params[:dc_conference_person], dc_options)
+    write_row(DebConf::Dc_person, params[:dc_person], {:preset=>{:person_id => person.person_id}})
 
     write_file_row( Person_image, params[:person_image], {:preset=>{:person_id => person.person_id},:always=>[:public],:image=>true})
     write_person_availability( @current_conference, person, params[:person_availability])
