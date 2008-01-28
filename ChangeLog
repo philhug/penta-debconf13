@@ -4,6 +4,7 @@
 
 	* rails/app/views/submission/_person_travel.rxml: Add
 	"travel_to_venue" checkbox
+	move accom fields to _general.rxml
 
 	* rails/app/views/pentabarf/_person_travel.rxml: Add
 	"travel_to_venue" checkbox
@@ -21,6 +22,7 @@
 	person_type_id moved to @dc_conference_person
 	add debcamp option
 	Add debcamp reason
+	Add a DebConf and DebCamp fieldset, move fields around.
 
 	* rails/app/views/pentabarf/_conference_export.rxml: Add
 	reconfirmation toggle

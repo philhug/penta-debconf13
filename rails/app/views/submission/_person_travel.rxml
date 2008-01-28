@@ -9,6 +9,9 @@ xml.div(:id=>'content-travel') do
 
     xml.table do
       xml.tr do
+        xml << check_box_row( @dc_conference_person, :travel_to_venue )
+      end
+      xml.tr do
         xml.td do
           xml.table do
             xml.tr do xml.th( local( 'arrival' ), {:colspan=>2}) end
@@ -34,9 +37,6 @@ xml.div(:id=>'content-travel') do
           end
         end
       end
-      xml.tr do
-        xml << check_box_row( @dc_conference_person, :travel_to_venue )
-      end
     end
 
     xml.table do
@@ -46,14 +46,6 @@ xml.div(:id=>'content-travel') do
       xml << check_box_row( @dc_conference_person, :public_data )
     end
 
-  end
-
-  xml.fieldset do
-    xml.legend local('accommodation_sponsored')
-
-    xml.table do
-      xml << select_row(  @dc_conference_person, :accom_id, DebConf::Dc_accomodation.select.map{|e| [e.accom_id,e.accom]} )
-    end
   end
 
   if 1 == 2
