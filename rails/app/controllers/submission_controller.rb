@@ -88,7 +88,7 @@ class SubmissionController < ApplicationController
     write_rows( Person_phone, params[:person_phone], {:preset=>{:person_id => person.person_id},:ignore_empty=>:phone_number})
 
     dc_options = {:preset=>{:person_id => person.person_id,:conference_id=>@conference.conference_id},
-      :always=>[:assassins,:public_data,:proceedings]}
+      :always=>[:assassins,:public_data,:proceedings,:attend]}
     write_row (DebConf::Dc_conference_person, params[:dc_conference_person], dc_options)
     write_row (DebConf::Dc_person, params[:dc_person], {:preset=>{:person_id => person.person_id}})
 

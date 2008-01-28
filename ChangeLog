@@ -1,3 +1,14 @@
+2008-01-28  Joerg Jaspert  <joerg@debian.org>
+
+	* rails/app/views/pentabarf/_conference_export.rxml: Add
+	reconfirmation toggle
+
+	* rails/app/controllers/submission_controller.rb
+	(SubmissionController::save_person): Save the attend flag.
+
+	* rails/app/controllers/pentabarf_controller.rb
+	(PentabarfController::save_person): Save the attend flag
+
 2008-01-27  Joerg Jaspert  <joerg@debian.org>
 
 	* rails/app/views/user/new_account.rxml: Add "Please use Debian
