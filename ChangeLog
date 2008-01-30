@@ -1,3 +1,25 @@
+2008-01-30  Joerg Jaspert  <joerg@debian.org>
+
+	* rails/app/views/submission/_person_travel.rxml: Added JS check
+	stuff for dates
+
+2008-01-29  Joerg Jaspert  <joerg@debian.org>
+
+	* rails/public/javascripts/application.js: Add date check JS
+
+	* rails/lib/builder_helper.rb (Builder_helper::date_button_row):
+	pass options, but hardcode :size in them.
+
+	* rails/app/views/submission/_person_general.rxml: Add various
+	javascript hooks and a span for the debcamp check.
+
+	* rails/app/views/submission/person.rxml: Use the _person buttons.
+	Add call to date check js
+
+	* rails/app/views/submission/_modification_buttons_person.rxml:
+	Added, copied from _modification_buttons_person.rxml.
+	Add form validation JS thingie into submit button
+
 2008-01-28  Joerg Jaspert  <joerg@debian.org>
 
 	* rails/app/views/submission/person.rxml: restructure tabs a bit

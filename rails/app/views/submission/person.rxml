@@ -18,7 +18,7 @@ xml.div( :id => 'data' ) do
 
     xml << hidden_field( @conference_person, :conference_person_id )
     xml.input( nil, {:type=>:hidden,:name=>:transaction,:value=>@transaction.person_transaction_id})
-    xml << render( :partial => 'modification_buttons' )
+    xml << render( :partial => 'modification_buttons_person' )
 
     tabs.each do | tab |
       xml << render( :partial => "person_#{tab}")
@@ -29,6 +29,8 @@ xml.div( :id => 'data' ) do
   xml.script( "function send_content(){ $('content_form').submit();  }", { :type => 'text/javascript' } )
   xml.script( "new Form.EventObserver('content_form', function(element, value ) { enable_save_button() } );", { :type => 'text/javascript' } )
   xml.script( "switch_tab();", { :type => 'text/javascript' } )
+  xml.script( "check_debcamp(); check_dates();", { :type => 'text/javascript' } )
+
 
 end
 

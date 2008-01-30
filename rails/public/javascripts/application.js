@@ -314,4 +314,85 @@ function add_person_event( event_person_id, event_id, event_role, event_role_sta
   replace_select_with_hidden_field( select );
 }
 
+function check_debcamp(){
+	var desc = $('dc_conference_person[debcamp_reason]');
+	var descerr = $('debcamp_description_err');
+	var ret = true;
+	desc.style.border = '';
+	descerr.style.display = 'none';
+	if($('dc_conference_person[debcamp_id]').value == 2) {
+		desc.disabled = 0;
+		desc.style.color = 'black';
+		if(desc.value.length < 10) {
+			descerr.style.display = 'inline';
+			desc.style.border = 'red solid 1px';
+			ret = false;
+		}
+	} else {
+		desc.disabled = 1;
+		desc.style.color = 'gray';
+	}
+	return ret;
+}
+function check_dates() {
+	var dcampstart = new Date(2008, 8, 2);
+	var dconfstart = new Date(2008, 8, 9);
+	var dconfend = new Date(2008, 8, 17);
+	var debcamp = $('dc_conference_person[debcamp_id]').value;
+	var arrivalst = $("conference_person_travel[arrival_date]").value;
+	var departst = $("conference_person_travel[departure_date]").value;
+	var ret = true;
+	var arrival;
+	var depart;
+	if(arrivalst) {
+		var arrivalA = arrivalst.split("-");
+		arrival = new Date(arrivalA[0], arrivalA[1], arrivalA[2]);
+	}
+	if(departst) {
+		var arrivalA = departst.split("-");
+		depart = new Date(arrivalA[0], arrivalA[1], arrivalA[2]);
+	}
+	$('arrival_date_err_range_dconf').style.display = 'none';
+	$('arrival_date_err_range_dcamp').style.display = 'none';
+	$('arrival_date_err_range_dcamp2').style.display = 'none';
+	$('departure_date_err_range').style.display = 'none';
+	$('departure_date_err_mixed').style.display = 'none';
 
+	if(arrival) {
+		if(arrival < dcampstart) {
+			$('arrival_date_err_range_dconf').style.display = 'inline';
+			ret = false;
+		} else {
+			if(debcamp == 1 && arrival < dconfstart) {
+				$('arrival_date_err_range_dcamp').style.display = 'inline';
+				ret = false;
+			}
+			if(debcamp > 1 && arrival >= dconfstart) {
+				$('arrival_date_err_range_dcamp2').style.display = 'inline';
+                               ret = false;
+			}
+		}
+	}
+	if(depart) {
+		if(arrival && depart < arrival) {
+			$('departure_date_err_mixed').style.display = 'inline';
+			ret = false;
+		}
+		if(depart > dconfend) {
+			$('departure_date_err_range').style.display = 'inline';
+			ret = false;
+		}
+	}
+	return ret;
+}
+function validate_form() {
+	if(! check_debcamp()) {
+		alert("Check DebCamp attendance data");
+		return false;
+	}
+	if(! check_dates()) {
+		alert("Check arrival and departure dates");
+		return false;
+	}
+	return true;
+}
