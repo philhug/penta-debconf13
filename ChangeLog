@@ -1,3 +1,11 @@
+2008-01-31  Joerg Jaspert  <joerg@debian.org>
+
+	* rails/app/views/submission/_person_general.rxml: Select only food
+	options for current conference
+
+	* rails/app/views/pentabarf/_person_general.rxml: Select only food
+	options for current conference
+
 2008-01-30  Joerg Jaspert  <joerg@debian.org>
 
 	* rails/app/views/submission/_person_travel.rxml: Added JS check
