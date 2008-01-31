@@ -1,5 +1,14 @@
 2008-01-31  Joerg Jaspert  <joerg@debian.org>
 
+	* rails/app/views/pentabarf/_person_travel.rxml: Hide
+	arrival_to/departure_to fields
+	Add travel_from_venue checkbox
+
+	* rails/app/views/submission/_person_travel.rxml: Make arrival be
+	on top of departure
+	Hide arrival_to/departure_to fields
+	Add travel_from_venue checkbox
+
 	* rails/app/views/submission/_person_general.rxml: Select only food
 	options for current conference
 

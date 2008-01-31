@@ -9,7 +9,9 @@ xml.div(:id=>'content-travel') do
           xml.table do
             xml.tr do xml.th( local( 'arrival' ), {:colspan=>2}) end
             xml << text_field_row( @conference_person_travel, :arrival_from )
-            xml << text_field_row( @conference_person_travel, :arrival_to )
+            if @conference.conference_id != 2
+              xml << text_field_row( @conference_person_travel, :arrival_to )
+            end
             xml << date_button_row( @conference_person_travel, :arrival_date )
             xml << text_field_row( @conference_person_travel, :arrival_time )
             xml << text_field_row( @conference_person_travel, :arrival_number )
@@ -21,7 +23,9 @@ xml.div(:id=>'content-travel') do
           xml.table do
             xml.tr do xml.th( local( 'departure' ), {:colspan=>2}) end
             xml << text_field_row( @conference_person_travel, :departure_from )
-            xml << text_field_row( @conference_person_travel, :departure_to )
+            if @conference.conference_id != 2
+              xml << text_field_row( @conference_person_travel, :departure_to )
+            end
             xml << date_button_row( @conference_person_travel, :departure_date )
             xml << text_field_row( @conference_person_travel, :departure_time )
             xml << text_field_row( @conference_person_travel, :departure_number )
@@ -30,8 +34,11 @@ xml.div(:id=>'content-travel') do
           end
         end
       end
-      xml.tr do
-        xml << check_box_row( @dc_conference_person, :travel_to_venue )
+      if @conference.conference_id == 2
+        xml.tr do
+          xml << check_box_row( @dc_conference_person, :travel_to_venue )
+          xml << check_box_row( @dc_conference_person, :travel_from_venue )
+        end
       end
     end
 
