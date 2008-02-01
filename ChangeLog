@@ -1,9 +1,13 @@
 2008-02-01  Joerg Jaspert  <joerg@debian.org>
 
+	* rails/app/views/pentabarf/_person_travel.rxml: Select only items
+	for the current conference
+
 	* rails/app/views/submission/_sidebar.rxml: s/Person/Registration detail/
 	Add /Paper
 
 	* rails/app/views/submission/_person_general.rxml: wording fixes
+	Select only items for the current conference
 
 2008-01-31  Joerg Jaspert  <joerg@debian.org>
 

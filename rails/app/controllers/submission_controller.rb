@@ -17,12 +17,13 @@ class SubmissionController < ApplicationController
       own = Own_conference_events.call({:person_id=>POPE.user.person_id,:conference_id=>@conference.conference_id},{:own_conference_events=>params[:id]})
       raise "You are not allowed to edit this event." if own.length != 1
       @event = Event.select_single({:event_id=>params[:id]})
+      @dc_event = DebConf::Dc_event.select_single({:event_id=>@event.event_id})
     else
       @event = Event.new({:conference_id=>@conference.conference_id,:event_id=>0})
+      @dc_event = DebConf::Dc_event.new({:event_id=>@event.event_id})
     end
     @attachments = View_event_attachment.select({:event_id=>@event.event_id,:translated=>@current_language})
     @transaction = Event_transaction.select_single({:event_id=>@event.event_id}) rescue Event_transaction.new
-    @dc_event = DebConf::Dc_event.select_single({:event_id=>@event.event_id})
   end
 
   def events
