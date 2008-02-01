@@ -16,7 +16,7 @@ xml.div(:id=>'content-availability') do
       xml.thead do
         xml.tr do
           xml.th
-          24.times do | hour |
+          12.times do | hour |
             real_hour = ( @conference.day_change.hour + hour ) % 24
             xml.th "#{real_hour}", {:title=>sprintf("%d:00 - %d:00", real_hour, real_hour + 1 )}
           end
@@ -25,10 +25,14 @@ xml.div(:id=>'content-availability') do
       xml.tbody do
         days.each_with_index do | day, index |
           xml.tr do
-            xml.td sprintf("day %d", index + 1 )
-            24.times do | hour |
+            date = day.conference_day
+            if day.name
+              xml.td sprintf("%d: %s (%s)", index + 1, date, day.name)
+            else
+              xml.td sprintf("%d: %s", index + 1, date)
+            end
+            12.times do | hour |
               real_hour = ( @conference.day_change.hour + hour ) % 24
-              date = day.conference_day + ( ( @conference.day_change.hour + hour ) / 24 )
               title = sprintf("day %d %s %d:00 - %d:00", index + 1, date, real_hour, real_hour + 1 )
               time = sprintf("%s %02d:00:00", date.strftime('%Y-%m-%d'), real_hour )
               xml.td do

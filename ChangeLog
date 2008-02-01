@@ -1,5 +1,8 @@
 2008-02-01  Joerg Jaspert  <joerg@debian.org>
 
+	* rails/app/views/submission/_person_availability.rxml: Show real
+	dates and date names
+
 	* rails/app/views/pentabarf/_person_travel.rxml: Select only items
 	for the current conference
 
