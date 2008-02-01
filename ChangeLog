@@ -1,6 +1,7 @@
 2008-02-01  Joerg Jaspert  <joerg@debian.org>
 
 	* rails/app/views/submission/_sidebar.rxml: s/Person/Registration detail/
+	Add /Paper
 
 	* rails/app/views/submission/_person_general.rxml: wording fixes
 
