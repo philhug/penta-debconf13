@@ -1,5 +1,8 @@
 2008-02-02  Joerg Jaspert  <joerg@debian.org>
 
+	* rails/app/views/pentabarf/find_conference.rxml: Fix syntax for
+	Ajax thingie
+
 	* rails/app/views/submission/_person_general.rxml: add participant
 	mapping thingie to select a participant category
 
