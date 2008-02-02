@@ -1,5 +1,8 @@
 2008-02-02  Joerg Jaspert  <joerg@debian.org>
 
+	* rails/app/controllers/pentabarf_controller.rb
+	(PentabarfController::event): Fix "nothing found in dc_events"
+
 	* rails/app/views/meditation.rhtml: Add pentabarf contact address
 
 	* rails/app/models/event.rb: drop f_ from two flags, so they can
