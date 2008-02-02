@@ -314,6 +314,14 @@ function add_person_event( event_person_id, event_id, event_role, event_role_sta
   replace_select_with_hidden_field( select );
 }
 
+function logout() {
+  xmlhttp = new XMLHttpRequest();
+  xmlhttp.open('GET',window.location,true,"logout","logout");
+  xmlhttp.send('');
+  xmlhttp.abort();
+  window.location = '/logout';
+}
+
 function check_debcamp(){
 	var desc = $('dc_conference_person[debcamp_reason]');
 	var descerr = $('debcamp_description_err');
