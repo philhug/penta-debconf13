@@ -1,5 +1,9 @@
 2008-02-02  Joerg Jaspert  <joerg@debian.org>
 
+	* rails/app/views/submission/_person_travel.rxml: add some
+	explanation for travel_[to|from]_venue
+	hide departure_from, not _to
+
 	* rails/config/routes.rb: Place it all below /penta/
 
 	* rails/app/views/layouts/submission.rxml: use title instead of acronym
