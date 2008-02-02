@@ -1,5 +1,10 @@
 2008-02-02  Joerg Jaspert  <joerg@debian.org>
 
+	* rails/app/views/meditation.rhtml: Add pentabarf contact address
+
+	* rails/app/models/event.rb: drop f_ from two flags, so they can
+	be saved.
+
 	* rails/app/views/pentabarf/find_conference.rxml: Fix syntax for
 	Ajax thingie
 
