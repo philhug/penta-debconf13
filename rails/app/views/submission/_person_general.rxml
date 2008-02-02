@@ -15,7 +15,9 @@ xml.div(:id=>'content-general') do
       xml << check_box_row( @person_image, :public )
       xml << check_box_row( @conference_person, :reconfirmed ) if @conference.f_reconfirmation_enabled
 
-      xml << select_row( @dc_conference_person, :person_type_id, DebConf::Dc_person_type.select.map{|e| [e.person_type_id,e.description]} )
+      xml << select_row( @dc_conference_person, :person_type_id, DebConf::Dc_person_type.select.map{|e| [e.person_type_id,e.description]}, {:master=>:dc_participant_category_id})
+      xml << select_row( @dc_conference_person, :dc_participant_category_id, DebConf::Dc_view_participant.select.map{|e| [e.participant_mapping_id,e.person_type_id,e.participant_category]},{:slave=>true,:with_empty=>false})
+      xml.script("$('dc_conference_person[person_type_id]').onchange()",{:type=>"text/javascript"})
       xml << select_row( @dc_conference_person, :t_shirt_sizes_id, DebConf::Dc_t_shirt_sizes.select.map{|e| [e.t_shirt_sizes_id,e.t_shirt_size]} )
 
     end

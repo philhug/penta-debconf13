@@ -1,5 +1,8 @@
 2008-02-02  Joerg Jaspert  <joerg@debian.org>
 
+	* rails/app/views/submission/_person_general.rxml: add participant
+	mapping thingie to select a participant category
+
 	* rails/app/views/submission/_person_travel.rxml: add some
 	explanation for travel_[to|from]_venue
 	hide departure_from, not _to
