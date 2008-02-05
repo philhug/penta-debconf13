@@ -57,6 +57,11 @@ class SubmissionController < ApplicationController
     redirect_to( :action => :event, :id => event.event_id )
   end
 
+  def all_events
+    @events = View_submission_event.select({:conference_id=>@conference.conference_id,:translated=>@current_language},{:order=>[:title,:subtitle]})
+    @content_title = "- All submitted Events"
+  end
+
   def person
     @person = Person.select_single(:person_id=>POPE.user.person_id)
     @account = Account.select_or_new(:person_id=>@person.person_id)

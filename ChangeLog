@@ -1,3 +1,19 @@
+2008-02-05  Joerg Jaspert  <joerg@debian.org>
+
+	* rails/app/views/layouts/submission.rxml: Use conference.title
+
+	* rails/app/helpers/submission_helper.rb
+	(SubmissionHelper::sanitize_track): copied from schedule
+	(SubmissionHelper::event_image): dito
+
+	* rails/app/views/submission/_sidebar.rxml: s/Events/Own Events/
+	Add All Events link
+
+	* rails/app/views/submission/all_events.rxml: Added, showing all events
+
+	* rails/app/views/submission/_event_general.rxml: Use the correct
+	state descriptions
+
 2008-02-02  Joerg Jaspert  <joerg@debian.org>
 
 	* rails/app/controllers/pentabarf_controller.rb

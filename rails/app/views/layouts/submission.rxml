@@ -17,7 +17,7 @@ xml.html(:xmlns => 'http://www.w3.org/1999/xhtml') do
 
     xml.div({:id=>:main}) do
       xml.div({:id=>:context}) do
-        xml.h1("#{@conference.acronym if @conference} #{@content_title}")
+        xml.h1("#{@conference.title if @conference} #{@content_title}")
         xml.em(@content_subtitle)
       end
       xml.div({:id=>:content}) do
