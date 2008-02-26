@@ -213,15 +213,15 @@ class PentabarfController < ApplicationController
       end
       conditions[:AND] << {:OR=>cond}
     end
-    @results = View_find_person.select( conditions, {:distinct => :person_id} )
+    @results = DebConf::Dc_view_find_person.select( conditions, {:distinct => :person_id} )
     @preferences[:search_person_simple] = query
     render(:partial=>'search_person')
   end
 
   def search_person_advanced
     params[:search_person] = @preferences[:search_person_advanced] if params[:id]
-    conditions = form_to_condition( params[:search_person], View_find_person )
-    @results = View_find_person.select( conditions, {:distinct=>:person_id})
+    conditions = form_to_condition( params[:search_person], DebConf::Dc_view_find_person )
+    @results = DebConf::Dc_view_find_person.select( conditions, {:distinct=>:person_id})
     @preferences[:search_person_advanced] = params[:search_person]
     render(:partial=>'search_person')
   end

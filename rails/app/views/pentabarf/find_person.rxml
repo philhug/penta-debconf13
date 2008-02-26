@@ -49,6 +49,36 @@ xml.div({:id=>:data}) do
         xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:arrived})
         xml << select_tag('search_person[row_id][value]', [['t','Yes'],['f','No']])
       end
+      # search for attend flag
+      xml.li({:class=>:attend,:title=>local(:attend)}) do
+        xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:attend})
+        xml << select_tag('search_person[row_id][value]', [['t','Yes'],['f','No']])
+      end
+      # search for accom
+      xml.li({:class=>:accom,:title=>local(:accom)}) do
+        xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:accom})
+        xml << select_tag('search_person[row_id][value]', DebConf::Dc_accomodation.select.map{|c| [c.accom, c.accom]})
+      end
+      # search for debcamp
+      xml.li({:class=>:debcamp_option,:title=>local(:debcamp)}) do
+        xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:debcamp_option})
+        xml << select_tag('search_person[row_id][value]', DebConf::Dc_debcamp.select.map{|c| [c.debcamp_option, c.debcamp_option]})
+      end
+      # search for person_type
+      xml.li({:class=>:person_type,:title=>local(:person_type)}) do
+        xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:person_type})
+        xml << select_tag('search_person[row_id][value]', DebConf::Dc_person_type.select.map{|c| [c.description, c.description]})
+      end
+      # search for category
+      xml.li({:class=>:participant_category,:title=>local(:participant_category)}) do
+        xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:participant_category})
+        xml << select_tag('search_person[row_id][value]', DebConf::Dc_participant_category.select.map{|c| [c.participant_category, c.participant_category]})
+      end
+      # search for food
+      xml.li({:class=>:food,:title=>local(:food)}) do
+        xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:food})
+        xml << select_tag('search_person[row_id][value]', DebConf::Dc_food_preferences.select.map{|c| [c.food, c.food]})
+      end
     end
 
     xml.ul({:id=>:search_template,:style=>"display:none"}) do

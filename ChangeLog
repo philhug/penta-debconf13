@@ -1,3 +1,15 @@
+2008-02-26  Joerg Jaspert  <joerg@debian.org>
+
+	* rails/app/views/pentabarf/_search_person.rxml: Add a few fields
+	into the table
+
+	* rails/app/views/pentabarf/find_person.rxml: Add lots of search options
+
+	* rails/app/controllers/pentabarf_controller.rb
+	(PentabarfController::search_person_simple): Use the debconf
+	find_person view
+	(PentabarfController::search_person_advanced): dito
+
 2008-02-06  Joerg Jaspert  <joerg@debian.org>
 
 	* rails/app/views/submission/all_events.rxml: Add Disclaimer
