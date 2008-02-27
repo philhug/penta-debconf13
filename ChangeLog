@@ -1,3 +1,8 @@
+2008-02-27  Joerg Jaspert  <joerg@debian.org>
+
+	* rails/app/views/pentabarf/_search_person.rxml: Add country code
+	to table
+
 2008-02-26  Joerg Jaspert  <joerg@debian.org>
 
 	* rails/app/views/pentabarf/_search_person.rxml: Add a few fields
