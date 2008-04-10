@@ -1,6 +1,6 @@
 paginate( xml, @results, params[:id].to_i ) do | results |
   xml.table do
-    fields = [:name, :first_name, :last_name, :nickname, :country, :attend, :accom, :debcamp_option, :person_type, :participant_category, :food]
+    fields = [:name, :email, :country, :attend, :accom, :debcamp_option, :person_type, :participant_category, :food]
     xml.thead do
       xml.tr do
         fields.each do | field |
