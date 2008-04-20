@@ -1,0 +1,85 @@
+xml.div(:id=>'event-index',:class=>'section') do
+  xml.h3("This is not a list of things that will happen, only a list of what people submitted. Selection of events will happen later, and at some point a schedule will be provided! Until then everything is possible - or not.")
+  xml.table(:class=>'event-index') do
+    xml.thead do
+      xml.tr do
+        xml.th( local( 'schedule::event' ),{:class=>'event'})
+        xml.th( local( 'schedule::speakers' ),{:class=>'speaker'})
+      end
+    end
+    xml.tbody do
+      prev = nil
+      row = 0
+      @events.each do | event |
+        next if prev && event.event_id == prev.event_id
+        if row.modulo(2) != 0
+          klass="even"
+        else
+          klass="odd"
+        end
+        row+=1
+        prev = event
+        xml.tr(:class=>"#{klass}") do
+          xml.td(:class=>"event #{sanitize_track(event.conference_track)}") do
+            xml.img(:class=>'event-image',:src=>event_image(event.event_id, 48))
+            xml.p(event.title, :class=>'title')
+            xml.p(event.subtitle, :class=>'subtitle')
+            xml.p(:class=>'info') do
+              xml.strong local( 'schedule::event_type' )
+              xml.text! ': '
+              xml.span(event.event_type,{:class=>'type'})
+              xml.br
+              xml.strong local( 'schedule::conference_track' )
+              xml.text! ': '
+              xml.span(event.conference_track,{:class=>'type'})
+              xml.br
+              xml.strong local( 'schedule::language' )
+              xml.text! ': '
+              xml.span(event.language,{:class=>'type'})
+              xml.br
+              xml.strong local( 'table::event::event_state' )
+              xml.text! ': '
+              xml.span(event.event_state,{:class=>'type'})
+              xml.br
+              xml.strong local( 'table::event::event_state_progress' )
+              xml.text! ': '
+              xml.span(event.event_state_progress,{:class=>'type'})
+              xml.br
+              
+            end
+            xml.div(:id=>'abstract',:class=>'abstract') do
+              xml.div(:id=>'abstract-title',:class=>'abstract') do
+                xml.strong local ( 'Abstract')
+                xml.text! ':'
+              end
+              xml.div(:id=>'abstract-text',:class=>'abstract') do
+                xml.span(event.abstract,{:class=>'abstract'})
+              end
+            end
+            xml.div(:id=>'description',:class=>'description') do
+              xml.div(:id=>'description-title',:class=>'description') do
+                xml.strong local ( 'Description')
+                xml.text! ':'
+              end
+              xml.div(:id=>'description-text',:class=>'description') do
+                xml.span(event.description,{:class=>'description'})
+              end
+            end
+          end
+          xml.td(:class=>"speakers #{sanitize_track(event.conference_track)}") do
+            xml.ul(:class=>'speakers') do
+              names = Array.new
+              @events.select{|e| e.event_id == event.event_id}.each do | speaker |
+                next if names.include?(speaker.name)
+                names << speaker.name
+                xml.li(speaker.name)
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+  xml.h3("This is not a list of things that will happen, only a list of what people submitted. Selection of events will happen later, and at some point a schedule will be provided! Until then everything is possible - or not.")
+end
+
