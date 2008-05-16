@@ -32,6 +32,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect '/penta/submission/:conference/:action/:id', :controller => 'submission'
 
+  map.connect '/penta/press/:conference/:action/:id', :controller => 'press'
+
   map.connect '/penta/image/:action/:id.:size.:extension', :controller=> 'image'
   map.connect '/penta/image/:action/:id.:size', :controller=> 'image'
 
