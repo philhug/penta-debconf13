@@ -67,6 +67,8 @@ xml.div(:id=>'content-travel') do
     end
 
     xml.table do
+      xml.td(:colspan=>2) do xml.b << "Please note that the deadline for sponsorship requests was March 31st, and no further sponsorship applications will be processed.  The sponsorship details below are provided for your convenience."
+      end
       xml << check_box_row( @conference_person_travel, :need_travel_cost )
       xml << money_currency_row( @conference_person_travel, :travel_cost, :travel_currency )
       xml << money_currency_row( @conference_person_travel, :fee, :fee_currency )

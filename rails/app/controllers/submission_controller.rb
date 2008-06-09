@@ -75,6 +75,28 @@ class SubmissionController < ApplicationController
   end
 
   def save_person
+    old_dc_conference_person = DebConf::Dc_conference_person.select_or_new({:conference_id=>@conference.conference_id, :person_id=>POPE.user.person_id})
+
+    if ["1", "2", "3", "4", "5"].include?(params[:dc_conference_person][:dc_participant_category_id])
+      if not ["1", "2", "3", "4", "5"].include?(old_dc_conference_person.dc_participant_category_id)
+        params[:dc_conference_person][:dc_participant_category_id] = old_dc_conference_person.dc_participant_category_id
+      end
+    elsif ["6", "7", "8", "9", "10", "11", "12"].include?(params[:dc_conference_person][:dc_participant_category_id])
+      if not ["6", "7", "8", "9", "10", "11", "12"].include?(old_dc_conference_person.dc_participant_category_id)
+        params[:dc_conference_person][:dc_participant_category_id] = old_dc_conference_person.dc_participant_category_id
+      end
+    elsif ["28", "29", "30", "31", "32", "33", "34"].include?(params[:dc_conference_person][:dc_participant_category_id])
+      params[:dc_conference_person][:food_id] = "10"
+    end
+
+    if params[:dc_conference_person][:food_id] == "10" or params[:dc_conference_person][:accom_id] == "5"
+      params[:dc_conference_person][:accom_id] = "5"
+      params[:dc_conference_person][:food_id] = "10"
+      map_id = DebConf::DC_participant_mapping.select_single({:participant_category_id=>5, :person_type_id=>params[:dc_conference_person][:person_type_id]})
+      params[:dc_conference_person][:dc_participant_category_id]= map_id.participant_mapping_id
+    end
+
+
     params[:person][:person_id] = POPE.user.person_id
     person = write_row( Person, params[:person], {:except=>[:person_id],:always=>[:spam]} )
     params[:account][:account_id] = Account.select_single(:person_id=>person.person_id).account_id rescue nil
@@ -88,14 +110,15 @@ class SubmissionController < ApplicationController
     options[ @conference.f_reconfirmation_enabled ? :always : :except ] = [:reconfirmed]
     conference_person = write_row( Conference_person, params[:conference_person], options )
     POPE.refresh
-    write_row( Conference_person_travel, params[:conference_person_travel], {:preset=>{:conference_person_id => conference_person.conference_person_id}})
+    write_row( Conference_person_travel, params[:conference_person_travel], {:preset=>{:conference_person_id => conference_person.conference_person_id},
+                 :always=>[:need_travel_cost]})
     write_rows( Person_language, params[:person_language], {:preset=>{:person_id => person.person_id}})
     write_rows( Conference_person_link, params[:conference_person_link], {:preset=>{:conference_person_id => conference_person.conference_person_id},:ignore_empty=>:url})
     write_rows( Person_im, params[:person_im], {:preset=>{:person_id => person.person_id},:ignore_empty=>:im_address})
     write_rows( Person_phone, params[:person_phone], {:preset=>{:person_id => person.person_id},:ignore_empty=>:phone_number})
 
     dc_options = {:preset=>{:person_id => person.person_id,:conference_id=>@conference.conference_id},
-      :always=>[:assassins,:public_data,:proceedings,:attend,:travel_to_venue]}
+      :always=>[:assassins,:public_data,:proceedings,:attend,:travel_to_venue,:travel_from_venue]}
     write_row (DebConf::Dc_conference_person, params[:dc_conference_person], dc_options)
     write_row (DebConf::Dc_person, params[:dc_person], {:preset=>{:person_id => person.person_id}})
 

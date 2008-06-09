@@ -54,6 +54,11 @@ xml.div({:id=>:data}) do
         xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:attend})
         xml << select_tag('search_person[row_id][value]', [['t','Yes'],['f','No']])
       end
+      # search for reconfirmed flag
+      xml.li({:class=>:reconfirmed,:title=>local('conference_person::reconfirmed')}) do
+        xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:reconfirmed})
+        xml << select_tag('search_person[row_id][value]', [['t','Yes'],['f','No']])
+      end
       # search for accom
       xml.li({:class=>:accom,:title=>local(:accom)}) do
         xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:accom})
