@@ -5,3 +5,7 @@ rails/config/mongrel_cluster.yml
 rails/log/production.log
 rails/public/.htaccess
 rails/public/stylesheets/main.css
+mhy
+rails/app/views/submission/attendee.rhtml
+rails/app/views/submission/attendee_dep.rhtml
+rails/app/views/submission/attendee_time.rhtml

@@ -20,7 +20,16 @@ xml.div( :id => 'sidebar' ) do
       xml.a( 'New Event/Paper', {:href=> url_for(:action => :event, :id=>:new), :class => 'menu-item'} )
       xml.a( 'Own Events', {:href=> url_for(:action=>:events), :class => 'menu-item'} )
       xml.a( 'All Events', {:href=> url_for(:action=>:all_events), :class => 'menu-item'} )
+    end
 
+    xml.div( :class=>'menu-item-group' ) do
+      xml.a( 'Travel dates by name', {:href=> url_for(:action=>:attendee), :class => 'menu-item'} )
+      xml.a( 'Travel dates by arrival date', {:href=> url_for(:action=>:attendee_time), :class => 'menu-item'} )
+      xml.a( 'Travel dates by departure date', {:href=> url_for(:action=>:attendee_dep), :class => 'menu-item'} )
+      xml.a( 'EZE-MDQ bus coordination', {:href=>"http://wiki.debconf.org/wiki/DebConf8/EZE-MDQ_bus", :class => 'menu-item'} )
+    end
+
+    xml.div( :class=>'menu-item-group' ) do
       xml.a( 'Logout', {:href=>"#{request.protocol}logout@#{request.host_with_port}/logout", :class => 'menu-item'} ) if POPE.user
 
       xml.a( 'DebConf7', {:href=>"https://debconf7.debconf.org/", :class => 'menu-item'} )

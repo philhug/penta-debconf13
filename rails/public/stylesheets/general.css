@@ -111,3 +111,11 @@ li {
   width: 128px;
 }
 
+#travel-container { margin-right: 9em; }
+#travel td,th { padding: 1em; }
+#travel th { vertical-align: middle; }
+#travel-menu { position: absolute; top: 1em; right: .5em; }
+#travel-menu div {
+    border: 1px solid #90acc8; background-color: #90acc8; padding: 2px;
+    margin: 2px; text-align: center;
+}

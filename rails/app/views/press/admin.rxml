@@ -1,0 +1,18 @@
+xml.div do
+  xml.h2 "Welcome to the press admin system"
+
+  if not @conference
+    xml.div do
+      xml.p "Please select a conference:"
+      xml.ul do
+        @conferences.each do | conf |
+          xml.li do
+            xml.a(conf.title, {:style=>"text-decoration: underline;color: blue;",:href=>url_for(:conference=>conf.acronym)})
+          end
+        end
+      end
+    end
+  end
+  xml.p "Please note that this system has only been tested with recent versions of Gecko-based browsers like Mozilla Firefox, Seamonkey or Camino. Other browsers might not work."
+
+end

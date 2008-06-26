@@ -8,6 +8,18 @@ class SubmissionController < ApplicationController
     @conferences = Conference.select({:f_submission_enabled=>'t'})
   end
 
+  def attendee
+  @content_title = "Attendee list sorted by name"
+  end
+
+  def attendee_time
+  @content_title = "Attendee list sorted by arrival time"
+  end
+
+  def attendee_dep
+  @content_title = "Attendee list sorted by departure time"
+  end
+
   def login
     redirect_to(:action=>:index,:id=>'auth')
   end

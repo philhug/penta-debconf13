@@ -1,0 +1,29 @@
+xml.div( :id => 'sidebar' ) do
+
+  xml.div( :id => 'logo' ) do
+    if @conference && POPE.user
+      xml.img( :src=>url_for(:controller=>'image',:action=>'conference',:id=>@conference.conference_id,:size=>'128x128'), :heigth=>128,:width=>128)
+    else
+      xml.img( :src=>"/images/erisdiscordia-128x128.png",:heigth=>128,:width=>128)
+    end
+  end
+
+  xml.div(:id => 'menu') do
+
+    xml.div( :class=>'menu-item-group' ) do
+      xml.a( 'Press Admin Login', {:href=>url_for(:action=>:admin), :class => 'menu-item'} )
+      xml.a( 'Enter data', {:href=>url_for(:action=>:enter), :class => 'menu-item'} )
+    end if not POPE.user
+
+    xml.div( :class=>'menu-item-group' ) do
+      xml.a( 'Press', {:href=>url_for(:action=>:index), :class => 'menu-item'} ) if POPE.user
+      xml.a( 'Logout', {:href=>"#{request.protocol}logout@#{request.host_with_port}/logout", :class => 'menu-item'} ) if POPE.user
+
+      xml.a( 'DebConf7', {:href=>"https://debconf7.debconf.org/", :class => 'menu-item'} )
+      xml.a( 'DebConf8', {:href=>"http://debconf8.debconf.org/", :class => 'menu-item'} )
+
+    end if @conference
+
+  end
+end
+
