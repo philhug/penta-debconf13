@@ -1,0 +1,31 @@
+xml.div( :id => 'sidebar' ) do
+
+  xml.div( :id => 'logo' ) do
+    xml.a( :href => url_for(:controller=>'pentabarf',:action=>'conference',:id=>@current_conference.conference_id)) do
+      xml.img( :src=>url_for(:controller=>'image',:action=>'conference',:id=>@current_conference.conference_id,:size=>'128x128'), :height=>128,:width=>128)
+    end
+  end
+
+  xml.div(:id => 'menu') do
+
+    xml.div(:class=>'menu-item-group') do
+      xml.form(:action=>url_for(:controller=>'video',:action=>:save_current_conference),:method=>:post,:class=>'menu-text') do
+        xml << select_tag('conference_id', Conference.select.map{|e| [e.conference_id,e.acronym]}, {:selected=>@current_conference.conference_id,:onchange=>'submit()'} )
+      end
+    end
+
+    xml.div( :class=>'menu-item-group' ) do
+      xml.a( local('video::index'), {:href=> url_for(:controller => 'video', :action => :index), :class => 'menu-item'} )
+      xml.a( local('video::list_events'), {:href=> url_for(:controller => 'video', :action => :list_events), :class => 'menu-item'} )
+      xml.a( local('video::transcoding_status'), {:href=> url_for(:controller => 'video', :action => :transcodings), :class => 'menu-item'} )
+    end
+
+    xml.div( :class=>'menu-item-group' ) do
+      xml.a( local('admin::index'), {:href=> url_for(:controller => 'admin', :action => :index), :class => 'menu-item'} ) if POPE.permission?('modify_config')
+      xml.a( local('localization::index'), {:href=> url_for(:controller => 'localization', :action => :index), :class => 'menu-item'} ) if POPE.permission?('modify_localization')
+      xml.a( local('pentabarf::preferences'), {:href=> url_for(:controller => 'pentabarf', :action => :person, :id=>POPE.user.person_id), :class => 'menu-item'} )
+      xml.a( local(:logout), {:href=>"#{request.protocol}logout@#{request.host_with_port}/logout", :onclick=>"logout()", :class => 'menu-item'} ) if POPE.user
+    end
+
+  end
+end

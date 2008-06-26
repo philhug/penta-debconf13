@@ -1,0 +1,65 @@
+xml.div({:id=>:data}) do
+  xml.h1(local("video::transcoding_status"))
+
+  xml.table do
+    xml.thead do
+      xml.tr do
+        xml.th(local("video::recording"))
+        xml.th(local("conference_room::conference_room"))
+        xml.th(local(:event))
+        @formats.each do |f|
+          xml.th("#{f.target_format_abbr} #{f.container_name if f.container_name != f.target_format_abbr} (Vid #{f.video_bit_rate/1000}k, Aud #{f.audio_bit_rate/1000}k)")
+        end
+      end
+    end
+    xml.tbody do
+      @recordings.each do |r|
+        vers = Video_event_recording.select(:recording_id => r.id)
+        status = Video_file_status.select_single(:id => r.file_status_id)
+
+        if vers.length == 0
+          xml.tr(:class => :recording_status_TODO) do
+            xml.td(r.recording_filename)
+            xml.td(r.conference_room)
+            xml.td(:colspan => @formats.length+1) do xml << link_to(local("video::associate_recording_first"), :action => 'index') end
+          end
+        else
+          vers.each do |ver|
+            xml.tr(:class => "recording_status_#{status.file_status_code}") do
+              xml.td(r.recording_filename, :title => r.comments)
+              xml.td(r.conference_room)
+              xml.td do
+                ev = Event.select_single(:event_id => ver.event_id)
+                xml << format_event(ev).to_s
+              end
+              @formats.each do |f|
+                vtf = Video_target_file.select(:event_recording_id => ver.id, :target_format_id => f.id)
+                if vtf.length == 0
+                  xml.td(local("TODO"),:class => "recording_status_TODO")
+                else
+                  vtf = vtf.first
+                  st = @map_vfs_to_s[vtf.file_status_id]
+                  xml.td(:class => "recording_status_#{st}") do
+                    xml.a(local(:file),:href => "#{@video_base}/#{f.target_format_abbr}/#{r.recording_filename.gsub(/^\/+/, '')}.#{f.filename_extension.gsub(/^\.+/, '')}", :title => vtf.comments)
+                    xml.br
+                    if vtf.locked_by
+                      if vtf.locked_by != POPE.user.person_id
+                        xml.text(local('video::claimed_by') + " #{Person.select_single({:person_id => vtf.locked_by}).name}")
+                      else
+                        xml << link_to(local('Unclaim'), :action => 'toggle_lock_file', :id => vtf.id)
+                        xml.br
+                        xml << link_to(local('Rate'), :action => 'rate_file', :id => vtf.id)
+                      end
+                    elsif st == 'X'
+                      xml << link_to(local('Claim'), :action => 'toggle_lock_file', :id => vtf.id)
+                    end
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end #END!!

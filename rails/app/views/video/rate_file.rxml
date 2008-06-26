@@ -1,0 +1,20 @@
+xml.div({:id=>:data}) do
+  xml.h1(@content_subtitle)
+  file = "#{@format.target_format_abbr}/#{@rec.recording_filename.gsub(/^\/+/, '')}.#{@format.filename_extension.gsub(/^\.+/, '')}"
+  xml.h2 do
+    xml << local(:rating).capitalize
+    xml.a(file,:href => "#{@video_base}/#{file}")
+  end
+
+  xml.h3(local(:format).capitalize)
+  xml.text("#{@format.container_name}: #{@format.video_width}x#{@format.video_height}")
+  xml.h3(local(:event).capitalize)
+  xml << format_event(@event).to_s
+
+  xml.form(:action=>url_for(:action=>:vtf_rating)) do
+    xml << hidden_field (@vtf, :id)
+    xml << text_area_fieldset (@vtf, :comments, {:cols => 40, :rows => 6})
+    xml << status_table(@vtf, :file_status_id).to_s
+    xml.input({:type=>:submit,:value=>local(:submit)})
+  end
+end

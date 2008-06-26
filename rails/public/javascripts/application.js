@@ -319,6 +319,34 @@ function add_person_event( event_person_id, event_id, event_role, event_role_sta
   replace_select_with_hidden_field( select );
 }
 
+function toggle_claim_recording( rec_id ) {
+  action_url = document.location.href.replace( /video.*/, 'video\/toggle_lock_recording\/' + rec_id );
+  request = new Ajax.Request( action_url,
+           {
+              asynchronous:false,
+              method: 'get',
+             // onComplete: function( r ){ alert (r.responseText); },
+              onSuccess: function( response ) {
+                            var text = document.createTextNode(response.responseText);
+                            $('claim_' + rec_id).replaceChild(text, $('claim_' + rec_id).firstChild);
+
+                            if (response.responseText == 'Claim') {
+                              Element.hide('on_claim_actions_' + rec_id);
+                            }
+                            else if (response.responseText == 'Unclaim') {
+                              Element.show('on_claim_actions_' + rec_id);
+                            }
+                            else if (response.responseText == 'Error') {
+                              alert('Error: this video must have been claimed by someone else, refresh to find out who');
+                            }
+                            else {
+                              alert('Unknown error from claiming');
+                            }
+                         },
+              onFailure: function() { alert('An error occurred.'); }
+            });
+}
+
 function logout() {
   xmlhttp = new XMLHttpRequest();
   xmlhttp.open('GET',window.location,true,"logout","logout");

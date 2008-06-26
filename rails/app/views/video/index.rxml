@@ -1,0 +1,59 @@
+xml.div({:id=>:data}) do
+  xml.h1(@content_subtitle)
+  xml.div(:align => :right) do xml << status_table(nil, nil).to_s end
+  xml.br
+  if(!@recordings.empty?)
+  xml.table do
+
+    xml.thead do
+      xml.tr do
+        xml.th(local("video_recording::recording_time"))
+        xml.th(local("video_recording::recording_duration"))
+        xml.th(local("video_recording::conference_room"))
+        xml.th(local("video_recording::recording_filename"))
+        xml.th(local(:file_status))
+        xml.th(local(:cover_event))
+        xml.th(local("video_recording::comments"))
+      end
+    end
+
+    xml.tbody do
+      @recordings.each do | rec |
+        toggle_lock_recording = rec.locked_by == nil ? local('Claim') : rec.locked_by == POPE.user.person_id ? local('Unclaim') : ''
+        xml.tr({:class => "recording_status_#{@map_vfs_to_s[rec.file_status_id]}"}) do
+          xml.td(display_time(rec.recording_time))
+          xml.td(display_time(rec.recording_duration))
+          xml.td(rec.conference_room)
+          xml.td(rec.recording_filename)
+          xml.td(@map_vfs_to_s[rec.file_status_id])
+          xml.td do
+            have = false
+            Video_event_recording.select(:recording_id => rec.id).each do |ver|
+              ev = Event.select({:event_id=>ver.event_id}).first
+              xml.text("#{ev.title} (#{ver.start_time} - #{ver.end_time})")
+              xml.br
+              have = true
+            end
+            xml.b local("NONE") and xml.br if !have
+            if toggle_lock_recording != ''
+              xml.a(toggle_lock_recording, {:id => "claim_#{rec.id}", :href => "#", :name => "claim_#{rec.id}", :class => :videolisting, :onclick => "toggle_claim_recording(#{rec.id});return false"})
+            else
+              xml.text(local('video::claimed_by') + " #{Person.select_single({:person_id => rec.locked_by}).name}")
+            end
+            xml.div({:id => "on_claim_actions_#{rec.id}", :style => "display:#{rec.locked_by == POPE.user.person_id ? '' : :none}"}) {
+              xml << "&nbsp;|&nbsp;"
+              xml.a(local("video::associate"), {:href => url_for({:action => :associate, :id => rec.id}), :class => :videolisting})
+              xml << "&nbsp;|&nbsp;"
+              xml.a(local("video::delete"), {:href => url_for({:action => :mark_for_deletion, :id => rec.id}), :class => :videolisting})
+            }
+          end
+          xml.td(rec.comments)
+        end
+      end
+    end
+
+  end
+  else # @recordings.empty?
+    xml.text local("video::no_recordings")
+  end
+end

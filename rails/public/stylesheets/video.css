@@ -1,0 +1,47 @@
+/* general formatting */
+
+td.recording_status_A, tr.recording_status_A {
+    background: #8f8;
+}
+
+td.recording_status_B, tr.recording_status_B {
+    background: #ad8;
+}
+
+td.recording_status_C, tr.recording_status_C {
+    background: #cb8;
+}
+
+td.recording_status_D, tr.recording_status_D {
+    background: #e98;
+}
+
+td.recording_status_E, tr.recording_status_E {
+    background: #f78;
+}
+
+td.recording_status_F, tr.recording_status_F {
+    background: #f55;
+}
+
+td.recording_status_X, tr.recording_status_X {
+    background: #999;
+}
+
+td.recording_status_TODO, tr.recording_status_TODO {
+    background: #aad;
+}
+
+td.video_associate {
+    text-align: center;
+}
+
+tr.associated_event {
+/*    background: #f55;*/
+}
+
+tr.unassociated_event {
+    background: #f55;
+}
+
+a.videolisting { text-decoration: underline; }

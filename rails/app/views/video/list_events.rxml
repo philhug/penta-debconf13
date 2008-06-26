@@ -1,0 +1,40 @@
+xml.div({:id=>:data}) do
+  xml.h1(@content_subtitle)
+  xml.table do
+    xml.thead do
+      xml.th(local("event::start_time"))
+      xml.th(local("event::title"))
+      xml.th(local("event::conference_room"))
+      xml.th(local("video::associated_recordings"))
+    end
+    xml.tbody do
+      @events.each do |event|
+        vers = Video_event_recording.select({:event_id => event.event_id})
+        if vers.length == 0
+          options = {:class => :unassociated_event}
+        else
+          options = {:class => :associated_event}
+        end
+
+        xml.tr(options) do
+          xml.td("#{event.conference_day} #{display_time(event.start_time)}")
+          xml.td do xml << format_event(event).to_s end
+          xml.td(event.conference_room)
+          xml.td do
+            if vers.length == 0
+              xml.text(local(:NONE))
+            else
+              first = true
+              vers.each do |ver|
+                xml.br if !first
+                first = false
+                vr = Video_recording.select_single(:id => ver.recording_id)
+                xml.text("#{vr.recording_filename} (#{ver.start_time} - #{ver.end_time})")
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

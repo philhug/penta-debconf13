@@ -1,0 +1,20 @@
+xml.div({:id=>:data}) do
+  xml.h2(local(:Link) + " #{@rec.recording_filename} " + local(:with) + " #{@event.title}")
+
+  xml.form(:action=>url_for(:action=>:ev_rec_data)) do
+    xml << hidden_field (@rec, :id)
+    xml << hidden_field (@ver, :recording_id)
+    xml << hidden_field (@ver, :event_id)
+    xml << text_area_fieldset (@rec, :comments, {:cols => 40, :rows => 6})
+    xml.table do
+      xml.tr do
+        xml.td do xml.label(local("video_event_recording::rate")) end
+        xml.td do xml << status_table(@rec, :file_status_id).to_s end
+      end
+      xml << text_field_row(@ver, :start_time, {:label => "#{local('video_event_recording::start_time')} (#{local('video::empty_means_beginning')})",:size => 30})
+      xml << text_field_row(@ver, :end_time, {:label => "#{local('video_event_recording::end_time')} (#{local('video::empty_means_end')})",:size => 30})
+      xml << text_field_row(@ver, :event_recording_base_name, {:label => "#{local('video_event_recording::event_recording_base_name')} (#{local('video::just_short_form')})",:size => 60})
+    end
+    xml.input({:type=>:submit,:value=>local(:submit)})
+  end
+end

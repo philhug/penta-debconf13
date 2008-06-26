@@ -1,0 +1,39 @@
+xml.div({:id=>:data}) do
+  xml.h1(@content_subtitle)
+  xml.h3(local("video::recording_filename") + ": #{@video.recording_filename}")
+  xml.p(local("video::recording_started_at" + " #{@video.recording_time}"))
+  xml.h3(local("video::events_scheduled_for_room") + " #{@room.conference_room}, " + local("video::sorted_by_proximity_to_video"))
+
+  xml.table do
+
+    xml.thead do
+      xml.tr do
+        xml.th(local(:event))
+        xml.th(local(:event_started_at))
+        xml.th(local("video::distance_to_recording"))
+        xml.th(local(:action))
+      end
+    end
+
+    xml.tbody do
+      @distances.each do |d|
+        ev = Event.select({:event_id=>d.event_id}).first
+        ver = Video_event_recording.select({:recording_id=>@video.id, :event_id=>d.event_id}).first
+        xml.tr do
+          xml.td do xml << format_event(ev).to_s end
+          xml.td(display_time(d.start_datetime))
+          xml.td(d.distance)
+          xml.td do
+            if(ver.nil?)
+              xml.a( local("video::link_event_to_recording"), {:href => url_for({:action => :link_to_event, :id => @video.id, :event_id => d.event_id})})
+            else
+              xml.a( local("video::unlink"), {:href => url_for({:action => :unlink_from_event, :id => ver.id})})
+          end
+
+          end
+        end
+      end
+    end
+
+  end
+end
