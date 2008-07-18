@@ -12,8 +12,12 @@ xml.div( :id => 'sidebar' ) do
 
     xml.div( :class=>'menu-item-group' ) do
       xml.a( 'Press Admin Login', {:href=>url_for(:action=>:admin), :class => 'menu-item'} )
-      xml.a( 'Enter data', {:href=>url_for(:action=>:enter), :class => 'menu-item'} )
-    end if not POPE.user
+      xml.a( 'Mass mail', {:href=>url_for(:action=>:mail), :class => 'menu-item'} ) if POPE.permission?('press_login')
+      options = {:action => :enter}
+      options[:id] = :auth if POPE.user
+      xml.a( 'Enter data', {:href=>url_for(options), :class => 'menu-item'} )
+      xml.a( 'Update data', {:href=>url_for(:action => :update_data), :class => 'menu-item'} ) if not POPE.user
+    end
 
     xml.div( :class=>'menu-item-group' ) do
       xml.a( 'Press', {:href=>url_for(:action=>:index), :class => 'menu-item'} ) if POPE.user

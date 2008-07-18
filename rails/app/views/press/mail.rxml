@@ -1,0 +1,36 @@
+xml.div({:id=>:data}) do
+  
+  xml.form({:action=>url_for({:action=>:send_mail}),:id=>:content_form}) do
+    xml.fieldset do
+      xml.legend 'Mail Template'
+
+      xml.table do
+        xml.tr do
+          xml.td "From:"
+          xml.td do
+            xml.input({:type=>:text,:name=>'mail[from]',:size=>60})
+          end
+        end
+        xml.tr do
+          xml.td "Subject:"
+          xml.td do
+            xml.input({:type=>:text,:name=>'mail[subject]',:size=>60})
+          end
+        end
+        xml.tr do
+          xml.td({:colspan=>2}) do
+            xml.button("Send Mail", {:type=>:submit})
+          end
+        end
+      end
+    end
+
+    xml.fieldset do
+      xml.legend "Body"
+      xml.textarea('',{:name=>'mail[body]',:cols=>60,:rows=>13}) 
+    end
+
+  end
+
+end
+

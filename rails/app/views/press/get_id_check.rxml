@@ -1,0 +1,7 @@
+xml.div do
+  xml.h2 "Mail with editing link sent"
+
+  xml.div do
+    xml.p "Thank you for updating your data #{@dc_press.name}"
+  end
+end

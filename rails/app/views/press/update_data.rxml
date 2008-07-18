@@ -1,5 +1,5 @@
 xml.div do
-  xml.h2 "Enter your data"
+  xml.h2 "Edit your data"
 
   if not @conference
     xml.div do
@@ -19,27 +19,15 @@ xml.div do
       xml.img( :src => image_path( 'icon-person-64x64.png' ), :class => 'object-image' )
     end
 
+		xml.p("Please fill this fields and we'll send you a link by mail where you'll be able to edit your data. This is done so that nobody but you can edit your personal data.")
     xml.div( :id => 'data' ) do
-      xml.form(:action=>url_for(:action=>:save_new_data,:id=>params[:id]),:id=>'content_form',:method=>'post',:enctype=>'multipart/form-data') do
+			options = {:action=>:get_id_check}
+      xml.form(:action=>url_for(options),:id=>'content_form',:method=>'post',:enctype=>'multipart/form-data') do
         xml << render( :partial => 'modification_buttons' )
         xml.fieldset do
           xml.legend local('Press')
-          xml << text_field_row( @dc_press, :association )
           xml << text_field_row( @dc_press, :name )
           xml << text_field_row( @dc_press, :email )
-          xml << text_field_row( @dc_press, :phone )
-          xml << text_field_row( @dc_press, :street )
-          xml << text_field_row( @dc_press, :zip )
-          xml << text_field_row( @dc_press, :city )
-          xml << text_field_row( @dc_press, :country )
-          xml << text_field_row( @dc_press, :fax )
-          xml << text_field_row( @dc_press, :url )
-          xml.tr do
-            xml.td do xml.b do xml << 'Description' end end
-            xml.td do
-              xml.textarea( @dc_press.description, {:name=>'dc_press[description]',:rows=>5,:id=>'dc_press[description]'} )
-            end
-          end
         end
       end
 

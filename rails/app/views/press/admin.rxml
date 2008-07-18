@@ -13,6 +13,52 @@ xml.div do
       end
     end
   end
+
+  if not @dc_press.empty? 
+    xml.thead do
+      xml.tr do
+        xml.th( local(:association) )
+        xml.th( local(:name) )
+        xml.th( local(:email) )
+        xml.th( local(:phone) )
+        xml.th( local(:street) )
+        xml.th( local(:zip) )
+        xml.th( local(:city) )
+        xml.th( local(:country) )
+        xml.th( local(:fax) )
+        xml.th( local(:description) )
+        xml.th( local(:notes) )
+        xml.th( local(:url) )
+        xml.th( local(:local) )
+        xml.th( local(:actions) )
+      end
+    end
+    xml.tbody do
+      @dc_press.each { |dcp|
+        xml.tr do
+          xml.td(dcp.association)
+          xml.td do xml.a( dcp.name, :href=>url_for(:action=>:edit,:id=>dcp.press_id)) end
+          xml.td(dcp.email)
+          xml.td(dcp.phone)
+          xml.td(dcp.street)
+          xml.td(dcp.zip)
+          xml.td(dcp.city)
+          xml.td(dcp.country)
+          xml.td(dcp.fax)
+          xml.td(dcp.description)
+          xml.td(dcp.notes)
+          xml.td(dcp.url)
+          xml.td(dcp.local)
+          xml.td do
+            xml.a(local("edit"), {:href => url_for({:action => :edit, :id => dcp.press_id})})
+            xml.a(local("delete"), {:href => url_for({:action => :delete, :id => dcp.press_id})})
+          end
+        end
+      }
+    end
+  else
+    xml.p "Not press contact found for this conference."
+  end
   xml.p "Please note that this system has only been tested with recent versions of Gecko-based browsers like Mozilla Firefox, Seamonkey or Camino. Other browsers might not work."
 
 end

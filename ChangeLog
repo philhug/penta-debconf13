@@ -1,3 +1,22 @@
+2008-07-15  Damian Viano  <des@debian.org>
+
+	* rails/app/controllers/press_controller.rb:
+	  Added admin listing/editing/deleteing capability
+		Added admin mass mailing capability
+		Added update data option
+	* rails/app/views/press/_modification_buttons.rxml:
+		Fixed spourious warning when saving
+	* rails/app/views/press/_sidebar.rxml: Added links to new actions
+	* rails/app/views/press/admin.rxml: Added listing
+	* rails/app/views/press/edit.rxml: Added
+	* rails/app/views/press/enter.rxml: Added
+	* rails/app/views/press/get_id_check.rxml: Added
+	* rails/app/views/press/index.rxml: Added some text
+	* rails/app/views/press/mail.rxml: Added
+	* rails/app/views/press/thankyou.rxml: Added
+	* rails/app/views/press/update_data.rxml: Added
+	* rails/lib/pope.rb: Added press domain support
+
 2008-06-24  Joerg Jaspert  <joerg@debian.org>
 
 	* rails/app/controllers/submission_controller.rb (SubmissionController::attendee_dep): Added
