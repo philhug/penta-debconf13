@@ -26,6 +26,7 @@ xml.div( :id => 'sidebar' ) do
       xml.a( 'Travel dates by name', {:href=> url_for(:action=>:attendee), :class => 'menu-item'} )
       xml.a( 'Travel dates by arrival date', {:href=> url_for(:action=>:attendee_time), :class => 'menu-item'} )
       xml.a( 'Travel dates by departure date', {:href=> url_for(:action=>:attendee_dep), :class => 'menu-item'} )
+      xml.a( 'Room assignments', {:href=> url_for(:action=>:rooms), :class => 'menu-item'} )
       xml.a( 'EZE-MDQ bus coordination', {:href=>"http://wiki.debconf.org/wiki/DebConf8/EZE-MDQ_bus", :class => 'menu-item'} )
     end
 

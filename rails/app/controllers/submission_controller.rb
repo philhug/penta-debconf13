@@ -20,6 +20,10 @@ class SubmissionController < ApplicationController
   @content_title = "Attendee list sorted by departure time"
   end
 
+  def rooms
+  @content_title = "Rooms"
+  end
+
   def login
     redirect_to(:action=>:index,:id=>'auth')
   end
