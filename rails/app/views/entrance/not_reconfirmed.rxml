@@ -1,0 +1,24 @@
+xml.div(:id=>:data) do
+
+  xml.fieldset(:id=>'content-simple') do
+    xml.label(local('entrance::find_unreconfirmed_person'))
+    xml.form(:id=>:simple_search,:action=>url_for) do
+      xml.input({:type=>:text,:name=>:entrance_not_reconfirmed_side,:id=>:entrance_not_reconfirmed_side,:value=>@preferences[:entrance_find_unreconfirmed_person]})
+      xml.label("Searching ...", {:id=>"search-indicator",:style=>"display:none"})
+    end
+  end
+
+
+  xml.fieldset do
+    xml.div({:id=>:results})
+  end
+
+end
+
+xml.script(:type=>'text/javascript') do
+  xml.text! <<-JS
+    new Form.Observer('simple_search', 1, function(element, value) { new Ajax.Updater('results', '#{url_for(:action=>:not_reconfirmed_side)}', { asynchronous:true, evalScripts:false, onComplete:function(request){Element.hide('search-indicator');sortables_init()}, onLoading:function(request){Element.show('search-indicator')}, parameters:value });});
+    new Ajax.Updater('results', '#{url_for(:action=>:not_reconfirmed_side)}', { asynchronous:true, evalScripts:false, onComplete:function(request){Element.hide('search-indicator');sortables_init()}, onLoading:function(request){Element.show('search-indicator')},parameters:$('simple_search').serialize()});
+
+JS
+end

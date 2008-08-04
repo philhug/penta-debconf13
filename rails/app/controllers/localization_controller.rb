@@ -70,4 +70,12 @@ class LocalizationController < ApplicationController
     @languages = Language.select({:localized=>'t'},{:order=>:language})
   end
 
+  def check_permission
+    if POPE.permission?('pentabarf_login') or POPE.permission?('localisation_login')
+      return true
+    end
+    redirect_to(:controller=>'submission')
+    false
+  end
+
 end

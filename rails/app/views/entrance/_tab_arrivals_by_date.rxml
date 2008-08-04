@@ -1,0 +1,26 @@
+xml.div(:id=>"content-#{tab_arrivals_by_date}") do
+  xml.text "#{@dates[tab_arrivals_by_date].length} people scheduled to arrive on #{tab_arrivals_by_date}"
+  xml.table({:id=>'arrivals',:class=>'sortable'}) do
+    fields = [:nickname, :country, :description, :first_name, :last_name, :arrival_date, :departure_date]
+
+    xml.thead do
+      xml.tr do
+        fields.each do | field |
+          xml.th( local(field) )
+        end
+      end
+    end
+    xml.tbody do
+      @dates.each_pair do |date, arrival|
+        next unless date == tab_arrivals_by_date
+        arrival.each do |row|
+          xml.tr do
+            fields.each do | field |
+              xml.td do xml.a( row[field], {:href=>url_for(:action=>:person,:id=>row[:person_id])}) end
+            end
+          end
+        end
+      end
+    end
+  end
+end

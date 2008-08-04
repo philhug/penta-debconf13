@@ -63,4 +63,8 @@ class ScheduleController < ApplicationController
     @current_language = params[:language] || 'en'
   end
 
+  def check_permission
+    POPE.permission?('submission_login')
+  end
+
 end

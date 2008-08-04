@@ -1,0 +1,19 @@
+tabs = []
+tabs = @dates.keys.sort
+
+xml << js_tabs( tabs )
+
+xml.div( :id => 'data' ) do
+
+  xml.form(:action=>url_for(:action=>:person),:id=>'content_form',:method=>'post',:enctype=>'multipart/form-data') do
+
+    tabs.each do | tab |
+      xml << render( :partial => "tab_arrivals_by_date", :collection => tab)
+    end
+  end
+
+  xml.script( "switch_tab();", { :type => 'text/javascript' } )
+
+end
+
+

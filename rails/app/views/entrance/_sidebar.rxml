@@ -1,0 +1,32 @@
+xml.div( :id => 'sidebar' ) do
+
+  xml.div( :id => 'logo' ) do
+    #xml.a( :href => url_for(:controller=>'pentabarf',:action=>'conference',:id=>@current_conference.conference_id)) do
+      xml.img( :src=>url_for(:controller=>'image',:action=>'conference',:id=>@current_conference.conference_id,:size=>'128x128'), :height=>128,:width=>128)
+    #end
+  end
+
+  xml.div(:id => 'menu') do
+
+    xml.div(:class=>'menu-item-group') do
+      xml.form(:action=>url_for(:controller=>'entrance',:action=>:save_current_conference),:method=>:post,:class=>'menu-text') do
+        xml << select_tag('conference_id', Conference.select.map{|e| [e.conference_id,e.acronym]}, {:selected=>@current_conference.conference_id,:onchange=>'submit()'} )
+      end
+    end
+
+    xml.div( :class=>'menu-item-group' ) do
+      xml.a( local('entrance::index'), {:href=> url_for(:controller => 'entrance', :action => :index), :class => 'menu-item'} )
+      xml.a( local('entrance::wat'), {:href=> url_for(:controller => 'entrance', :action => :wat), :class => 'menu-item'} )
+      xml.a( local('entrance::not_reconfirmed'), {:href=> url_for(:controller => 'entrance', :action => :not_reconfirmed), :class => 'menu-item'} )
+      xml.a( local('entrance::arrived'), {:href=> url_for(:controller => 'entrance', :action => :arrived), :class => 'menu-item'} )
+      xml.a( local('entrance::arrivals_by_date'), {:href=> url_for(:controller => 'entrance', :action => :arrivals_by_date), :class => 'menu-item'} )
+    end
+
+    xml.div( :class=>'menu-item-group' ) do
+    end
+
+    xml.div( :class=>'menu-item-group' ) do
+    end
+
+  end
+end

@@ -1,0 +1,23 @@
+paginate( xml, @unreconfirmed, params[:id].to_i ) do | results |
+  xml.table({:id=>'person_results_table',:class=>'sortable'}) do
+    fields = [:name, :first_name, :last_name, :nickname]
+    xml.thead do
+      xml.tr do
+        xml.th(local('person::name'))
+        fields[1..fields.length].each do | field |
+          xml.th( local("person::#{field}") )
+        end
+      end
+    end
+    xml.tbody do
+      results.each do | person |
+        xml.tr do
+          fields.each do | field |
+            xml.td do xml.a( person.send(field), {:href=>url_for(:action=>:confirm_person,:id=>person.person_id)}) end
+          end
+        end
+      end
+    end
+  end if results.length > 0
+end
+
