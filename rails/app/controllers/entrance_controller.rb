@@ -90,7 +90,7 @@ class EntranceController < ApplicationController
   end
 
   def search_arrived
-    query = params[:id] ? @preferences[:entrance_search_person].to_s : params[:entrance_search_person].to_s
+    query = params[:id] ? @preferences[:entrance_search_arrived].to_s : params[:entrance_search_arrived].to_s
     conditions = {}
     conditions[:conference_id] = @current_conference.conference_id
     conditions[:AND] = []
@@ -106,8 +106,8 @@ class EntranceController < ApplicationController
     cond2[:arrived] = true
     conditions[:AND] << {:AND => cond2 } 
     @results = DebConf::Dc_view_find_person_entrance.select( conditions, {:distinct => [:name,:person_id]} )
-    @preferences[:entrance_search_person] = query
-    render(:partial=>'search_person')
+    @preferences[:entrance_search_arrived] = query
+    render(:partial=>'search_arrived')
   end
 
   def wat
