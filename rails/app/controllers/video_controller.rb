@@ -154,8 +154,12 @@ class VideoController < ApplicationController
     true
   end
 
-	def check_permission
-		return POPE.permission?('video_login')
-	end
+  def check_permission
+    if POPE.permission?('video_login')
+      return true
+    end
+    redirect_to(:controller=>'submission')
+    false
+  end
 
 end

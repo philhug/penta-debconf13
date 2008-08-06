@@ -180,4 +180,49 @@ module ApplicationHelper
     xml
   end
 
+  def format_volunteer_event( event )
+    xml = Builder::XmlMarkup.new
+    xml.a({:href=>url_for(:controller=>'pentabarf',:action=>:event,:id=>event.event_id)}) do
+      xml.strong event.title
+      if event.subtitle
+        xml.br
+        xml.text! event.subtitle
+      end
+      already_in_event = false
+      if event.respond_to?( :speaker_ids ) && event.speaker_ids
+        ids = event.speaker_ids.split("\n")
+        names = event.speakers.split("\n")
+        xml.ul(:class=>'event-persons') do
+          ids.each_with_index do | id, index |
+            xml.li do xml.a( names[index], {:href=>url_for(:controller=>'pentabarf',:action=>:person,:id=>id)}) end
+            already_in_event = true if POPE.user.person_id == id.to_i
+          end
+        end
+      end
+      if event.respond_to?( :needed_roles ) && event.needed_roles
+        roles = event.needed_roles.split("\n")
+        xml.ul do
+          roles.each do |r|
+            missing_amount = r.split(" ",2).first
+            role = r.split(" ",2).last
+            xml.li do
+              xml.text! "#{missing_amount} #{role} missing " 
+              if not already_in_event
+                xml.a({:href=>url_for(:controller=>'volunteer',:action=>:volunteer,:event_role=>role,:id=>event.event_id)}) do
+                  xml.button('Join!')
+                end
+              end
+            end
+          end
+        end
+      end
+      if already_in_event
+        xml.a({:href=>url_for(:controller=>'volunteer',:action=>:remove_from_event,:id=>event.event_id)}) do
+          xml.button('Remove me')
+        end
+      end
+    end
+    xml
+  end
+
 end

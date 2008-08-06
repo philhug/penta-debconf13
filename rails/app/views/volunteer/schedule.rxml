@@ -1,0 +1,50 @@
+rooms = Conference_room.select({:conference_id=>@current_conference.conference_id},{:order=>:rank})
+conf = Conference.select_single({:conference_id=>@current_conference.conference_id})
+table = schedule_table( conf, @events )
+day_tabs = table.keys.sort
+
+xml.div({:id=>:data}) do
+  xml << js_tabs(day_tabs)
+
+  tracks = Conference_track.select({:conference_id=>@current_conference.conference_id})
+  xml << conference_track_color_div( tracks, track_color = {} )
+
+  day_tabs.each do | conference_day |
+    day_table = table[conference_day]
+    xml.div({:id=>"content-#{conference_day}",:class=>"content_tab"}) do
+      xml.table do
+
+        xml.thead do
+          xml.tr do
+            xml.th(local(:time))
+            rooms.each do | room |
+              xml.th(room.conference_room)
+            end
+          end
+        end
+
+        xml.tbody do
+          day_table.each do | row |
+            xml.tr do
+              xml.td(row[0])
+              rooms.each do | room |
+                next if row[room.conference_room] == 0
+                if row[room.conference_room].nil?
+                  xml.td
+                else
+                  event = @events.select{|e| e.event_id == row[room.conference_room][:event_id]}.first
+                  xml.td({:rowspan=>row[room.conference_room][:slots],:style=>"background-color: #{track_color[event.conference_track]}"}) do
+                    xml <<  format_volunteer_event( event )
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+
+  xml.script("switch_tab();",{:type=>'text/javascript'})
+end
+

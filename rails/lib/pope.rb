@@ -95,6 +95,8 @@ class Pope
   end
 
   def domain_event( action, row )
+    # allow to add oneself to fullfill roles in an event
+    return true if row.class.table.table_name == 'event_person' and row[:person_id] == POPE.user.person_id
     if action == :modify && permission?(:modify_own_event)
       return if @own_events.member?( row.event_id )
     end
