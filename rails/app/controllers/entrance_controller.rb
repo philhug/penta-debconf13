@@ -41,7 +41,7 @@ class EntranceController < ApplicationController
   end
 
   def save_person
-    dcp = [:badge, :foodtickets, :has_to_pay, :has_paid, :shirt, :bag, :proceedings, :proceeded, :amount_to_pay]
+    dcp = [:badge, :foodtickets, :has_to_pay, :has_paid, :shirt, :bag, :proceedings, :proceeded, :amount_to_pay, :paiddaytrip]
     dcpv = Hash.new
     dcp.each do |field|
       dcpv[field] = params[:dc_view_find_person_entrance][field] || 'f'
