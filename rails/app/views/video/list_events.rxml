@@ -17,7 +17,7 @@ xml.div({:id=>:data}) do
         end
 
         xml.tr(options) do
-          xml.td("#{event.conference_day} #{display_time(event.start_time)}")
+          xml.td("#{display_time(event.start_datetime)}")
           xml.td do xml << format_event(event).to_s end
           xml.td(event.conference_room)
           xml.td do

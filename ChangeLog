@@ -1,3 +1,11 @@
+2008-08-08  Damian Viano  <des@debian.org>
+	* rails/app/views/entrance/_not_reconfirmed_side.rxml:
+	Added confirm js dialog fix rt#719
+
+	* rails/app/controllers/video_controller.rb:
+	Fix for displaying wrong times in list_events rt#706
+	* rails/app/views/video/list_events.rxml: same
+
 2008-08-07  Damian Viano  <des@debian.org>
 	* rails/app/views/layouts/volunteer.rxml:
 	Added thankful notice for volunteers

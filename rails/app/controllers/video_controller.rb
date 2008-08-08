@@ -71,7 +71,7 @@ class VideoController < ApplicationController
 
   def list_events
     @content_subtitle = local("video::list_events")
-    @events = Event.select({:conference_id => @current_conference.conference_id}, {:order => [:conference_day, :start_time]})
+    @events = View_event.select({:conference_id => @current_conference.conference_id, :translated => @current_language}, {:order => [:conference_day, :start_time]})
   end
 
   def toggle_lock_recording

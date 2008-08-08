@@ -13,7 +13,7 @@ paginate( xml, @unreconfirmed, params[:id].to_i ) do | results |
       results.each do | person |
         xml.tr do
           fields.each do | field |
-            xml.td do xml.a( person.send(field), {:href=>url_for(:action=>:confirm_person,:id=>person.person_id)}) end
+            xml.td do xml.a( person.send(field), {:onclick=>"return confirm('Are you sure?');",:href=>url_for(:action=>:confirm_person,:id=>person.person_id)}) end
           end
         end
       end
