@@ -8,7 +8,7 @@ class VolunteerController < ApplicationController
   end
 
   def schedule
-    @content_title = 'Schedule'
+    @content_subtitle = 'Schedule'
     @events = View_schedule_volunteer.select({:conference_id => @current_conference.conference_id, :translated => @current_language}, :order => :event_id)
   end
 
@@ -30,11 +30,18 @@ class VolunteerController < ApplicationController
     redirect_to( request.env['HTTP_REFERER'] )
   end
 
+  def needed_events
+    @content_subtitle = 'Needed events'
+    @minutes_ago = params[:minutes_ago] ? params[:minutes_ago] : 30
+    @events = View_needed_event_nice.select({:conference_id => @current_conference.conference_id, :start_datetime => {:ge, Time.now - 60*@minutes_ago.to_i}}, :order => :start_datetime )
+  end
+
   protected
 
   def init
     @current_conference = Conference.select_single(:conference_id => POPE.user.current_conference_id) rescue Conference.new(:conference_id=>0)
     @current_language = POPE.user.current_language || 'en'
+    @content_title = 'Volunteer'
   end
 
   def check_permission

@@ -1,0 +1,29 @@
+xml.div({:id=>:data}) do
+  xml.h1(@content_subtitle)
+  xml.form(:action=>url_for(:action=>:needed_events)) do
+    xml.p do
+      xml << "See events that started: "
+      xml.input({:type=>:text,:id=>'minutes_ago',:name=>'minutes_ago', :value => @minutes_ago})
+      xml << "minutes ago"
+      xml.input({:type=>:submit,:value=>local(:submit)})
+    end
+  end
+  xml.table do
+    xml.thead do
+      xml.th(local("event::start_datetime"))
+      xml.th(local("event::title"))
+      xml.th(local("event::conference_room"))
+      xml.th(local("Missing volunteers"))
+    end
+    xml.tbody do
+      @events.each do |event|
+        xml.tr do
+          xml.td(display_time(event.start_datetime))
+          xml.td do xml << format_event(event).to_s end
+          xml.td(event.conference_room)
+          xml.td(event.missing_roles)
+        end
+      end
+    end
+  end
+end

@@ -1,4 +1,19 @@
 2008-08-07  Damian Viano  <des@debian.org>
+	* rails/app/views/layouts/volunteer.rxml:
+	Added thankful notice for volunteers
+	* rails/app/views/volunteer/_sidebar.rxml:
+	Added link to the needed events list
+	* rails/app/models/view_needed_event_nice.rb: Added view with nice data to
+	* rails/app/views/volunteer/needed_events.rxml:
+	View for displaying close to come events with missing roles
+	* rails/app/controllers/volunteer_controller.rb:
+	Improve title/subtitle handling
+	* rails/app/helpers/application_helper.rb: Move display_date from
+	video_helper to application_helper since it's used in volunteer controller
+	too now
+	* rails/app/helpers/video_helper.rb: dito
+
+2008-08-07  Damian Viano  <des@debian.org>
 	* Include room_roles patch, already in upstream
 	* rails/app/models/conference_room_role.rb: Added from the patch
 	* rails/app/views/pentabarf/_conference_room_roles.rxml: dito

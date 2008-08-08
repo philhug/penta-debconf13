@@ -16,6 +16,7 @@ xml.div( :id => 'sidebar' ) do
 
     xml.div( :class=>'menu-item-group' ) do
       xml.a( 'Volunteer Schedule', {:href=> url_for(:controller => 'volunteer', :action => :schedule), :class => 'menu-item'} ) if POPE.permission?('volunteer_login')
+      xml.a( 'Needed events', {:href=> url_for(:controller => 'volunteer', :action => :needed_events), :class => 'menu-item'} ) if POPE.permission?('volunteer_login')
     end
 
     xml.div( :class=>'menu-item-group' ) do

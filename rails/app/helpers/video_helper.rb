@@ -1,12 +1,5 @@
 module VideoHelper
 
-  def display_time (time)
-    # Display a timestamp including date and time up to seconds
-    # Discard microseconds, timezone
-    return nil unless time
-    time.to_s.gsub(/(.*[\d]+:[\d]+:[\d]+) .*/, '\1')
-  end
-
   def status_table(row, column, status = nil)
     xml = Builder::XmlMarkup.new
     status = Video_file_status.select() unless status
