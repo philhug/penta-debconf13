@@ -52,6 +52,7 @@ class AssassinsController < ApplicationController
       rescue Momomoto::Nothing_found
       end
       @victims = DebConf::View_dc_assassination_victims.select({:conference_id => @current_conference.conference_id, 
+                                                                :acked_kill => true,
                                                                 :killed_by => POPE.user.person_id}, 
                                                                {:ignore_empty => true})
     else
@@ -94,7 +95,8 @@ class AssassinsController < ApplicationController
     rescue
     end
 
-    @hunting = 
+    @hunting = DebConf::View_dc_assassin_pairs.select({:conference_id=>@current_conference.conference_id},
+                                                      {:ignore_empty => true} )
     @pending = DebConf::View_dc_assassination_victims.select({:acked_kill => false,
                                                               :conference_id=>@current_conference.conference_id},
                                                              {:ignore_empty => true} )

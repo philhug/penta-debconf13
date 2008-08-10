@@ -33,7 +33,7 @@ xml.div( :id => 'sidebar' ) do
 
     xml.div( :class=>'menu-item-group' ) do
       xml.a( local('video::index'), {:href=> url_for(:controller => 'video', :action => :index), :class => 'menu-item'} ) if POPE.permission?('video_login')
-      xml.a( 'Volunteer Schedule', {:href=> url_for(:controller => 'volunteer', :action => :schedule), :class => 'menu-item'} ) if POPE.permission?('volunteer_login')
+      xml.a( 'Volunteer Schedule', {:href=> url_for(:controller => 'volunteer', :action => :schedule), :class => 'menu-item'} ) if (POPE.permission?('volunteer_login') or POPE.permission?('submission_login'))
       xml.a( 'Logout', {:href=>"#{request.protocol}logout@#{request.host_with_port}/logout", :class => 'menu-item'} ) if POPE.user
 
       xml.a( 'DebConf7', {:href=>"https://debconf7.debconf.org/", :class => 'menu-item'} )

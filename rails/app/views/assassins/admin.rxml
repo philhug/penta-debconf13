@@ -3,28 +3,52 @@ if @started == false
     xml.input({:type => :submit, :value => "Let the games begin"})
   end
 else
+  if @pending.to_ary.length > 0
+    xml.fieldset do 
+      xml.legend(local('Kills Pending Confirmation') )
+      xml.table({:id=>'pending_confirms'}) do
+        xml.thead do
+          xml.tr do
+            ['Victim', 'Killed At', 'Killer'].each do |field|
+              xml.th("#{field}")
+            end
+          end
+        end
+        xml.tbody do
+          fields = [:killed_at, :killed_by_name]
+          @pending.each do |row|
+            xml.tr do
+              xml.td do
+                xml.form(:action=>url_for(:action=>:save_confirm_kill),:id=>'content_form',:method=>'post',:enctype=>'multipart/form-data') do
+                  xml.input({:type=>:hidden,:name=>'person_id',:value=>row.person_id})
+                  xml.a( row.send(:name), {:href => url_for(:action=>:save_confirm_kill)} )
+                end
+              end
+              fields.each do |field|
+                xml.td do xml.a( row.send(field), {:href => url_for(:action=>:save_confirm_kill)} ) end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
   xml.fieldset do 
-    xml.legend(local('Pending Confirms') )
-    xml.table({:id=>'pending_confirms',:class=>'sortable'}) do
+    xml.legend(local('State of the Hunt') )
+    fields = [:hunter, :hunted]
+    xml.table({:id=>'assassin_pairs'}) do
       xml.thead do
         xml.tr do
-          ['Victim', 'Killed At', 'Killer'].each do |field|
+          fields.each do |field|
             xml.th("#{field}")
           end
         end
       end
       xml.tbody do
-        fields = [:killed_at, :killed_by_name]
-        @pending.each do |row|
+        @hunting.each do |row|
           xml.tr do
-            xml.td do
-              xml.form(:action=>url_for(:action=>:save_confirm_kill),:id=>'content_form',:method=>'post',:enctype=>'multipart/form-data') do
-                xml.input({:type=>:hidden,:name=>'person_id',:value=>row.person_id})
-                xml.a( row.send(:name), {:href => url_for(:action=>:save_confirm_kill)} )
-              end
-            end
             fields.each do |field|
-              xml.td do xml.a( row.send(field), {:href => url_for(:action=>:save_confirm_kill)} ) end
+              xml.td ( row.send(field) )
             end
           end
         end

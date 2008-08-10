@@ -22,21 +22,23 @@ xml.div({:id=>:data}) do
     end
     xml.p ("Should the target not confirm this kill within 2 hours, or outright refuse to do it, please contact this years assassins admins at assassins@debconf.org or talk to one of your 3 beloved admins, Ganneff / Mhy / Sgran")
 
-    xml.fieldset do 
-      xml.legend(local('Previous Kills') )
-      xml.table({:id=>'previous_kills',:class=>'sortable'}) do
-        xml.thead do
-          xml.tr do
-            [:victim, :killed_at].each do |field|
-              xml.th(local("assassins::#{field}"))
+    if @victims.to_ary.length > 0
+      xml.fieldset do 
+        xml.legend(local('Previous Kills') )
+        xml.table({:id=>'previous_kills'}) do
+          xml.thead do
+            xml.tr do
+              [:victim, :killed_at].each do |field|
+                xml.th(local("assassins::#{field}"))
+              end
             end
           end
-        end
-        xml.tbody do
-          @victims.each do |row|
-            xml.tr do
-              xml.td(row.name)
-              xml.td(row.killed_at)
+          xml.tbody do
+            @victims.each do |row|
+              xml.tr do
+                xml.td(row.name)
+                xml.td(row.killed_at)
+              end
             end
           end
         end
