@@ -233,3 +233,17 @@ module ApplicationHelper
   end
 
 end
+
+class Array
+  def shuffle!
+    each_index do |i|
+      j = Kernel.rand(length-i) + i
+      self[j],self[i] = self[i],self[j]
+    end
+  end
+
+  def shuffle
+    dup.shuffle!
+  end
+end
+

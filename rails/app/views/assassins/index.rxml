@@ -1,0 +1,47 @@
+xml.div({:id=>:data}) do
+  
+  if @not_playing.class == Array
+    xml.text ("You are not playing the assassins game, sod off")
+  else
+    xml.form(:action=>url_for(:action=>:target_killed),:id=>'content_form',:method=>'post') do
+      if @pending == false
+        xml.p do
+          xml.text("Your target is ")
+          xml.b("#{@target.name}.")
+        end
+        xml.p ("If you successfully eliminate your target press the button below. After the target confirms this kill you will get a new target assigned")
+        xml.p do xml.b("DO NOT CLICK THE BUTTON UNTIL YOU HAVE KILLED THEM!") end
+        xml.input({:type=>:submit, :value=>"Slayer"})
+      else
+        xml.p do
+          xml.text("Your target was ")
+          xml.b("#{@target.name}.")
+        end
+        xml.p ("Until they confirm the kill, we cannot give you a new target.")
+      end
+    end
+    xml.p ("Should the target not confirm this kill within 2 hours, or outright refuse to do it, please contact this years assassins admins at assassins@debconf.org or talk to one of your 3 beloved admins, Ganneff / Mhy / Sgran")
+
+    xml.fieldset do 
+      xml.legend(local('Previous Kills') )
+      xml.table({:id=>'previous_kills',:class=>'sortable'}) do
+        xml.thead do
+          xml.tr do
+            [:victim, :killed_at].each do |field|
+              xml.th(local("assassins::#{field}"))
+            end
+          end
+        end
+        xml.tbody do
+          @victims.each do |row|
+            xml.tr do
+              xml.td(row.name)
+              xml.td(row.killed_at)
+            end
+          end
+        end
+      end
+    end
+  end
+
+end

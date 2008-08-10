@@ -1,0 +1,51 @@
+if @display == false
+  xml.p("The game isn't over yet.  Have patience")
+else
+  high = @total.keys.sort.reverse[0]
+  if @total[high].length > 1
+    xml.p("We have a tie!")
+    xml.table do 
+      xml.thead do
+        xml.tr do
+          ['name', 'kills'].each do |field|
+            xml.th(field)
+          end
+        end
+      end
+      xml.tbody do
+        @total[high].each do |killer|
+          xml.tr do 
+            xml.td(killer)
+            xml.td(high)
+          end
+        end
+      end
+    end
+  elsif @total[high].length == 1
+    xml.h2("The winner is #{@total[high][0]} with #{high} kills!")
+  else
+    xml.p("mu?")
+  end
+  fields = [:name, :killed_at, :killed_by_name]
+  xml.fieldset do 
+    xml.legend(local('Kills') )
+    xml.table do 
+      xml.thead do
+        xml.tr do
+          ['Victim', 'Time of Death', 'Killer'].each do |field|
+            xml.th("#{field}")
+          end
+        end
+      end
+      xml.tbody do
+        @dead.each do |row|
+          xml.tr do 
+            fields.each do |field|
+              xml.td(row.send(field))
+            end
+          end
+        end
+      end
+    end
+  end
+end

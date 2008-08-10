@@ -111,6 +111,10 @@ class Pope
     raise Pope::PermissionError
   end
 
+  def domain_public( action, row )
+    true
+  end
+
   protected
 
   def domain( object )

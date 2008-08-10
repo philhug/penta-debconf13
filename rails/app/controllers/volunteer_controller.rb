@@ -45,8 +45,11 @@ class VolunteerController < ApplicationController
   end
 
   def check_permission
-    if POPE.permission?('volunteer_login')
-      return true
+    case params[:action]
+    when 'schedule', 'index'
+      return true if POPE.permission?('submission_login')
+    else 
+      return true if POPE.permission?('volunteer_login')
     end
     redirect_to(:controller=>'submission')
     false
