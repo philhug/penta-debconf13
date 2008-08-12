@@ -8,8 +8,10 @@ xml.div({:id=>:data}) do
         xml.p do
           xml.text("Your target is ")
           xml.b("#{@target.name}.")
+          xml.text(" (#{@target.nick})")
         end
         xml.p ("If you successfully eliminate your target press the button below. After the target confirms this kill you will get a new target assigned")
+        xml.p do xml.b("If you are killed, please reload this page and confirm, so that your killer can get a new victim in a reasonable amount of time") end
         xml.p do xml.b("DO NOT CLICK THE BUTTON UNTIL YOU HAVE KILLED THEM!") end
         xml.input({:type=>:submit, :value=>"Slayer"})
       else

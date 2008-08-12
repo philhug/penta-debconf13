@@ -31,9 +31,12 @@ function ts_makeSortable(table) {
       j += cell.attributes.colspan.value - 1;
     }
     var txt = ts_getInnerText(cell);
+    var uarr = String.fromCharCode(0x2191);
+    var darr = String.fromCharCode(0x2193);
+
     cell.innerHTML = '<a href="#" class="sortheader" '+
     'onclick="ts_resortTable(this, '+j+');return false;">' +
-    txt+'<span class="sortarrow">&uarr;&darr;</span></a>';
+    txt+'<span class="sortarrow">'+uarr+darr+'</span></a>';
   }
 }
 
@@ -90,12 +93,14 @@ function ts_resortTable(lnk,clid) {
 
   newRows.sort(sortfn);
 
+  var uarr = String.fromCharCode(0x2191);
+  var darr = String.fromCharCode(0x2193);
   if (span.getAttribute("sortdir") == 'down') {
-    ARROW = '&nbsp;&uarr;';
+    ARROW = '&nbsp;'+uarr;
     newRows.reverse();
     span.setAttribute('sortdir','up');
   } else {
-    ARROW = '&nbsp;&darr;';
+    ARROW = '&nbsp;'+darr;
     span.setAttribute('sortdir','down');
   }
 

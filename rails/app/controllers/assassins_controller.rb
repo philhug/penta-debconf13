@@ -100,7 +100,8 @@ class AssassinsController < ApplicationController
     @pending = DebConf::View_dc_assassination_victims.select({:acked_kill => false,
                                                               :conference_id=>@current_conference.conference_id},
                                                              {:ignore_empty => true} )
-    @dead = DebConf::View_dc_assassination_victims.select({:conference_id=>@current_conference.conference_id},
+    @dead = DebConf::View_dc_assassination_victims.select({:conference_id=>@current_conference.conference_id,
+                                                           :acked_kill => true},
                                                           {:ignore_empty => true} )
   end
 

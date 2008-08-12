@@ -6,7 +6,7 @@ else
   if @pending.to_ary.length > 0
     xml.fieldset do 
       xml.legend(local('Kills Pending Confirmation') )
-      xml.table({:id=>'pending_confirms'}) do
+      xml.table({:id=>'pending_confirms',:class=>:sortable}) do
         xml.thead do
           xml.tr do
             ['Victim', 'Killed At', 'Killer'].each do |field|
@@ -33,10 +33,34 @@ else
       end
     end
   end
+  if @dead.to_ary.length > 0
+    xml.fieldset do 
+      xml.legend(local('Kills') )
+      xml.table({:id=>'kills'},:class=>:sortable) do
+        xml.thead do
+          xml.tr do
+            ['Victim', 'Killed At', 'Killer'].each do |field|
+              xml.th("#{field}")
+            end
+          end
+        end
+        xml.tbody do
+          fields = [:name, :killed_at, :killed_by_name]
+          @dead.each do |row|
+            xml.tr do
+              fields.each do |field|
+                xml.td ( row.send(field))
+              end
+            end
+          end
+        end
+      end
+    end
+  end
   xml.fieldset do 
     xml.legend(local('State of the Hunt') )
     fields = [:hunter, :hunted]
-    xml.table({:id=>'assassin_pairs'}) do
+    xml.table({:id=>'assassin_pairs'},:class=>:sortable) do
       xml.thead do
         xml.tr do
           fields.each do |field|
