@@ -21,7 +21,8 @@ else
               xml.td do
                 xml.form(:action=>url_for(:action=>:save_confirm_kill),:id=>'content_form',:method=>'post',:enctype=>'multipart/form-data') do
                   xml.input({:type=>:hidden,:name=>'person_id',:value=>row.person_id})
-                  xml.a( row.send(:name), {:href => url_for(:action=>:save_confirm_kill)} )
+                  xml.input({:type=>:submit, :value=>row.send(:name)})
+
                 end
               end
               fields.each do |field|
