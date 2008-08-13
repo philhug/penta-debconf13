@@ -248,6 +248,7 @@ class AssassinsController < ApplicationController
         current.each_index do |i|
           begin
             DebConf::Dc_assassins_kills.select_single({:person_id => current[i],
+                                                       :acked_kill => true,
                                                        :conference_id=>@current_conference.conference_id} )
             insert_index = i
             current[i] = nil
