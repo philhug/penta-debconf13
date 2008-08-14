@@ -19,7 +19,7 @@ xml.div({:id=>:data}) do
 
     xml.tbody do
       @recordings.each do | rec |
-        toggle_lock_recording = rec.locked_by == nil ? local('Claim') : rec.locked_by == POPE.user.person_id ? local('Unclaim') : ''
+        toggle_lock_recording = rec.locked_by == nil ? local('Claim') : rec.locked_by == POPE.user.person_id ? local('Unclaim') : POPE.permission?('video_admin') ? local('Force Unclaim') : ''
         xml.tr({:class => "recording_status_#{@map_vfs_to_s[rec.file_status_id]}"}) do
           xml.td(display_time(rec.recording_time))
           xml.td(display_time(rec.recording_duration))

@@ -83,7 +83,7 @@ class VideoController < ApplicationController
       vr.locked_by = POPE.user.person_id
       claim_text = "Unclaim"
     #unlock
-    elsif vr.locked_by == POPE.user.person_id
+    elsif vr.locked_by == POPE.user.person_id or POPE.permission?('video_admin')
       vr.locked_by = nil
       claim_text = "Claim"
     else
@@ -104,7 +104,7 @@ class VideoController < ApplicationController
     if vtf.locked_by == nil
       vtf.locked_by = POPE.user.person_id
     #unlock
-    elsif vtf.locked_by == POPE.user.person_id
+    elsif vtf.locked_by == POPE.user.person_id or POPE.permission?('video_admin')
       vtf.locked_by = nil
     else
       raise "Someone beat you to it"

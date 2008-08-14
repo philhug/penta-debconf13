@@ -45,6 +45,9 @@ xml.div({:id=>:data}) do
                     if vtf.locked_by
                       if vtf.locked_by != POPE.user.person_id
                         xml.text(local('video::claimed_by') + " #{Person.select_single({:person_id => vtf.locked_by}).name}")
+												if POPE.permission?('video_admin')
+                        xml << link_to(local('Force Unclaim'), :action => 'toggle_lock_file', :id => vtf.id)
+												end
                       else
                         xml << link_to(local('Unclaim'), :action => 'toggle_lock_file', :id => vtf.id)
                         xml.br
