@@ -59,7 +59,7 @@ else
     end
   end
   xml.fieldset do 
-    xml.legend(local('State of the Hunt') )
+    xml.legend(local("State of the Hunt (#{@hunting.to_ary.length} people left)") )
     fields = [:hunter, :hunted]
     xml.table({:id=>'assassin_pairs'},:class=>:sortable) do
       xml.thead do

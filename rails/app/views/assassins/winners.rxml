@@ -4,7 +4,7 @@ else
   high = @total.keys.sort.reverse[0]
   if @total[high].length > 1
     xml.p("We have a tie!")
-    xml.table do 
+    xml.table({:id=>'kill_matrix',:class=>:sortable}) do 
       xml.thead do
         xml.tr do
           ['name', 'kills'].each do |field|
@@ -29,7 +29,7 @@ else
   fields = [:name, :killed_at, :killed_by_name]
   xml.fieldset do 
     xml.legend(local('Kills') )
-    xml.table do 
+    xml.table ({:id=>'kills',:class=>:sortable}) do 
       xml.thead do
         xml.tr do
           ['Victim', 'Time of Death', 'Killer'].each do |field|
