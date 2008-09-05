@@ -35,10 +35,11 @@ xml.div({:id=>:data}) do
               have = true
             end
             xml.b local("NONE") and xml.br if !have
+            if rec.locked_by != nil && rec.locked_by != POPE.user.person_id
+              xml.text(local('video::claimed_by') + " #{Person.select_single({:person_id => rec.locked_by}).name}")
+            end
             if toggle_lock_recording != ''
               xml.a(toggle_lock_recording, {:id => "claim_#{rec.id}", :href => "#", :name => "claim_#{rec.id}", :class => :videolisting, :onclick => "toggle_claim_recording(#{rec.id});return false"})
-            else
-              xml.text(local('video::claimed_by') + " #{Person.select_single({:person_id => rec.locked_by}).name}")
             end
             xml.div({:id => "on_claim_actions_#{rec.id}", :style => "display:#{rec.locked_by == POPE.user.person_id ? '' : :none}"}) {
               xml << "&nbsp;|&nbsp;"

@@ -347,6 +347,28 @@ function toggle_claim_recording( rec_id ) {
             });
 }
 
+function volunteer_for( role, event_id ) {
+  action_url = document.location.href.replace( /volunteer.*/, 'volunteer\/volunteer\/' + event_id + '?event_role=' + role );
+  request = new Ajax.Request( action_url,
+    {
+      asynchronous:false,
+      method: 'get',
+      onSuccess: function( response ) { $('event_' + event_id).innerHTML = response.responseText; },
+      onFailure: function() { alert('An error occurred.'); }
+    });
+}
+
+function remove_from_event( event_id ) {
+  action_url = document.location.href.replace( /volunteer.*/, 'volunteer\/remove_from_event\/' + event_id );
+  request = new Ajax.Request( action_url,
+    {
+      asynchronous:false,
+      method: 'get',
+      onSuccess: function( response ) { $('event_' + event_id).innerHTML = response.responseText; },
+      onFailure: function() { alert('An error occurred.'); }
+    });
+}
+
 function logout() {
   xmlhttp = new XMLHttpRequest();
   xmlhttp.open('GET',window.location,true,"logout","logout");

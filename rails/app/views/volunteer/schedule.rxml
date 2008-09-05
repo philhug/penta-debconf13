@@ -33,7 +33,7 @@ xml.div({:id=>:data}) do
                   xml.td
                 else
                   event = @events.select{|e| e.event_id == row[room.conference_room][:event_id]}.first
-                  xml.td({:rowspan=>row[room.conference_room][:slots],:style=>"background-color: #{track_color[event.conference_track]}"}) do
+                  xml.td({:rowspan=>row[room.conference_room][:slots],:style=>"background-color: #{track_color[event.conference_track]}", :id=>"event_#{event.event_id}"}) do
                     xml <<  format_volunteer_event( event )
                   end
                 end

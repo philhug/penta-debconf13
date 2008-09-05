@@ -15,13 +15,15 @@ class VolunteerController < ApplicationController
   def volunteer
     @event_person = Event_person.new({:event_id => params[:id], :person_id => POPE.user.person_id, :event_role => params[:event_role]})
     @event_person.write
-    redirect_to(:action => 'schedule')
+    @event = View_schedule_volunteer.select_single({:conference_id => @current_conference.conference_id, :translated => @current_language, :event_id => params[:id]}, :order => :event_id)
+    render :partial => 'volunteer_event'
   end
 
   def remove_from_event
     @event_person = Event_person.select_single({:event_id => params[:id], :person_id => POPE.user.person_id})
     @event_person.delete if @event_person
-    redirect_to(:action => 'schedule')
+    @event = View_schedule_volunteer.select_single({:conference_id => @current_conference.conference_id, :translated => @current_language, :event_id => params[:id]}, :order => :event_id)
+    render :partial => 'volunteer_event'
   end
 
   def save_current_conference

@@ -1,0 +1,1 @@
+xml <<  format_volunteer_event( @event )

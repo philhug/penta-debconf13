@@ -208,7 +208,7 @@ module ApplicationHelper
             xml.li do
               xml.text! "#{missing_amount} #{role} missing " 
               if not already_in_event
-                xml.a({:href=>url_for(:controller=>'volunteer',:action=>:volunteer,:event_role=>role,:id=>event.event_id)}) do
+                xml.a({:href=> "#", :onclick => "volunteer_for('#{role}', #{event.event_id});return false"}) do
                   xml.button('Join!')
                 end
               end
@@ -217,7 +217,7 @@ module ApplicationHelper
         end
       end
       if already_in_event
-        xml.a({:href=>url_for(:controller=>'volunteer',:action=>:remove_from_event,:id=>event.event_id)}) do
+        xml.a({:href=> "#", :onclick => "remove_from_event( #{event.event_id} );return false"}) do
           xml.button('Remove me')
         end
       end
