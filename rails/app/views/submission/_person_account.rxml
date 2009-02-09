@@ -17,7 +17,11 @@ xml.div(:id=>'content-account') do
     end
   end
 
-      xml.a( 'DebConf8', {:href=>"http://debconf8.debconf.org/", :class => 'menu-item'} )
+  if @conference.conference_id == 2
+    xml.a( 'DebConf8', {:href=>"http://debconf8.debconf.org/", :class => 'menu-item'} )
+  elsif @conference.conference_id == 3
+    xml.a( 'DebConf9', {:href=>"http://debconf9.debconf.org/", :class => 'menu-item'} )
+  end
 
   xml.fieldset do
     xml.legend local('Mailing Lists')

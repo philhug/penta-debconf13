@@ -4,7 +4,12 @@ xml.div(:id=>'content-travel') do
     xml.legend local('travel')
 
     xml.p do
-      xml.b "Please enter the dates relevant for the Conference, not those for your whole Argentina visit."
+      xml.b "Please enter the dates relevant for the Conference, not those for your whole "
+      if @conference.conference_id == 2
+        xml.b "Argentina visit."
+      elsif @conference.conference_id == 3
+        xml.b "visit to Spain"
+      end
     end
 
     xml.table do
@@ -67,7 +72,9 @@ xml.div(:id=>'content-travel') do
     end
 
     xml.table do
-      xml.td(:colspan=>2) do xml.b << "Please note that the deadline for sponsorship requests was March 31st, and no further sponsorship applications will be processed.  The sponsorship details below are provided for your convenience."
+      if @conference.conference_id == 2
+        xml.td(:colspan=>2) do xml.b << "Please note that the deadline for sponsorship requests was March 31st, and no further sponsorship applications will be processed.  The sponsorship details below are provided for your convenience."
+      end
       end
       xml << check_box_row( @conference_person_travel, :need_travel_cost )
       xml << money_currency_row( @conference_person_travel, :travel_cost, :travel_currency )
