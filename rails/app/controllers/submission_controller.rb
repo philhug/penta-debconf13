@@ -91,23 +91,23 @@ class SubmissionController < ApplicationController
   end
 
   def save_person
-#    old_dc_conference_person = DebConf::Dc_conference_person.select_or_new({:conference_id=>@conference.conference_id, :person_id=>POPE.user.person_id})
-#
-#    if ["1", "2", "3", "4", "5"].include?(params[:dc_conference_person][:dc_participant_category_id])
-#      if not ["1", "2", "3", "4", "5"].include?(old_dc_conference_person.dc_participant_category_id)
-#        params[:dc_conference_person][:dc_participant_category_id] = old_dc_conference_person.dc_participant_category_id
-#      end
-#    elsif ["6", "7", "8", "9", "10", "11", "12"].include?(params[:dc_conference_person][:dc_participant_category_id])
-#      if not ["6", "7", "8", "9", "10", "11", "12"].include?(old_dc_conference_person.dc_participant_category_id)
-#        params[:dc_conference_person][:dc_participant_category_id] = old_dc_conference_person.dc_participant_category_id
-#      end
-#    elsif ["28", "29", "30", "31", "32", "33", "34"].include?(params[:dc_conference_person][:dc_participant_category_id])
-#      params[:dc_conference_person][:food_id] = "10"
-#    end
+    old_dc_conference_person = DebConf::Dc_conference_person.select_or_new({:conference_id=>@conference.conference_id, :person_id=>POPE.user.person_id})
 
-    if params[:dc_conference_person][:food_id] == "10" or params[:dc_conference_person][:accom_id] == "5"
-      params[:dc_conference_person][:accom_id] = "5"
-      params[:dc_conference_person][:food_id] = "10"
+    if ["1", "2", "3", "4", "5"].include?(params[:dc_conference_person][:dc_participant_category_id])
+      if not ["1", "2", "3", "4", "5"].include?(old_dc_conference_person.dc_participant_category_id)
+        params[:dc_conference_person][:dc_participant_category_id] = old_dc_conference_person.dc_participant_category_id
+      end
+    elsif ["6", "7", "8", "9", "10", "11", "12"].include?(params[:dc_conference_person][:dc_participant_category_id])
+      if not ["6", "7", "8", "9", "10", "11", "12"].include?(old_dc_conference_person.dc_participant_category_id)
+        params[:dc_conference_person][:dc_participant_category_id] = old_dc_conference_person.dc_participant_category_id
+      end
+    elsif ["28", "29", "30", "31", "32", "33", "34", "35"].include?(params[:dc_conference_person][:dc_participant_category_id])
+      params[:dc_conference_person][:food_id] = "18"
+    end
+
+    if params[:dc_conference_person][:food_id] == "18" or params[:dc_conference_person][:accom_id] == "11"
+      params[:dc_conference_person][:accom_id] = "11"
+      params[:dc_conference_person][:food_id] = "18"
       map_id = DebConf::DC_participant_mapping.select_single({:participant_category_id=>5, :person_type_id=>params[:dc_conference_person][:person_type_id]})
       params[:dc_conference_person][:dc_participant_category_id]= map_id.participant_mapping_id
     end

@@ -10,16 +10,20 @@ xml.div({:id=>:data}) do
         xml.th( local( "Name" ), {:colspan=>2} )
         xml.th( local( "Requested Sponsorship" ), {:colspan=>2} )
         xml.th( local( "Travel Cost" ), {:colspan=>2} )
-        xml.th( local( "Arrival" ), {:colspan=>2} )
+        xml.th( local( "Contributor Level" ), {:colspan=>2} )
+        xml.th( local( "Requested Amount Rating" ), {:colspan=>2} )
+        xml.th( local( "Rating" ) )
+#        xml.th( local( "Arrival" ), {:colspan=>2} )
       end
     end
 
-    sum = Hash.new(0)
+    fee = Hash.new(0)
+    travel = Hash.new(0)
     xml.tbody do
       @rows.each do | row |
-        sum[row.fee_currency] += row.fee if row.fee
-        sum[row.travel_currency] += row.travel_cost if row.travel_cost
-        sum[row.accommodation_currency] += row.accommodation_cost if row.accommodation_cost
+        fee[row.fee_currency] += row.fee if row.fee
+        travel[row.travel_currency] += row.travel_cost if row.travel_cost
+#        sum[row.accommodation_currency] += row.accommodation_cost if row.accommodation_cost
         xml.tr do
           xml.td do
             xml.a({:href=>url_for({:controller=>'pentabarf',:action=>:person,:id=>row.person_id})}) do
@@ -31,16 +35,27 @@ xml.div({:id=>:data}) do
           xml.td do xml.a( row.fee_currency, {:href=>url_for({:controller=>'pentabarf',:action=>:person,:id=>row.person_id})}) end
           xml.td do xml.a( row.travel_cost ? sprintf("%.2f", row.travel_cost) : '', {:href=>url_for({:controller=>'pentabarf',:action=>:person,:id=>row.person_id})}) end
           xml.td do xml.a( row.travel_currency, {:href=>url_for({:controller=>'pentabarf',:action=>:person,:id=>row.person_id})}) end
-          xml.td do xml.a( row.accommodation_cost ? sprintf("%.2f", row.accommodation_cost) : '', {:href=>url_for({:controller=>'pentabarf',:action=>:person,:id=>row.person_id})}) end
-          xml.td do xml.a( row.accommodation_currency, {:href=>url_for({:controller=>'pentabarf',:action=>:person,:id=>row.person_id})}) end
+
+          xml.td do xml.a( row.quality, {:href=>url_for({:controller=>'pentabarf',:action=>:person,:id=>row.person_id})}) end
+          xml.td do xml.a( row.quality_count, {:href=>url_for({:controller=>'pentabarf',:action=>:person,:id=>row.person_id})}) end
+          xml.td do xml.a( row.competence, {:href=>url_for({:controller=>'pentabarf',:action=>:person,:id=>row.person_id})}) end
+          xml.td do xml.a( row.competence_count, {:href=>url_for({:controller=>'pentabarf',:action=>:person,:id=>row.person_id})}) end
+          xml.td do xml.a( row.rating, {:href=>url_for({:controller=>'pentabarf',:action=>:person,:id=>row.person_id})}) end
+
+#          xml.td do xml.a( row.accommodation_cost ? sprintf("%.2f", row.accommodation_cost) : '', {:href=>url_for({:controller=>'pentabarf',:action=>:person,:id=>row.person_id})}) end
+#          xml.td do xml.a( row.accommodation_currency, {:href=>url_for({:controller=>'pentabarf',:action=>:person,:id=>row.person_id})}) end
         end
       end
     end
 
     xml.tfoot do
       xml.tr do
-        xml.th("Sum:",{:colspan=>3})
-        xml.th( sum.map{|k,v| sprintf("%.2f %s",v,k)}.join(" and "), {:colspan=>5})
+        xml.th("Sum Travel Cost:",{:colspan=>3})
+        xml.th( travel.map{|k,v| sprintf("%.2f %s",v,k)}.join(" and "), {:colspan=>8})
+      end
+      xml.tr do
+        xml.th("Sum Sponsorship:",{:colspan=>3})
+        xml.th( fee.map{|k,v| sprintf("%.2f %s",v,k)}.join(" and "), {:colspan=>8})
       end
     end
 

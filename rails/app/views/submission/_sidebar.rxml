@@ -24,20 +24,32 @@ xml.div( :id => 'sidebar' ) do
     end
 
     
-    if @conference.conference_id == 2
-      xml.div( :class=>'menu-item-group' ) do
-        xml.a( 'Travel dates by name', {:href=> url_for(:action=>:attendee), :class => 'menu-item'} )
-        xml.a( 'Travel dates by arrival date', {:href=> url_for(:action=>:attendee_time), :class => 'menu-item'} )
-        xml.a( 'Travel dates by departure date', {:href=> url_for(:action=>:attendee_dep), :class => 'menu-item'} )
-        xml.a( 'Room assignments', {:href=> url_for(:action=>:rooms), :class => 'menu-item'} )
-        xml.a( 'EZE-MDQ bus coordination', {:href=>"http://wiki.debconf.org/wiki/DebConf8/EZE-MDQ_bus", :class => 'menu-item'} )
+    if @conference && POPE.user
+      if [ 2, 3 ].include?(@conference.conference_id)
+        xml.div( :class=>'menu-item-group' ) do
+          xml.a( 'Travel dates by name', {:href=> url_for(:action=>:attendee), :class => 'menu-item'} )
+          xml.a( 'Travel dates by arrival date', {:href=> url_for(:action=>:attendee_time), :class => 'menu-item'} )
+          xml.a( 'Travel dates by departure date', {:href=> url_for(:action=>:attendee_dep), :class => 'menu-item'} )
+        end
+        if @conference.conference_id == 2
+          xml.a( 'Room assignments', {:href=> url_for(:action=>:rooms), :class => 'menu-item'} )
+          xml.a( 'EZE-MDQ bus coordination', {:href=>"http://wiki.debconf.org/wiki/DebConf8/EZE-MDQ_bus", :class => 'menu-item'} )
+        end
+      end
+
+      if @conference.conference_id == 3
+        xml.div( :class=>'menu-item-group' ) do
+          xml.a( 'Freerunner for DebConf attendees', {:href=>"http://www.tuxbrain.com/debconf", :class => 'menu-item'} ) if POPE.user
+        end
       end
     end
 
     xml.div( :class=>'menu-item-group' ) do
-      if @conference.conference_id == 2
-        xml.a( local('video::index'), {:href=> url_for(:controller => 'video', :action => :index), :class => 'menu-item'} ) if POPE.permission?('video_login')
-        xml.a( 'Volunteer Schedule', {:href=> url_for(:controller => 'volunteer', :action => :schedule), :class => 'menu-item'} ) if (POPE.permission?('volunteer_login') or POPE.permission?('submission_login'))
+      if @conference && POPE.user
+        if @conference.conference_id == 2
+          xml.a( local('video::index'), {:href=> url_for(:controller => 'video', :action => :index), :class => 'menu-item'} ) if POPE.permission?('video_login')
+          xml.a( 'Volunteer Schedule', {:href=> url_for(:controller => 'volunteer', :action => :schedule), :class => 'menu-item'} ) if (POPE.permission?('volunteer_login') or POPE.permission?('submission_login'))
+        end
       end
       xml.a( 'Logout', {:href=>"#{request.protocol}logout@#{request.host_with_port}/logout", :class => 'menu-item'} ) if POPE.user
 

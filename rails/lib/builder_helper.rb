@@ -129,6 +129,15 @@ module Builder_helper
     end
   end
 
+  def date_row( row, column, options = {} )
+    xml = Builder::XmlMarkup.new
+    name = "#{row.class.table.table_name}[#{column}]"
+    button_id = "#{row.class.table.table_name}_#{column}"
+    options[:size] ||= 12
+    xml << text_field_row( row, column, options )
+  end
+
+
   def date_button_row( row, column, options = {} )
     xml = Builder::XmlMarkup.new
     name = "#{row.class.table.table_name}[#{column}]"

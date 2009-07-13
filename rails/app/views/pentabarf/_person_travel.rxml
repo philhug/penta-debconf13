@@ -50,6 +50,8 @@ xml.div(:id=>'content-travel') do
     end
   end
 
+  xml << text_area_fieldset( @dc_conference_person, :debianwork, {:rows=>5,:cols=>60})
+
   xml.fieldset do
     xml.legend local('accommodation_sponsored')
 

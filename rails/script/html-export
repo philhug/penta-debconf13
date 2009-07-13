@@ -34,6 +34,7 @@ languages.each do | lang |
 end
 
 while HTMLExport.urls[0]
+  puts "Looking at #{HTMLExport.urls[0]}"
   current_url = HTMLExport.urls[0]
   HTMLExport.urls.delete( current_url )
   HTMLExport.export( current_url )

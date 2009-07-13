@@ -12,6 +12,11 @@ xml.div(:id=>'content-travel') do
       end
     end
 
+    xml.p do
+      xml.b "Please not that changing dates is no longer possible using this interface."
+      xml.b "In case you do have to change them please mail rooms@debconf.org"
+    end
+
     xml.table do
       xml.tr do
         xml.td do
@@ -30,7 +35,8 @@ xml.div(:id=>'content-travel') do
             if @conference.conference_id != 2
               xml << text_field_row( @conference_person_travel, :arrival_to )
             end
-            xml << date_button_row( @conference_person_travel, :arrival_date, {:onchange=>'check_dates();'})
+#            xml << date_button_row( @conference_person_travel, :arrival_date, {:onchange=>'check_dates();', :disabled=>true})
+            xml << date_row( @conference_person_travel, :arrival_date, {:onchange=>'check_dates();', :disabled=>true})
 
             xml.tr do xml.td(:colspan=>2) do xml << '<span id="arrival_date_err_range_dcamp" style="color: red; font-size: small;"> (this date is outside the conference time span, and you said you won''t attend DebCamp)</span><span id="arrival_date_err_range_dcamp2" style="color: red; font-size: small;"> (this date is after DebCamp ends, and you said you will attend DebCamp)</span><span id="arrival_date_err_range_dconf" style="color: red; font-size: small;"> (this date is outside the conference time span)</span>' end end
 
@@ -58,7 +64,8 @@ xml.div(:id=>'content-travel') do
               xml << text_field_row( @conference_person_travel, :departure_from )
             end
             xml << text_field_row( @conference_person_travel, :departure_to )
-            xml << date_button_row( @conference_person_travel, :departure_date, {:onchange=>'check_dates();'})
+#            xml << date_button_row( @conference_person_travel, :departure_date, {:onchange=>'check_dates();', :disabled=>true})
+            xml << date_row( @conference_person_travel, :departure_date, {:onchange=>'check_dates();', :disabled=>true})
 
             xml.tr do xml.td(:colspan=>2) do xml << '<span id="departure_date_err_range" style="color: red; font-size: small;"> (this date is outside the conference time span)</span><span id="departure_date_err_mixed" style="color: red; font-size: small;"> (departure date is before arrival date)</span>' end end
 
@@ -83,6 +90,8 @@ xml.div(:id=>'content-travel') do
     end
 
   end
+
+  xml << text_area_fieldset( @dc_conference_person, :debianwork, {:rows=>5,:cols=>60})
 
   if 1 == 2
     xml.fieldset do

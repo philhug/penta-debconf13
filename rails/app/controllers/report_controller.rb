@@ -21,6 +21,11 @@ class ReportController < ApplicationController
     @ratings = Event_rating.select({:person_id=>POPE.user.person_id}).select{|r| r.remark || r.relevance || r.acceptance || r.actuality }.map{|r| r.event_id}
   end
 
+  def expenses
+    @content_title = "Expenses Report"
+    @rows = "DebConf::Dc_view_report_expenses".constantize.select({:conference_id=>@current_conference.conference_id})
+  end
+
   protected
 
   def init

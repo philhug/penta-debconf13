@@ -4,7 +4,7 @@ xml.div(:id=>:data) do
 
     xml.thead do
       xml.tr do
-        [:title,:event_state,:track,:rating,:raters,:start_datetime,:duration,:public].each do | field | xml.th(field.to_s) end
+        [:id,:title,:event_state,:track,:rating,:raters,:start_datetime,:duration,:public].each do | field | xml.th(field.to_s) end
       end
     end
 
@@ -16,6 +16,7 @@ xml.div(:id=>:data) do
         style += "background-color: moccasin;" if not @ratings.member?( event.event_id )
 
         xml.tr({:style=>style}) do
+          xml.td("#{event.event_id}")
           xml.td do xml << format_event( event ) end
           xml.td do
             xml.a( "#{event.event_state} #{event.event_state_progress}", {:href=>url_for(:controller=>'pentabarf',:action=>:event,:id=>event.event_id)})

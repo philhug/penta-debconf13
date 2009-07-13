@@ -11,7 +11,8 @@ xml.html(:xmlns => 'http://www.w3.org/1999/xhtml') do
   xml.body do
     xml.div(:id=>'conference-logo',:class=>'noprint') do
       xml.a(:href=>@conference.homepage) do
-        xml.img(:alt=> @conference.title, :src=> conference_image( @conference.conference_id, 128 ) )
+#        xml.img(:alt=> @conference.title, :src=> conference_image( @conference.conference_id, 128 ) )
+	xml.img(:alt=> @conference.title, :src=>'http://media.debconf.org/dc9/images/dc9sc.png' )
       end
     end
     xml << render(:partial => 'sidebar')

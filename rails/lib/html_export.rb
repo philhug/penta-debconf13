@@ -12,7 +12,7 @@ class HTMLExport
       @session.host = 'pentabarf.org'
       @http_prefix = @conference.export_base_url
       @file_prefix = "tmp/html-export/#{conf.acronym}/"
-      get( "/schedule/#{@conference.acronym}")
+      get( "/penta/schedule/#{@conference.acronym}")
     end
 
     def get( url )

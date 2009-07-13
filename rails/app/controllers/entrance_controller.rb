@@ -36,6 +36,7 @@ class EntranceController < ApplicationController
 
   def person
     @conference_person = DebConf::Dc_view_find_person_entrance.select_single( :person_id => params[:id], :conference_id => @current_conference.conference_id)
+    @dc_conference_person = DebConf::Dc_conference_person.select_or_new({:conference_id=>@current_conference.conference_id, :person_id => params[:id]})
     @content_title = "Front Desk"
     @content_subtitle = "Person View"
   end
