@@ -24,7 +24,7 @@ class AssassinsController < ApplicationController
     end
                                                          
     begin
-      @killed = DebConf::Dc_assassins_kills.select_single({:person_id => @current_conference.conference_id, 
+      @killed = DebConf::Dc_assassins_kills.select_single({:conference_id => @current_conference.conference_id, 
                                                            :person_id => POPE.user.person_id})
     rescue Momomoto::Nothing_found
       begin
