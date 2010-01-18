@@ -21,7 +21,7 @@ xml.div(:id=>'content-general') do
       xml << select_row(  @dc_conference_person, :t_shirt_sizes_id, DebConf::Dc_t_shirt_sizes.select.map{|e| [e.t_shirt_sizes_id,e.t_shirt_size]} )
 
       xml << select_row( @dc_conference_person, :food_id, DebConf::Dc_food_preferences.select(:conference_id=>@conference.conference_id).map{|e| [e.food_id,e.food]} )
-      xml << check-box_row( @dc_conference_person, :disabilities )
+      xml << check_box_row( @dc_conference_person, :disabilities )
       xml << select_row(  @dc_conference_person, :daytrip_id, DebConf::Dc_daytrip.select.map{|e| [e.daytrip_id,e.daytrip_option]} )
       xml << select_row(  @dc_conference_person, :computer_id, DebConf::Dc_computer.select.map{|e| [e.computer_id,e.computer]} )
       xml << select_row( @dc_conference_person, :debcamp_id, DebConf::Dc_debcamp.select.map{|e| [e.debcamp_id,e.debcamp_option]} )
