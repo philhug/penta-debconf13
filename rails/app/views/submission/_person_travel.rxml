@@ -13,9 +13,10 @@ xml.div(:id=>'content-travel') do
         xml.b "visit to New York City or the United States."
       end
       xml.b do
-        xml << " For travel coordination among attendees, please "
-        xml.a("use the wiki", {:href => "http://wiki.debconf.org/wiki/DebConf#{@conference.acronym[2..-1]}/TravelCoordination", :class => "menu-item"})
-        xml << " instead."
+        xml << " For travel coordination among attendees, please use the wiki instead."
+        xml.ul do
+          xml.li xml.a("DebConf#{conference.acronym[2..-1]} travel coordination page", {:href => "http://wiki.debconf.org/wiki/DebConf#{@conference.acronym[2..-1]}/TravelCoordination"})
+        end
       end
     end
 
