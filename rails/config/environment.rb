@@ -12,7 +12,6 @@ require 'pope'
 require 'jabberlogger'
 require 'yaml'
 require 'bluecloth'
-require 'cgi'
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here
