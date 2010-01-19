@@ -14,7 +14,7 @@ xml.div(:id=>'content-travel') do
       end
       xml.b do
         xml << " For travel coordination among attendees, please "
-        xml.a("use the wiki", {:href => "http://wiki.debconf.org/wiki/DebConf#{@conference.acronym[2..-1]}/TravelCoordination"})
+        xml.a("use the wiki", {:href => "http://wiki.debconf.org/wiki/DebConf#{@conference.acronym[2..-1]}/TravelCoordination", :class => "menu-item"})
         xml << " instead."
       end
     end
