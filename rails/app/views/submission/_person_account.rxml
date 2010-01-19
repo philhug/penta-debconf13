@@ -31,11 +31,11 @@ xml.div(:id=>'content-account') do
     xml.table do
       xml.tr do
         xml.td ( local('debconf-announce') )
-        xml.td do xml.a( 'debconf-announce', {:href=>"http://lists.debconf.org/mailman/subscribe/debconf-announce?email=#{CGI::escape(@conference_person.email || @person.email)}&fullname=#{CGI::escape(@person.name)}"} ) end
+        xml.td do xml.a( 'debconf-announce', {:href=>"http://lists.debconf.org/mailman/subscribe/debconf-announce?email=#{CGI.escape(@conference_person.email || @person.email)}&fullname=#{CGI.escape(@person.name)}"} ) end
       end
       xml.tr do
         xml.td ( local('debconf-discuss') )
-        xml.td do xml.a( 'debconf-discuss', {:href=>"http://lists.debconf.org/mailman/subscribe/debconf-discuss?email=#{CGI::escape(@conference_person.email || @person.email)}&fullname=#{CGI::escape(@person.name)}"} ) end
+        xml.td do xml.a( 'debconf-discuss', {:href=>"http://lists.debconf.org/mailman/subscribe/debconf-discuss?email=#{CGI.escape(@conference_person.email || @person.email)}&fullname=#{CGI.escape(@person.name)}"} ) end
       end
     end
   end
