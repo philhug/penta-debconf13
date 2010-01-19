@@ -9,12 +9,21 @@ xml.div(:id=>'content-travel') do
         xml.b "Argentina visit."
       elsif @conference.conference_id == 3
         xml.b "visit to Spain"
+      elsif @conference.conference_id == 4
+        xml.b "visit to New York City or the United States."
+      end
+      xml.b do
+        xml << " For travel coordination among attendees, please "
+        xml.a("use the wiki", {:href => "http://wiki.debconf.org/wiki/DebConf#{@conference.acronym[2..-1]}/TravelCoordination"})
+        xml << " instead."
       end
     end
 
-    xml.p do
-      xml.b "Please not that changing dates is no longer possible using this interface."
-      xml.b "In case you do have to change them please mail rooms@debconf.org"
+    if @conference.conference_id < 4
+      xml.p do
+        xml.b "Please not that changing dates is no longer possible using this interface."
+        xml.b "In case you do have to change them please mail rooms@debconf.org"
+      end
     end
 
     xml.table do
@@ -31,17 +40,17 @@ xml.div(:id=>'content-travel') do
                 end
               end
             end
-            xml << text_field_row( @conference_person_travel, :arrival_from )
-            if @conference.conference_id != 2
-              xml << text_field_row( @conference_person_travel, :arrival_to )
-            end
-#            xml << date_button_row( @conference_person_travel, :arrival_date, {:onchange=>'check_dates();', :disabled=>true})
-            xml << date_row( @conference_person_travel, :arrival_date, {:onchange=>'check_dates();', :disabled=>true})
+            #xml << text_field_row( @conference_person_travel, :arrival_from )
+            #if @conference.conference_id != 2
+            #  xml << text_field_row( @conference_person_travel, :arrival_to )
+            #end
+            xml << date_button_row( @conference_person_travel, :arrival_date, {:onchange=>'check_dates();'})
+#            xml << date_row( @conference_person_travel, :arrival_date, {:onchange=>'check_dates();', :disabled=>true})
 
             xml.tr do xml.td(:colspan=>2) do xml << '<span id="arrival_date_err_range_dcamp" style="color: red; font-size: small;"> (this date is outside the conference time span, and you said you won''t attend DebCamp)</span><span id="arrival_date_err_range_dcamp2" style="color: red; font-size: small;"> (this date is after DebCamp ends, and you said you will attend DebCamp)</span><span id="arrival_date_err_range_dconf" style="color: red; font-size: small;"> (this date is outside the conference time span)</span>' end end
 
-            xml << text_field_row( @conference_person_travel, :arrival_time )
-            xml << text_field_row( @conference_person_travel, :arrival_number )
+            #xml << text_field_row( @conference_person_travel, :arrival_time )
+            #xml << text_field_row( @conference_person_travel, :arrival_number )
             xml << select_row( @conference_person_travel, :arrival_transport, Transport_localized.select({:translated=>@current_language},{:order=>:name}).map{|e| [e.transport, e.name]} )
             xml << check_box_row( @conference_person_travel, :arrival_pickup )
           end
@@ -60,17 +69,17 @@ xml.div(:id=>'content-travel') do
                 end
               end
             end
-            if @conference.conference_id != 2
-              xml << text_field_row( @conference_person_travel, :departure_from )
-            end
-            xml << text_field_row( @conference_person_travel, :departure_to )
-#            xml << date_button_row( @conference_person_travel, :departure_date, {:onchange=>'check_dates();', :disabled=>true})
-            xml << date_row( @conference_person_travel, :departure_date, {:onchange=>'check_dates();', :disabled=>true})
+            #if @conference.conference_id != 2
+            #  xml << text_field_row( @conference_person_travel, :departure_from )
+            #end
+            #xml << text_field_row( @conference_person_travel, :departure_to )
+            xml << date_button_row( @conference_person_travel, :departure_date, {:onchange=>'check_dates();'})
+#            xml << date_row( @conference_person_travel, :departure_date, {:onchange=>'check_dates();', :disabled=>true})
 
             xml.tr do xml.td(:colspan=>2) do xml << '<span id="departure_date_err_range" style="color: red; font-size: small;"> (this date is outside the conference time span)</span><span id="departure_date_err_mixed" style="color: red; font-size: small;"> (departure date is before arrival date)</span>' end end
 
-            xml << text_field_row( @conference_person_travel, :departure_time )
-            xml << text_field_row( @conference_person_travel, :departure_number )
+            #xml << text_field_row( @conference_person_travel, :departure_time )
+            #xml << text_field_row( @conference_person_travel, :departure_number )
             xml << select_row( @conference_person_travel, :departure_transport, Transport_localized.select({:translated=>@current_language},{:order=>:name}).map{|e| [e.transport, e.name]} )
             xml << check_box_row( @conference_person_travel, :departure_pickup )
           end
@@ -110,15 +119,15 @@ xml.div(:id=>'content-travel') do
     end
   end
 
-  xml.fieldset do
-    xml.legend local('bank')
-    xml.table do
-      xml << text_field_row( @person, :iban )
-      xml << text_field_row( @person, :bic )
-      xml << text_field_row( @person, :bank_name )
-      xml << text_field_row( @person, :account_owner )
-    end
-  end
+  #xml.fieldset do
+  #  xml.legend local('bank')
+  #  xml.table do
+  #    xml << text_field_row( @person, :iban )
+  #    xml << text_field_row( @person, :bic )
+  #    xml << text_field_row( @person, :bank_name )
+  #    xml << text_field_row( @person, :account_owner )
+  #  end
+  #end
 
 end
 
