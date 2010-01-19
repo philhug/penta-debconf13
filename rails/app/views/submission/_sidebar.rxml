@@ -56,6 +56,7 @@ xml.div( :id => 'sidebar' ) do
       xml.a( 'DebConf7 Website', {:href=>"https://debconf7.debconf.org/", :class => 'menu-item'} )
       xml.a( 'DebConf8 Website', {:href=>"http://debconf8.debconf.org/", :class => 'menu-item'} )
       xml.a( 'DebConf9 Website', {:href=>"http://debconf9.debconf.org/", :class => 'menu-item'} )
+      xml.a( 'DebConf10 Website', {:href=>"http://debconf10.debconf.org/", :class => 'menu-item'} )
 
     end if @conference
 
