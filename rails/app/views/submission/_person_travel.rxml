@@ -4,7 +4,7 @@ xml.div(:id=>'content-travel') do
     xml.legend local('travel')
 
     xml.p do
-      xml.b "Please enter the dates relevant for the Conference, not those for your whole "
+      xml.b "Please enter the dates and times relevant for the conference itself, not those for your whole "
       if @conference.conference_id == 2
         xml.b "Argentina visit."
       elsif @conference.conference_id == 3
@@ -52,7 +52,7 @@ xml.div(:id=>'content-travel') do
 
             xml.tr do xml.td(:colspan=>2) do xml << '<span id="arrival_date_err_range_dcamp" style="color: red; font-size: small;"> (this date is outside the conference time span, and you said you won''t attend DebCamp)</span><span id="arrival_date_err_range_dcamp2" style="color: red; font-size: small;"> (this date is after DebCamp ends, and you said you will attend DebCamp)</span><span id="arrival_date_err_range_dconf" style="color: red; font-size: small;"> (this date is outside the conference time span)</span>' end end
 
-            #xml << text_field_row( @conference_person_travel, :arrival_time )
+            xml << text_field_row( @conference_person_travel, :arrival_time )
             #xml << text_field_row( @conference_person_travel, :arrival_number )
             xml << select_row( @conference_person_travel, :arrival_transport, Transport_localized.select({:translated=>@current_language},{:order=>:name}).map{|e| [e.transport, e.name]} )
             xml << check_box_row( @conference_person_travel, :arrival_pickup )
@@ -81,7 +81,7 @@ xml.div(:id=>'content-travel') do
 
             xml.tr do xml.td(:colspan=>2) do xml << '<span id="departure_date_err_range" style="color: red; font-size: small;"> (this date is outside the conference time span)</span><span id="departure_date_err_mixed" style="color: red; font-size: small;"> (departure date is before arrival date)</span>' end end
 
-            #xml << text_field_row( @conference_person_travel, :departure_time )
+            xml << text_field_row( @conference_person_travel, :departure_time )
             #xml << text_field_row( @conference_person_travel, :departure_number )
             xml << select_row( @conference_person_travel, :departure_transport, Transport_localized.select({:translated=>@current_language},{:order=>:name}).map{|e| [e.transport, e.name]} )
             xml << check_box_row( @conference_person_travel, :departure_pickup )
