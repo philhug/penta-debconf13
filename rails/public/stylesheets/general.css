@@ -18,6 +18,10 @@ p {
 
 /* link formatting */
 
+:link.visible-link {
+  text-decoration: underline;
+}
+
 :link, :visited {
   text-decoration: none;
   color: inherit;
