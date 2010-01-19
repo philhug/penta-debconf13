@@ -8,7 +8,7 @@ xml.div( :id => 'object-image' ) do
 end
 
 
-tabs = [:general,:contact,:travel,:description,:links,:availability,:account]
+tabs = [:general,:contact,:travel,:links,:account]
 
 xml << js_tabs( tabs )
 
