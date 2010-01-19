@@ -126,7 +126,8 @@ class SubmissionController < ApplicationController
     options[ @conference.f_reconfirmation_enabled ? :always : :except ] = [:reconfirmed]
     conference_person = write_row( Conference_person, params[:conference_person], options )
     POPE.refresh
-    write_row( Conference_person_travel, params[:conference_person_travel], {:preset=>{:conference_person_id => conference_person.conference_person_id},
+    write_row( Conference_person_travel, params[:conference_person_travel], {:preset=>{:conference_person_id => conference_person.conference_person_id,
+       arrival_transport => '', departure_transport => ''},
                  :always=>[:need_travel_cost]})
     write_rows( Person_language, params[:person_language], {:preset=>{:person_id => person.person_id}})
     write_rows( Conference_person_link, params[:conference_person_link], {:preset=>{:conference_person_id => conference_person.conference_person_id},:ignore_empty=>:url})
