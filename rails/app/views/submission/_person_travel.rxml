@@ -15,7 +15,9 @@ xml.div(:id=>'content-travel') do
       xml.b do
         xml << " For travel coordination among attendees, please use the wiki instead."
         xml.ul do
-          xml.li xml.a("DebConf#{@conference.acronym[2..-1]} travel coordination page", {:href => "http://wiki.debconf.org/wiki/DebConf#{@conference.acronym[2..-1]}/TravelCoordination"})
+          xml.li do
+            xml.a("DebConf#{@conference.acronym[2..-1]} travel coordination page", {:href => "http://wiki.debconf.org/wiki/DebConf#{@conference.acronym[2..-1]}/TravelCoordination"})
+          end
         end
       end
     end
