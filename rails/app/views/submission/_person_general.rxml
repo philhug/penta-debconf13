@@ -36,7 +36,7 @@ xml.div(:id=>'content-general') do
       xml.tr do
         xml.td do xml.b do xml << 'OK being photographed or filmed?' end end
         xml.td do
-          xml << select_tag( 'photo_film_ok', [[true, 'Yes in public areas, unless I say otherwise'], [false, 'No, unless I give my permission']], {:selected => @dc_person.photo_film_ok )
+          xml << select_tag( 'photo_film_ok', [[true, 'Yes in public areas, unless I say otherwise'], [false, 'No, unless I give my permission']], {:selected => @dc_person.photo_film_ok} )
         end
       end
       xml << check_box_row( @dc_conference_person, :proceedings )
