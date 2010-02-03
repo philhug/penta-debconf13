@@ -33,6 +33,12 @@ xml.div(:id=>'content-general') do
       xml << select_row( @dc_conference_person, :food_id, DebConf::Dc_food_preferences.select({:conference_id=>@conference.conference_id}, {:order => Momomoto.asc(:food_id)}).map{|e| [e.food_id,e.food]} )
       xml << select_row( @dc_conference_person, :computer_id, DebConf::Dc_computer.select.map{|e| [e.computer_id,e.computer]} )
       #xml << select_row( @dc_conference_person, :daytrip_id, DebConf::Dc_daytrip.select.map{|e| [e.daytrip_id,e.daytrip_option]} )
+      xml.tr do
+        xml.td do xml.b do xml << 'OK being photographed or filmed?' end end
+        xml.td do
+          xml << select_tag( 'dc_person[photo_or_film_ok]', [[true, 'Yes in public areas, unless I say otherwise'], [false, 'No, unless I give my permission']], {:selected => @dc_person.photo_or_film_ok} )
+        end
+      end
       xml << check_box_row( @dc_conference_person, :proceedings )
       xml << check_box_row( @dc_conference_person, :assassins )
       if @conference.f_reconfirmation_enabled
