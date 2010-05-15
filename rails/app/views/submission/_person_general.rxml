@@ -32,7 +32,7 @@ xml.div(:id=>'content-general') do
       xml << select_row( @dc_conference_person, :accom_id, DebConf::Dc_accomodation.select(:conference_id=>@conference.conference_id).map{|e| [e.accom_id,e.accom]} )
       xml << select_row( @dc_conference_person, :food_id, DebConf::Dc_food_preferences.select({:conference_id=>@conference.conference_id}, {:order => Momomoto.asc(:food_id)}).map{|e| [e.food_id,e.food]} )
       xml << select_row( @dc_conference_person, :computer_id, DebConf::Dc_computer.select.map{|e| [e.computer_id,e.computer]} )
-      #xml << select_row( @dc_conference_person, :daytrip_id, DebConf::Dc_daytrip.select.map{|e| [e.daytrip_id,e.daytrip_option]} )
+      xml << select_row( @dc_conference_person, :daytrip_id, DebConf::Dc_daytrip.select.map{|e| [e.daytrip_id,e.daytrip_option]} )
       xml.tr do
         xml.td do xml.b do xml << 'OK being photographed or filmed?' end end
         xml.td do
