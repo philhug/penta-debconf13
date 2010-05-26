@@ -2,7 +2,7 @@ xml.div(:id=>'content-description') do
 
   xml.fieldset do
     xml.legend( local('abstract') )
-    xml.textarea( @event.abstract, {:name=>'event[abstract]',:rows=>5} )
+    xml.textarea( @event.abstract, {:name=>'event[abstract]',:rows=>10} )
   end
 
   xml.fieldset do
