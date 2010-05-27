@@ -102,16 +102,16 @@ class SubmissionController < ApplicationController
         params[:dc_conference_person][:dc_participant_category_id] = old_dc_conference_person.dc_participant_category_id
       end
     elsif ["58", "59", "60", "61", "62"].include?(params[:dc_conference_person][:dc_participant_category_id])
-      if not ["58", "59", "60", "61", "62"].include?(old_dc_conference_person.dc_participant_category_id)
-	raise "The deadline to increase your sponsorship request was April 15, so your changes were not accepted."
+      if not [58, 59, 60, 61, 62].include?(old_dc_conference_person.dc_participant_category_id)
+        raise "The deadline to increase your sponsorship request was April 15, so your changes were not accepted."
       end
     elsif ["66", "67", "68", "69", "70"].include?(params[:dc_conference_person][:dc_participant_category_id])
-      if not ["58", "59", "60", "61", "62", "66", "67", "68", "69", "70"].include?(old_dc_conference_person.dc_participant_category_id)
-	raise "The deadline to increase your sponsorship request was April 15, so your changes were not accepted."
+      if not [58, 59, 60, 61, 62, 66, 67, 68, 69, 70].include?(old_dc_conference_person.dc_participant_category_id)
+        raise "The deadline to increase your sponsorship request was April 15, so your changes were not accepted."
       end
     elsif ["71", "72", "73", "74", "75"].include?(params[:dc_conference_person][:dc_participant_category_id])
-      if not ["58", "59", "60", "61", "62", "71", "72", "73", "74", "75"].include?(old_dc_conference_person.dc_participant_category_id)
-	raise "The deadline to increase your sponsorship request was April 15, so your changes were not accepted."
+      if not [58, 59, 60, 61, 62, 71, 72, 73, 74, 75].include?(old_dc_conference_person.dc_participant_category_id)
+        raise "The deadline to increase your sponsorship request was April 15, so your changes were not accepted."
       end
     elsif ["28", "29", "30", "31", "32", "33", "34", "35"].include?(params[:dc_conference_person][:dc_participant_category_id])
       params[:dc_conference_person][:food_id] = "18"
