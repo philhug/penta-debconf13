@@ -13,7 +13,7 @@ xml.div(:id=>'content-general') do
       xml << file_row( :person_image, :image )
       xml << check_box_row( @person_image, :public )
       #xml << check_box_row( @conference_person, :arrived )
-      #xml << check_box_row( @conference_person, :reconfirmed )
+      xml << check_box_row( @conference_person, :reconfirmed )
       xml << check_box_row ( @dc_conference_person, :attend )
       xml << select_row( @dc_conference_person, :person_type_id, DebConf::Dc_person_type.select.map{|e| [e.person_type_id,e.description]}, {:master=>:dc_participant_category_id})
       xml << select_row( @dc_conference_person, :dc_participant_category_id, DebConf::Dc_view_participant.select.map{|e| [e.participant_mapping_id,e.person_type_id,e.participant_category]},{:slave=>true,:with_empty=>false})
