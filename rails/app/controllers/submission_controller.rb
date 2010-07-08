@@ -125,7 +125,7 @@ class SubmissionController < ApplicationController
     end
 
     if params[:conference_person_travel][:arrival_date] != old_conference_person_travel.arrival_date.to_s or params[:conference_person_travel][:departure_date] != old_conference_person_travel.departure_date.to_s
-        if params[:dc_conference_person][:accom_id] == "12" or ["58", "66", "71"].include?(params[:dc_conference_person][:dc_participant_category_id])
+        if params[:dc_conference_person][:accom_id] == "12" or ["58", "59", "60", "61", "62", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75"].include?(params[:dc_conference_person][:dc_participant_category_id])
           raise "The deadline for on-campus or sponsored attendees to change dates was July 6, so your changes were not accepted. Contact registration@debconf.org if changes are needed."
         end
     end
