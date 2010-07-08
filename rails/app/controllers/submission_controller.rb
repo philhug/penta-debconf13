@@ -92,6 +92,7 @@ class SubmissionController < ApplicationController
 
   def save_person
     old_dc_conference_person = DebConf::Dc_conference_person.select_or_new({:conference_id=>@conference.conference_id, :person_id=>POPE.user.person_id})
+    old_conference_person_travel = Conference_person_travel.select_or_new({:conference_id=>@conference.conference_id, :person_id=>POPE.user.person_id})
 
     if ["1", "2", "3", "4", "5"].include?(params[:dc_conference_person][:dc_participant_category_id])
       if not ["1", "2", "3", "4", "5"].include?(old_dc_conference_person.dc_participant_category_id)
@@ -115,6 +116,18 @@ class SubmissionController < ApplicationController
       end
     elsif ["28", "29", "30", "31", "32", "33", "34", "35"].include?(params[:dc_conference_person][:dc_participant_category_id])
       params[:dc_conference_person][:food_id] = "18"
+    end
+
+    if params[:dc_conference_person][:accom_id] == "12"
+        if not old_dc_conference_person.accom_id == 12
+          raise "The deadline to request on-campus lodging was July 6, so your changes were not accepted."
+        end
+    end
+
+    if params[:conference_person_travel][:arrival_date] != old_conference_person_travel.arrival_date or params[:conference_person_travel][:departure_date] != old_conference_person_travel.departure_date
+        if params[:dc_conference_person][:accom_id] == "12" or ["58", "66", "71"].include?(params[:dc_conference_person][:dc_participant_category_id])
+          raise "The deadline for on-campus or sponsored attendees to change dates was July 6, so your changes were not accepted. Contact registration@debconf.org if changes are needed."
+        end
     end
 
     if params[:dc_conference_person][:food_id] == "18" or params[:dc_conference_person][:accom_id] == "11"
