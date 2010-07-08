@@ -92,7 +92,7 @@ class SubmissionController < ApplicationController
 
   def save_person
     old_dc_conference_person = DebConf::Dc_conference_person.select_or_new({:conference_id=>@conference.conference_id, :person_id=>POPE.user.person_id})
-    old_conference_person_travel = Conference_person_travel.select_or_new({:conference_id=>@conference.conference_id, :person_id=>POPE.user.person_id})
+    old_conference_person_travel = Conference_person_travel.select_or_new({:conference_person_id=>@conference_person.conference_person_id})
 
     if ["1", "2", "3", "4", "5"].include?(params[:dc_conference_person][:dc_participant_category_id])
       if not ["1", "2", "3", "4", "5"].include?(old_dc_conference_person.dc_participant_category_id)
