@@ -1,8 +1,15 @@
 xml.ul do
   @days.each_with_index do | day, index |
-    xml.li do
-      xml.a(:href=>url_for({:conference=>@conference.acronym,:action=>:day,:id=>day.conference_day.to_s,:language=>params[:language]})) do
-        xml.span(format_conference_day(day), :class=>:normal)
+    putout = false
+    @events.each do |event|
+      break if putout
+      if event.conference_day == day.conference_day
+        putout = true
+        xml.li do
+          xml.a(:href=>url_for({:conference=>@conference.acronym,:action=>:day,:id=>day.conference_day.to_s,:language=>params[:language]})) do
+            xml.span(format_conference_day(day), :class=>:normal)
+          end
+        end
       end
     end
   end

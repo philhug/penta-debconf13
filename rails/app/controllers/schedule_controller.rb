@@ -5,6 +5,7 @@ class ScheduleController < ApplicationController
   before_filter :init
 
   def index
+    @events = View_schedule_event.select({:conference_id=>@conference.conference_id,:translated=>@current_language},{:order=>[:title,:subtitle]})
   end
 
   def css
