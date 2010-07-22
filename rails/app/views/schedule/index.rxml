@@ -1,7 +1,7 @@
 xml.ul do
   @days.each_with_index do | day, index |
     putout = false
-    @events.each do |event|
+    @showevents.each do |event|
       break if putout
       if event.conference_day == day.conference_day
         putout = true

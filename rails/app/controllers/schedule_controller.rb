@@ -5,7 +5,6 @@ class ScheduleController < ApplicationController
   before_filter :init
 
   def index
-    @events = View_schedule_event.select({:conference_id=>@conference.conference_id,:translated=>@current_language},{:order=>[:title,:subtitle]})
   end
 
   def css
@@ -28,6 +27,7 @@ class ScheduleController < ApplicationController
 
   def events
     @events = View_schedule_event.select({:conference_id=>@conference.conference_id,:translated=>@current_language},{:order=>[:title,:subtitle]})
+    @showevents=@events
   end
 
   def speaker
@@ -62,6 +62,7 @@ class ScheduleController < ApplicationController
     @days = Conference_day.select({:conference_id=>@conference.conference_id,:public=>'t'},{:order=>:conference_day})
     @tracks = Conference_track.select(:conference_id=>@conference.conference_id)
     @current_language = params[:language] || 'en'
+    @showevents = View_schedule_event.select({:conference_id=>@conference.conference_id,:translated=>@current_language},{:order=>[:title,:subtitle]})
   end
 
   def check_permission
