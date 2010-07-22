@@ -14,7 +14,7 @@ xml.div(:id=>'event-index',:class=>'section') do
         xml.tr do
           xml.td(:class=>"event #{sanitize_track(event.conference_track)}") do
             xml.a(:href=>url_for(:action=>:track_event,:conference=>@conference.acronym,:track=>@track.conference_track,:language=>params[:language],:id=>event.event_id)) do
-              xml.img(:class=>'event-image',:src=>event_image(event.event_id, 48))
+              xml.img(:class=>'event-image',:src=>event_image(event.event_id, 128))
             end
             xml.p(:class=>'title') do
               xml.a(event.title,{:href=>url_for(:action=>:track_event,:conference=>@conference.acronym,:track=>@track.conference_track,:id=>event.event_id,:language=>params[:language])})
