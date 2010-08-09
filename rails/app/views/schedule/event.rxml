@@ -109,8 +109,15 @@ xml.div(:id=>'event',:class=>'section vevent') do
             vtf = Video_target_file.select(:event_recording_id => ver.id, :target_format_id => f.id, :file_status_id => {:ne => 6})
             if vtf.length > 0 
               xml.li do
-                #hack to get the links right for dc7-dc9 FIXME: add the base url to the conference data?
-                xml.a("#{f.target_format_abbr} #{f.filename_extension.gsub(/^\.+/, '')}",:href => "http://meetings-archive.debian.net/pub/debian-meetings/200#{@conference.title[-1,1]}/#{@conference.title.downcase}/#{f.target_format_abbr}/#{ver.event_recording_base_name.gsub(/^\/+/, '')}.#{f.filename_extension.gsub(/^\.+/, '')}")#, :title => vtf.comments)
+                #evenworsehack to get this stuff right for dc10, up to (including) dc16
+                vtlink=""
+                if @conference.title[-1,1].to_i > 7
+                  #hack to get the links right for dc7-dc9 FIXME: add the base url to the conference data?
+                  vtlink="http://meetings-archive.debian.net/pub/debian-meetings/200#{@conference.title[-1,1]}/#{@conference.title.downcase}/#{f.target_format_abbr}/#{ver.event_recording_base_name.gsub(/^\/+/, '')}.#{f.filename_extension.gsub(/^\.+/, '')}"
+                else
+                  vtlink="http://meetings-archive.debian.net/pub/debian-meetings/20#{@conference.title[-2,2]}/#{@conference.title.downcase}/#{f.target_format_abbr}/#{ver.event_recording_base_name.gsub(/^\/+/, '')}.#{f.filename_extension.gsub(/^\.+/, '')}"
+                end
+                  xml.a("#{f.target_format_abbr} #{f.filename_extension.gsub(/^\.+/, '')}",:href => vtlink)
               end
             end
           end
