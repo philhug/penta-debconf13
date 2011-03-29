@@ -5,12 +5,14 @@ xml.div(:id=>'content-travel') do
 
     xml.p do
       xml.b "Please enter the dates and times relevant for the conference itself, not those for your whole "
-      if @conference.conference_id == 2
+      if @thisconf == :argentina
         xml.b "Argentina visit."
-      elsif @conference.conference_id == 3
+      elsif @thisconf == :caceres
         xml.b "visit to Spain"
-      elsif @conference.conference_id == 4
+      elsif @thisconf == :nyc
         xml.b "visit to New York City or the United States."
+      elsif @thisconf == :bosnia
+        xml.b "visit to Bosnia and Herzegovina."
       end
       xml.b do
         xml << " For travel coordination among attendees, please use the wiki instead."
@@ -55,6 +57,7 @@ xml.div(:id=>'content-travel') do
             xml << text_field_row( @conference_person_travel, :arrival_time )
             #xml << text_field_row( @conference_person_travel, :arrival_number )
             #xml << select_row( @conference_person_travel, :arrival_transport, Transport_localized.select({:translated=>@current_language},{:order=>:name}).map{|e| [e.transport, e.name]} )
+            xml << check_box_row( @conference_person_travel, :arrival_pickup ) if !bosnia
           end
         end
       end
@@ -83,6 +86,7 @@ xml.div(:id=>'content-travel') do
             xml << text_field_row( @conference_person_travel, :departure_time )
             #xml << text_field_row( @conference_person_travel, :departure_number )
             #xml << select_row( @conference_person_travel, :departure_transport, Transport_localized.select({:translated=>@current_language},{:order=>:name}).map{|e| [e.transport, e.name]} )
+            xml << check_box_row( @conference_person_travel, :departure_pickup ) if !bosnia
           end
         end
       end
