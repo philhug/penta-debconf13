@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   session :off
   around_filter :transaction_wrapper
   before_filter :check_token
+  after_filter :symbolic_conference
 
   protected
 
@@ -70,6 +71,15 @@ class ApplicationController < ActionController::Base
       end
     end
     true
+  end
+
+  # Set the symbolic @thisconf variable, to avoid filling the views
+  # with meaningless numeric comparisons
+  def symbolic_conference
+    return nil if !@conference
+    # We started using Pentabarf for Edinburgh - which got conference_id == 1.
+    confs = [nil, :edinburgh, :argentina, :caceres, :nyc, :bosnia]
+    @thisconf = confs[@conference.conference_id]
   end
 
   # check whether we are working on the last version
