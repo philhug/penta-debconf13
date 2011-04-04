@@ -137,7 +137,6 @@ class SubmissionController < ApplicationController
     #   params[:dc_conference_person][:dc_participant_category_id]= map_id.participant_mapping_id
     # end
 
-
     params[:person][:person_id] = POPE.user.person_id
     person = write_row( Person, params[:person], {:except=>[:person_id],:always=>[:spam]} )
     params[:account][:account_id] = Account.select_single(:person_id=>person.person_id).account_id rescue nil
@@ -176,9 +175,15 @@ class SubmissionController < ApplicationController
   protected
 
   def init
+    # Set the symbolic @thisconf variable, to avoid filling the views
+    # with meaningless numeric comparisons.
+    # We started using Pentabarf for Edinburgh - which got conference_id == 1.
+    confs = [nil, :edinburgh, :argentina, :caceres, :nyc, :bosnia]
+
     @current_language = POPE.user ? POPE.user.current_language : 'en'
     begin
       @conference = Conference.select_single(:acronym=>params[:conference],:f_submission_enabled=>'t')
+      @thisconf = confs[@conference.conference_id]
     rescue Momomoto::Error
       if params[:action] != 'index' || params[:conference]
         redirect_to(:controller=>'submission', :action => :index, :conference => nil )
