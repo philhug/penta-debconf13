@@ -94,49 +94,48 @@ class SubmissionController < ApplicationController
     old_dc_conference_person = DebConf::Dc_conference_person.select_or_new({:conference_id=>@conference.conference_id, :person_id=>POPE.user.person_id})
     old_conference_person_travel = Conference_person_travel.select_or_new({:conference_person_id=>params[:conference_person][:conference_person_id].to_i})
 
-    if ["1", "2", "3", "4", "5"].include?(params[:dc_conference_person][:dc_participant_category_id])
-      if not ["1", "2", "3", "4", "5"].include?(old_dc_conference_person.dc_participant_category_id)
-        params[:dc_conference_person][:dc_participant_category_id] = old_dc_conference_person.dc_participant_category_id
-      end
-    elsif ["6", "7", "8", "9", "10", "11", "12"].include?(params[:dc_conference_person][:dc_participant_category_id])
-      if not ["6", "7", "8", "9", "10", "11", "12"].include?(old_dc_conference_person.dc_participant_category_id)
-        params[:dc_conference_person][:dc_participant_category_id] = old_dc_conference_person.dc_participant_category_id
-      end
-    elsif ["58", "59", "60", "61", "62"].include?(params[:dc_conference_person][:dc_participant_category_id])
-      if not [58, 59, 60, 61, 62].include?(old_dc_conference_person.dc_participant_category_id)
-        raise "The deadline to increase your sponsorship request was April 15, so your changes were not accepted."
-      end
-    elsif ["66", "67", "68", "69", "70"].include?(params[:dc_conference_person][:dc_participant_category_id])
-      if not [58, 59, 60, 61, 62, 66, 67, 68, 69, 70].include?(old_dc_conference_person.dc_participant_category_id)
-        raise "The deadline to increase your sponsorship request was April 15, so your changes were not accepted."
-      end
-    elsif ["71", "72", "73", "74", "75"].include?(params[:dc_conference_person][:dc_participant_category_id])
-      if not [58, 59, 60, 61, 62, 71, 72, 73, 74, 75].include?(old_dc_conference_person.dc_participant_category_id)
-        raise "The deadline to increase your sponsorship request was April 15, so your changes were not accepted."
-      end
-    elsif ["28", "29", "30", "31", "32", "33", "34", "35"].include?(params[:dc_conference_person][:dc_participant_category_id])
-      params[:dc_conference_person][:food_id] = "18"
-    end
+    # if ["1", "2", "3", "4", "5"].include?(params[:dc_conference_person][:dc_participant_category_id])
+    #   if not ["1", "2", "3", "4", "5"].include?(old_dc_conference_person.dc_participant_category_id)
+    #     params[:dc_conference_person][:dc_participant_category_id] = old_dc_conference_person.dc_participant_category_id
+    #   end
+    # elsif ["6", "7", "8", "9", "10", "11", "12"].include?(params[:dc_conference_person][:dc_participant_category_id])
+    #   if not ["6", "7", "8", "9", "10", "11", "12"].include?(old_dc_conference_person.dc_participant_category_id)
+    #     params[:dc_conference_person][:dc_participant_category_id] = old_dc_conference_person.dc_participant_category_id
+    #   end
+    # elsif ["58", "59", "60", "61", "62"].include?(params[:dc_conference_person][:dc_participant_category_id])
+    #   if not [58, 59, 60, 61, 62].include?(old_dc_conference_person.dc_participant_category_id)
+    #     raise "The deadline to increase your sponsorship request was April 15, so your changes were not accepted."
+    #   end
+    # elsif ["66", "67", "68", "69", "70"].include?(params[:dc_conference_person][:dc_participant_category_id])
+    #   if not [58, 59, 60, 61, 62, 66, 67, 68, 69, 70].include?(old_dc_conference_person.dc_participant_category_id)
+    #     raise "The deadline to increase your sponsorship request was April 15, so your changes were not accepted."
+    #   end
+    # elsif ["71", "72", "73", "74", "75"].include?(params[:dc_conference_person][:dc_participant_category_id])
+    #   if not [58, 59, 60, 61, 62, 71, 72, 73, 74, 75].include?(old_dc_conference_person.dc_participant_category_id)
+    #     raise "The deadline to increase your sponsorship request was April 15, so your changes were not accepted."
+    #   end
+    # elsif ["28", "29", "30", "31", "32", "33", "34", "35"].include?(params[:dc_conference_person][:dc_participant_category_id])
+    #   params[:dc_conference_person][:food_id] = "18"
+    # end
 
-    if params[:dc_conference_person][:accom_id] == "12"
-        if not old_dc_conference_person.accom_id == 12
-          raise "The deadline to request on-campus lodging was July 6, so your changes were not accepted."
-        end
-    end
+    # if params[:dc_conference_person][:accom_id] == "12"
+    #     if not old_dc_conference_person.accom_id == 12
+    #       raise "The deadline to request on-campus lodging was July 6, so your changes were not accepted."
+    #     end
+    # end
 
-    if params[:conference_person_travel][:arrival_date] != old_conference_person_travel.arrival_date.to_s or params[:conference_person_travel][:departure_date] != old_conference_person_travel.departure_date.to_s
-        if params[:dc_conference_person][:accom_id] == "12" or ["58", "59", "60", "61", "62", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75"].include?(params[:dc_conference_person][:dc_participant_category_id])
-          raise "The deadline for on-campus or sponsored attendees to change dates was July 6, so your changes were not accepted. Contact registration@debconf.org if changes are needed."
-        end
-    end
+    # if params[:conference_person_travel][:arrival_date] != old_conference_person_travel.arrival_date.to_s or params[:conference_person_travel][:departure_date] != old_conference_person_travel.departure_date.to_s
+    #     if params[:dc_conference_person][:accom_id] == "12" or ["58", "59", "60", "61", "62", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75"].include?(params[:dc_conference_person][:dc_participant_category_id])
+    #       raise "The deadline for on-campus or sponsored attendees to change dates was July 6, so your changes were not accepted. Contact registration@debconf.org if changes are needed."
+    #     end
+    # end
 
-    if params[:dc_conference_person][:food_id] == "18" or params[:dc_conference_person][:accom_id] == "11"
-      params[:dc_conference_person][:accom_id] = "11"
-      params[:dc_conference_person][:food_id] = "18"
-      map_id = DebConf::DC_participant_mapping.select_single({:participant_category_id=>5, :person_type_id=>params[:dc_conference_person][:person_type_id]})
-      params[:dc_conference_person][:dc_participant_category_id]= map_id.participant_mapping_id
-    end
-
+    # if params[:dc_conference_person][:food_id] == "18" or params[:dc_conference_person][:accom_id] == "11"
+    #   params[:dc_conference_person][:accom_id] = "11"
+    #   params[:dc_conference_person][:food_id] = "18"
+    #   map_id = DebConf::DC_participant_mapping.select_single({:participant_category_id=>5, :person_type_id=>params[:dc_conference_person][:person_type_id]})
+    #   params[:dc_conference_person][:dc_participant_category_id]= map_id.participant_mapping_id
+    # end
 
     params[:person][:person_id] = POPE.user.person_id
     person = write_row( Person, params[:person], {:except=>[:person_id],:always=>[:spam]} )
@@ -176,9 +175,15 @@ class SubmissionController < ApplicationController
   protected
 
   def init
+    # Set the symbolic @thisconf variable, to avoid filling the views
+    # with meaningless numeric comparisons.
+    # We started using Pentabarf for Edinburgh - which got conference_id == 1.
+    confs = [nil, :edinburgh, :argentina, :caceres, :nyc, :bosnia]
+
     @current_language = POPE.user ? POPE.user.current_language : 'en'
     begin
       @conference = Conference.select_single(:acronym=>params[:conference],:f_submission_enabled=>'t')
+      @thisconf = confs[@conference.conference_id]
     rescue Momomoto::Error
       if params[:action] != 'index' || params[:conference]
         redirect_to(:controller=>'submission', :action => :index, :conference => nil )
