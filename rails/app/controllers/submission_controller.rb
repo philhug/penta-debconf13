@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class SubmissionController < ApplicationController
 
   before_filter :init
@@ -136,6 +137,21 @@ class SubmissionController < ApplicationController
     #   map_id = DebConf::DC_participant_mapping.select_single({:participant_category_id=>5, :person_type_id=>params[:dc_conference_person][:person_type_id]})
     #   params[:dc_conference_person][:dc_participant_category_id]= map_id.participant_mapping_id
     # end
+
+    if @thisconf == :bosnia
+      # Basic registration means no regular room will be provided
+      if params[:dc_conference_person][:accom_id] == '15'
+        if params[:dc_conference_person][:dc_participant_category_id] == '110'
+          raise 'Your requested category («Basic registration») is incompatible with ' +
+            '«Regular» accomodation. Please fix it!'
+        end
+      else
+        if params[:dc_conference_person][:dc_participant_category_id] == '118'
+          raise 'Your requested category («Sponsored») is incompatible with ' +
+            'accomodations other than «Regular». Please fix it!'
+        end
+      end
+    end
 
     params[:person][:person_id] = POPE.user.person_id
     person = write_row( Person, params[:person], {:except=>[:person_id],:always=>[:spam]} )
