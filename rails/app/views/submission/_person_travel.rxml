@@ -1,3 +1,4 @@
+# -*- coding: undecided -*-
 xml.div(:id=>'content-travel') do
 
   xml.fieldset do
@@ -89,6 +90,21 @@ xml.div(:id=>'content-travel') do
             xml << check_box_row( @conference_person_travel, :departure_pickup ) if @thisconf != :bosnia
           end
         end
+      end
+    end
+
+    xml.p do
+      xml.b do
+        xml << 'Do you need help paying for your travel?'
+      end
+      xml.br
+      xml << 'We will '
+      xml.em { xml << 'try to ' }
+      xml << 'give you travel sponsorship if you need it — no promises made, but we will try to help you. Please fill in the following fields as follows:'
+      xml.ul do
+        xml.li { xml << 'First, tell us if you do need help for your travel.' }
+        xml.li { xml << 'Second, tell us the full cost for your travel, indicating the currency. Do this as accurately as possible, even if you do not yet have the final price.' }
+        xml.li { xml << 'Third, tell us how much help you need — this means the amount you are requesting from us. For example, if your ticket costs €700 and you can pay €500, enter €200 here.' }
       end
     end
 
