@@ -1,4 +1,4 @@
-# -*- coding: undecided -*-
+# -*- coding: utf-8 -*-
 xml.div(:id=>'content-travel') do
 
   xml.fieldset do
@@ -91,6 +91,13 @@ xml.div(:id=>'content-travel') do
           end
         end
       end
+      xml.tr do
+        xml.td do
+          xml.table do
+            xml << check_box_row( @dc_conference_person, :public_data )
+          end
+        end
+      end     
     end
 
     xml.p do
@@ -116,7 +123,6 @@ xml.div(:id=>'content-travel') do
       xml << check_box_row( @conference_person_travel, :need_travel_cost )
       xml << money_currency_row( @conference_person_travel, :travel_cost, :travel_currency )
       xml << money_currency_row( @conference_person_travel, :fee, :fee_currency )
-      xml << check_box_row( @dc_conference_person, :public_data )
     end
 
   end
