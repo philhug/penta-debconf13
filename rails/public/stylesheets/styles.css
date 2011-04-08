@@ -1,0 +1,97 @@
+/* This stylesheet is only used for the static information pages */
+/* STANDARD TAGS' REDEFINITIONS */
+body{	font-family : Arial, Helvetica, sans-serif;	color : Black;	background-color : #868686;  font-size: 12px;	background-image: url(../images/bg_main.gif); background-repeat: repeat-x;	margin: 0;	text-align: center;  padding: 0;  }
+a{	color : #006400; text-decoration: underline;  font-weight: normal;}
+p{ margin: 0 0 10px 0; padding:0; }
+a:hover{	text-decoration : underline;  color: #2CB73B;   }
+form{	margin:0;}
+
+/* STRUCTURE */
+#HEADER{ width: 80%; height: 88px; margin-left: auto; margin-right: auto; padding: 0; font-size: 83px; background-image: url(../images/bg_swish.gif); background-repeat: no-repeat; background-position: bottom left;}
+	#HEADER h1{ margin: 0px 0 0 0; padding: 0 9px 0 9px; float: left; font-size: 19pt;    width: 200px; height: 88px;  line-height: 45px;  background-image: url(../images/bg_logo.png);  background-repeat: no-repeat;      }
+	#HEADER h1  span {display:none;}
+	#HEADER a:hover{ text-decoration: none;  }
+	#HEADER p{ float: right;  font-size: 10pt;  color: White;  font-family: "Times New Roman", Times, serif;  font-style: italic;    margin: 59px 0 0 0;  padding: 0;  line-height: 9pt;            }
+	
+#NAVIGATION{ width: 80%; height:31px; text-align: left; margin-left: auto; margin-right: auto; background-color: #2E6BA9;  background-image: url(../images/bg_topnav2.gif);  }
+	#TABS{ margin-right:140px; height:31px;  background-image: url(../images/bg_topnav.gif);  background-repeat: repeat-x;  text-align: center; border-right: 1px solid #666666;  line-height: 31px;   }
+	#TABS ul { margin:0; padding-left: 0; display: inline;  list-style: none;    } 
+	#TABS li { float:left; margin: 0;  padding: 0px 36px 0px 36px; list-style: none; display: inline;  background-image: url(../images/bg_navbutton.gif);  background-repeat: no-repeat;  background-position: right;    }
+	#TABS .Last{ background-image: none; }
+	#TABS a{ color: Black;  text-decoration: none;  font-family: Tahoma, Arial, Sans-Serif;  font-size: 11px;    }
+	#TABS a:hover{ text-decoration : none;  border-bottom: 2px solid #1D76CB;  }
+	#BUTTONS{ float: right;  width: 140px; height:28px; text-align: center;  display: block; position: relative; top: -5px;  }
+
+#VISUAL{ width: 80%; text-align: right; margin-left: auto; margin-right: auto;  height: 122px;  background-color: #1F7A2A;  background-image: url(../images/bg_visbar.jpg);  }
+	#VISGRAPH { width: 100%; height: 122px; background-image: url(../images/bg_visual.jpg);  background-repeat: no-repeat;}
+	#VISUAL ul{ margin:0; padding-left: 0;   float: right;  width: 302px;    }
+	#VISUAL ul li{ display: block; list-style: none; }
+	#VISUAL ul li.PhraseOne{  padding-right: 15px;  color: White;  font-family: "MS Sans Serif", Geneva, sans-serif;  font-size: 12px;  font-style: normal;  margin-top: 18px;  font-weight: bold;       }
+	#VISUAL ul li.PhraseTwo{ padding-right: 15px;   color: White;  font-family: Arial, Helvetica, sans-serif;  font-size: 17px; font-style: normal;  font-weight: bold;   }
+	#VISUAL li.Button{ width: 130px; height: 29px; float: right; padding-right: 15px; }
+/*	#VISUAL a{ color: #48EE49; font-family: Arial, Helvetica, sans-serif; font-size: 17px; font-style: normal; font-weight: bold; text-decoration: underline; }*/
+	#VISUAL a{ color: White; text-decoration: none; font-weight: bold; }
+	#VISUAL a:hover { text-decoration: underline; }
+
+#CONTENT{ width: 80%; text-align: left; margin-left: auto; margin-right: auto;    background-color: White;     height: 100%;}
+	#LEFTBOX{ float: left;  width: 180px; text-align: left;   margin-left: 0;  background-color: #f4f4f4;    left: 15px;  position: relative;  background-image: url(../images/leftbar_footer.gif);  background-repeat: no-repeat;  background-position: bottom;  padding: 5px 0 20px 0;    }
+	#LEFTBOX div{ margin-left: 12px;  margin-right: 12px;  padding-bottom: 10px;  margin-bottom: 20px;  background-image: url(../images/bg_hdot.gif);  background-repeat: repeat-x;  background-position: bottom;        }
+	#LEFTBOX div.Last{ background-image: none; }
+	#LEFTBOX h1{ font-family: Arial, Helvetica, sans-serif;  font-weight: bold;  font-size: 16px;  color: #4E4E4E;    letter-spacing: 1px;  margin: 0 0 9px 12px;    	     }
+	#LEFTBOX p{ font-family: "MS Sans Serif", Geneva, sans-serif; font-size: 11px; line-height: 18px; text-align: left; }
+	#LEFTBOX p .Date{ font-weight: bold; color: #C10000; font-size: 9px; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; }
+	#LEFTBOX a{ font-size:11px;  color: #2665A5;  text-decoration: none;  }
+	#LEFTBOX a:hover{	text-decoration : underline;  }
+	#LEFTBOX input{ font-size:12px;  padding: 0;  margin: 0; }
+	#LEFTBOX input.Search{ width:153px; height: 18px; border: 1px solid #666666; }
+	#LEFTBOX .Browse{ width:125px; height: 18px; border: 1px solid #666666;  margin-right: 7px;  }
+	#LEFTBOX ul{   padding-left: 1px;  display: block; border: none;  margin: 0 0 15px 0;  } 
+	#LEFTBOX ul li {margin-left: 0; padding-left: 0;     font-size: 11px;  font-family: Tahoma, Arial, Helvetica, sans-serif;  font-weight: bold;  list-style: none inside url(../images/point_left.gif);  line-height: 18px;        }
+	#LEFTBOX ul a{ color: #1A5FA8; text-decoration: none; font-size:11px;    padding-right: 0;  margin-right: 0;  font-family: "MS Sans Serif", Geneva, sans-serif; }	
+	#LEFTBOX ul a:hover{text-decoration: underline;}	
+
+	#TEXT {  margin: 0 30px 0 220px;  display: block;  position: relative;  padding-top: 15px;  padding-bottom: 20px;  }
+	#TEXT h1{ color: #5F5F5F;  font-size: 18px;  font-weight: normal;  margin: 0 0 5px 0;  padding: 5px 0 0 0;     }
+	#TEXT p{ text-align: justify;  line-height: 18px;  margin-bottom: 18px; }
+	#TEXT ul.Path { margin-left: 0;  padding-left: 0;  display: block; border: none;  margin: 0 0 15px 0;   } 
+	#TEXT ul.Path li {margin-left: 0; padding-left: 0px; border: none; list-style: none; display: inline; color: #B90000; font-size: 11px;  font-family: Tahoma, Arial, Helvetica, sans-serif;  font-weight: bold;  line-height: 18px;          }
+	#TEXT ul.Path a{ color: Black; text-decoration: none; font-size:11px;    padding-right: 8px;  margin-right: 5px;  background-image: url(../images/arrow_path.gif);  background-position: right;  background-repeat: no-repeat;          }	
+	#TEXT ul.Path a:hover{text-decoration: underline;}
+	
+	img {
+		vertical-align: middle;
+		padding:5px;
+		border:0px;
+	 	}
+
+#FOOTER{ width: 80%; text-align: left; margin-left: auto; margin-right: auto; background-position: right; background-image: url(../images/bg_footer.gif);  background-repeat: no-repeat;  padding-top: 0px; }
+	#LINKS{ width: 90%; margin-right:80%; height:38px;  text-align: left; color:white;  padding-left: 5px;   background-image: url(../images/bgbar.gif); background-position: top right; padding-top: 9px; }
+	#LINKS ul { margin:0; padding-left: 0; display: inline;  list-style: none;    } 
+	#LINKS li{ float:left; margin: 0;  padding: 0px 11px 0px 11px; list-style: none; display: inline;  border-right: 1px solid White;           }
+	#LINKS li.Last{ border-right: none;  }
+	#LINKS a{ font-size:11px; color: white; text-decoration: none;	}
+	#LINKS a:hover{ text-decoration: underline;	}
+	#COPYRIGHT{ float: right;  width: 80%; height:38px; text-align: right;  display: block;  color: White;    font-size: 11px;  padding-right: 20px;  padding-top: 12px; background-position: right; background-image: url(../images/bg_footer.gif);  background-repeat: no-repeat; }
+	#COPYRIGHT a{ color: White; text-decoration: none; font-weight: normal; }
+	#COPYRIGHT a:hover{ text-decoration: underline;	}
+
+#RESOURCES { border-collapse: collapse; border: hidden; }
+#RESOURCES th { padding-bottom: 0.6em; }
+#RESOURCES td { padding-bottom: 0.3em; }
+#RESOURCES tbody { border: 1px solid black; margin: 5px; }
+img.icon {
+	background-image: url(../sanscons/bg_rounded.gif);
+	background-color: #006400;
+	background-repeat: no-repeat;
+	margin: 0px;
+	padding: 0px;
+	width: 16px;
+	height: 16px;
+}
+img.icon.square { background-image: url(../sanscons/bg_blank.gif); }
+img.icon.circle { background-image: url(../sanscons/bg_circle.gif); }
+img.icon.red { background-color: red; }
+img.icon.blue { background-color: blue; }
+img.icon.yellow { background-color: #ffcc00; }
+
+div.newsflash { border: 2px solid black; margin-top: 10px; margin-bottom: 20px; padding-left: 10px; padding-right: 10px; background-color: yellow; }
