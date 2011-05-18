@@ -151,6 +151,13 @@ class SubmissionController < ApplicationController
             'accomodations other than «Regular». Please fix it!'
         end
       end
+
+      # No more Sponsored Accomodation accepted after May 19 23:59
+      if params[:dc_conference_person][:dc_participant_category_id].to_i == 118 and
+          old_conference_person_travel.dc_participant_category_id.to_i != 118 and
+          Time.now > Time.gm(2011,5,20)
+          raise "The deadline for sponsored attendees' registration was May 19, so your changes were not accepted. Contact registration@debconf.org if changes are needed."
+      end
     end
 
     params[:person][:person_id] = POPE.user.person_id
