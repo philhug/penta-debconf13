@@ -139,6 +139,10 @@ class SubmissionController < ApplicationController
     # end
 
     if @thisconf == :bosnia
+      # Sponsored registration from DC11: participant_mapping_id
+      # (debconf.dc_participant_mapping) where participant_category=15
+      # and conference_id=5
+      sponsored = [118, 119, 120, 121, 122]
       # Basic registration means no regular room will be provided
       if params[:dc_conference_person][:accom_id] == '15'
         if params[:dc_conference_person][:dc_participant_category_id] == '110'
@@ -146,15 +150,15 @@ class SubmissionController < ApplicationController
             '«Regular» accomodation. Please fix it!'
         end
       else
-        if params[:dc_conference_person][:dc_participant_category_id] == '118'
+        if sponsored.include? params[:dc_conference_person][:dc_participant_category_id].to_i
           raise 'Your requested category («Sponsored») is incompatible with ' +
             'accomodations other than «Regular». Please fix it!'
         end
       end
 
       # No more Sponsored Accomodation accepted after May 19 23:59
-      if params[:dc_conference_person][:dc_participant_category_id].to_i == 118 and
-          old_dc_conference_person.dc_participant_category_id.to_i != 118 and
+      if sponsored.include?(params[:dc_conference_person][:dc_participant_category_id].to_i) and
+          !sponsored.include(old_dc_conference_person.dc_participant_category_id.to_i) and
           Time.now > Time.gm(2011,5,20)
           raise "The deadline for sponsored attendees' registration was May 19, so your changes were not accepted. Contact registration@debconf.org if changes are needed."
       end
