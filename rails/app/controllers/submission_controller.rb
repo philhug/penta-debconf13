@@ -143,9 +143,11 @@ class SubmissionController < ApplicationController
       # (debconf.dc_participant_mapping) where participant_category=15
       # and conference_id=5
       sponsored = [118, 119, 120, 121, 122]
+
       # Basic registration means no regular room will be provided
+      basic = [110, 111, 112, 113, 114, 115, 116, 117]
       if params[:dc_conference_person][:accom_id] == '15'
-        if params[:dc_conference_person][:dc_participant_category_id] == '110'
+        if basic.include? params[:dc_conference_person][:dc_participant_category_id].to_i
           raise 'Your requested category («Basic registration») is incompatible with ' +
             '«Regular» accomodation. Please fix it!'
         end
