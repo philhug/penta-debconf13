@@ -44,7 +44,8 @@ xml.div do
       end
 
       xml.script( "function send_content(){ $('content_form').submit();  }", { :type => 'text/javascript' } )
-      xml.script( "new Form.Observer('content_form', 2, function(element, value ) { enable_save_button() } );", { :type => 'text/javascript' } )
+      xml.script( "new Form.EventObserver('content_form', function(element, value ) { enable_save_button() } );", { :type => 'text/javascript' } )
+      xml.script( "window.addEventListener('DOMContentLoaded', function() { new Form.Observer('content_form', 2, function(element, value ) { enable_save_button() } ); }, false);", { :type => 'text/javascript' } )
     end
   end # if @conference
   xml.p "Please note that this system has only been tested with recent versions of Gecko-based browsers like Mozilla Firefox, Seamonkey or Camino. Other browsers might not work."
