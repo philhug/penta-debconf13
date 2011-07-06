@@ -25,8 +25,7 @@ xml.div( :id => 'sidebar' ) do
       xml.a( local('video::index'), {:href=> url_for(:controller => 'video', :action => :index), :class => 'menu-item'} ) if POPE.permission?('video_login')
       xml.a( local('link::preferences'), {:href=> url_for(:controller => 'pentabarf', :action => :person, :id=>POPE.user.person_id), :class => 'menu-item'} )
       xml.a( 'Logout', {:href=>"#{request.protocol}logout@#{request.host_with_port}/logout", :onclick=>"logout()", :class => 'menu-item'} ) if POPE.user
-      xml.a( 'DebConf7', {:href=>'https://debconf7.debconf.org/', :class => 'menu-item'} )
-      xml.a( 'DebConf8', {:href=>'http://debconf8.debconf.org/', :class => 'menu-item'} )
+      xml.a( 'DebConf11', {:href=>'http://debconf11.debconf.org/', :class => 'menu-item'} )
     end
   end
 end

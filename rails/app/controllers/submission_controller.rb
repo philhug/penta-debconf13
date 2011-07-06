@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class SubmissionController < ApplicationController
 
   before_filter :init
@@ -137,6 +138,33 @@ class SubmissionController < ApplicationController
     #   params[:dc_conference_person][:dc_participant_category_id]= map_id.participant_mapping_id
     # end
 
+    if @thisconf == :bosnia
+      # Sponsored registration from DC11: participant_mapping_id
+      # (debconf.dc_participant_mapping) where participant_category=15
+      # and conference_id=5
+      sponsored = [118, 119, 120, 121, 122]
+
+      # Basic registration means no regular room will be provided
+      basic = [110, 111, 112, 113, 114, 115, 116, 117]
+      if params[:dc_conference_person][:accom_id] == '15'
+        if basic.include? params[:dc_conference_person][:dc_participant_category_id].to_i
+          raise 'Your requested category («Basic registration») is incompatible with ' +
+            '«Regular» accomodation. Please fix it!'
+        end
+      else
+        if sponsored.include? params[:dc_conference_person][:dc_participant_category_id].to_i
+          raise 'Your requested category («Sponsored») is incompatible with ' +
+            'accomodations other than «Regular». Please fix it!'
+        end
+      end
+
+      # No more Sponsored Accomodation accepted after May 19 23:59
+      if sponsored.include?(params[:dc_conference_person][:dc_participant_category_id].to_i) and
+          !sponsored.include?(old_dc_conference_person.dc_participant_category_id.to_i) and
+          Time.now > Time.gm(2011,5,20)
+          raise "The deadline for sponsored attendees' registration was May 19, so your changes were not accepted. Contact registration@debconf.org if changes are needed."
+      end
+    end
 
     params[:person][:person_id] = POPE.user.person_id
     person = write_row( Person, params[:person], {:except=>[:person_id],:always=>[:spam]} )
@@ -176,9 +204,15 @@ class SubmissionController < ApplicationController
   protected
 
   def init
+    # Set the symbolic @thisconf variable, to avoid filling the views
+    # with meaningless numeric comparisons.
+    # We started using Pentabarf for Edinburgh - which got conference_id == 1.
+    confs = [nil, :edinburgh, :argentina, :caceres, :nyc, :bosnia]
+
     @current_language = POPE.user ? POPE.user.current_language : 'en'
     begin
       @conference = Conference.select_single(:acronym=>params[:conference],:f_submission_enabled=>'t')
+      @thisconf = confs[@conference.conference_id]
     rescue Momomoto::Error
       if params[:action] != 'index' || params[:conference]
         redirect_to(:controller=>'submission', :action => :index, :conference => nil )

@@ -10,6 +10,10 @@ CREATE OR REPLACE VIEW view_report_review AS
     event_state_localized.translated,
     event.event_state_progress,
     event.conference_track,
+    event.conference_day + event.start_time + conference.day_change::interval AS start_datetime,
+    event.event_type,
+    event.duration,
+    event.public,
     array_to_string(ARRAY(
       SELECT view_person.person_id
         FROM
@@ -41,6 +45,7 @@ CREATE OR REPLACE VIEW view_report_review AS
     coalesce( rating.raters, 0 ) AS raters,
     (2 * coalesce( rating.acceptance, 0 ) + coalesce( rating.relevance, 0 ) + coalesce( rating.actuality, 0 ))/4 AS rating
   FROM event
+         JOIN conference USING (conference_id)
          LEFT OUTER JOIN event_state_localized USING (event_state)
          LEFT OUTER JOIN (
            SELECT event_id,
