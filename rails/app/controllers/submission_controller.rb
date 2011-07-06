@@ -168,7 +168,7 @@ class SubmissionController < ApplicationController
       # Regular rooms cannot be accepted anymore after July 3 for
       # those not yet having it
       if Time.now > Time.gm(2011,7,3) and params[:dc_conference_person][:accom_id] == '15' and
-          ! old_dc_conference_person.accom_id == 15
+          !(old_dc_conference_person.accom_id == 15)
         raise "We are sorry, you cannot select 'regular room' anymore. Please set your accomodation to 'I will arrange my own accommodation' and try again. Please mail registration@debconf.org if you need to make changes."
       end
 
