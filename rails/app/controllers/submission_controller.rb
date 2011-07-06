@@ -164,6 +164,22 @@ class SubmissionController < ApplicationController
           Time.now > Time.gm(2011,5,20)
           raise "The deadline for sponsored attendees' registration was May 19, so your changes were not accepted. Contact registration@debconf.org if changes are needed."
       end
+
+      # Regular rooms cannot be accepted anymore after July 3 for
+      # those not yet having it
+      if Time.now > Time.gm(2011,7,3) and params[:dc_conference_person][:accom_id] == '15' and
+          ! old_dc_conference_person.accom_id == 15
+        raise "We are sorry, you cannot select 'regular room' anymore. Please set your accomodation to 'I will arrange my own accommodation' and try again. Please mail registration@debconf.org if you need to make changes."
+      end
+
+      # People lodging at the hotel should not change their
+      # arrival/departure dates anymore (also, retroactively since
+      # July 3 :-P )
+      if Time.now > Time.gm(2011,7,3) and params[:dc_conference_person][:accom_id] == '15' and
+          (old_conference_person_travel[:arrival_date].to_s != params[:conference_person_travel][:arrival_date]) or
+          (old_conference_person_travel[:departure_date].to_s != params[:conference_person_travel][:departure_date])
+        raise 'Hey, hey, not so fast! You cannot change your arrival/departure dates anymore. Please contact registration@debconf.org if you need to make changes.'
+      end
     end
 
     params[:person][:person_id] = POPE.user.person_id
