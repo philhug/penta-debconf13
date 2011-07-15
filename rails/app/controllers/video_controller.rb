@@ -31,7 +31,7 @@ class VideoController < ApplicationController
     #TODO: this prefix thing should be moved to the
     #      video_event_recording model
     prefix = sprintf('%03d_', params[:video_recording][:id])
-    params[:video_event_recording][:event_recording_base_name] = prefix + params[:video_event_recording][:event_recording_base_name] if params[:video_event_recording][:event_recording_base_name][0..3] != prefix
+    params[:video_event_recording][:event_recording_base_name] = prefix + params[:video_event_recording][:event_recording_base_name] if params[:video_event_recording][:event_recording_base_name][0..prefix.length-1] != prefix
 
     # FIXME: UGLY!
     params[:video_event_recording][:start_time] = "00:00:00" if params[:video_event_recording][:start_time].empty?
