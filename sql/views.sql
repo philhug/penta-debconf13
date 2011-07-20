@@ -2,6 +2,7 @@
 \i views/conference_image_modification.sql
 \i views/conference_person_link_internal.sql
 \i views/conference_person.sql
+\i views/dc_when_do_they_get_here.sql
 \i views/event_attachment.sql
 \i views/event_image_modification.sql
 \i views/event_link_internal.sql
