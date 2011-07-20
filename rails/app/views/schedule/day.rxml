@@ -62,6 +62,9 @@ xml.div(:id=>'schedule',:class=>'section') do
                     xml.text! local('schedule::conference_track')
                     xml.span(event.conference_track,{:class=>'track'})
                     xml.br
+		    xml.text! local('schedule::roomnamethingie')
+		    xml.span(room.conference_room,{:class=>'track'})
+		    xml.br
                   end
                 end
               end
