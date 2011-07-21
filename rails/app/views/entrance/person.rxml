@@ -5,6 +5,7 @@ xml.div( :id => 'data') do
 
     fields = [:name, :first_name, :last_name, :nickname, :email]
     change = [:badge, :foodtickets, :has_to_pay, :has_paid, :shirt, :bag, :proceedings, :proceeded, :arrived, :paiddaytrip]
+    change << :has_sim_card if @thisconf == :bosnia
     xml.table do
       fields.each do | category |
         xml.tr do

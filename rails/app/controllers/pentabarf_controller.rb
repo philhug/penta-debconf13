@@ -340,9 +340,15 @@ class PentabarfController < ApplicationController
   protected
 
   def init
+    # Set the symbolic @thisconf variable, to avoid filling the views
+    # with meaningless numeric comparisons.
+    # We started using Pentabarf for Edinburgh - which got conference_id == 1.
+    confs = [nil, :edinburgh, :argentina, :caceres, :nyc, :bosnia]
+
     @current_conference = Conference.select_single(:conference_id => POPE.user.current_conference_id) rescue Conference.new(:conference_id=>0)
     @preferences = POPE.user.preferences
     @current_language = POPE.user.current_language || 'en'
+    @thisconf = confs[@current_conference.conference_id]
   end
 
   def check_permission

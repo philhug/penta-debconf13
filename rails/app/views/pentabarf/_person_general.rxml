@@ -45,6 +45,9 @@ xml.div(:id=>'content-general') do
 
       xml << check_box_row( @dc_conference_person, :has_to_pay )
       xml << check_box_row( @dc_conference_person, :has_paid )
+      if @thisconf == :bosnia
+        xml << check_box_row( @dc_conference_person, :has_sim_card )
+      end
       xml << text_field_row( @dc_conference_person, :amount_to_pay )
     end
   end
