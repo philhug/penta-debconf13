@@ -47,6 +47,10 @@ class EntranceController < ApplicationController
     dcp.each do |field|
       dcpv[field] = params[:dc_view_find_person_entrance][field] || 'f'
     end
+#    if @this_conference == :bosnia
+#      dcpv[:has_sim_card] = params[:dc_conference_person][:has_sim_card] || 'f'
+#      raise Exception, dcpv.to_yaml if params[:dc_view_find_person_entrance].person_id=120
+#    end
 
     options = params[:dc_view_find_person_entrance]
     write_row( DebConf::Dc_conference_person, dcpv, {:preset => {:conference_id => @current_conference.conference_id, :person_id => options[:person_id] } } )

@@ -5,6 +5,8 @@ xml.div( :id => 'data') do
 
     fields = [:name, :first_name, :last_name, :nickname, :email]
     change = [:badge, :foodtickets, :has_to_pay, :has_paid, :shirt, :bag, :proceedings, :proceeded, :arrived, :paiddaytrip]
+    change << :has_sim_card if @thisconf == :bosnia
+
     xml.table do
       fields.each do | category |
         xml.tr do
@@ -29,7 +31,7 @@ xml.div( :id => 'data') do
       change.each do | category |
           xml << check_box_row(@conference_person, category)
       end
-      xml << check_box_row( @dc_conference_person, :has_sim_card) if @thisconf == :bosnia
+#      xml << check_box_row( @dc_conference_person, :has_sim_card) if @thisconf == :bosnia
 
       if @conference_person[:has_to_pay] and not @conference_person[:has_paid]
         xml << text_field_row( @conference_person, :amount_to_pay, {:style=>"color: red; font-size: large;"})
