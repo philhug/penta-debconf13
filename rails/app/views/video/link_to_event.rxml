@@ -13,8 +13,17 @@ xml.div({:id=>:data}) do
       end
       xml << text_field_row(@ver, :start_time, {:label => "#{local('video_event_recording::start_time')} (#{local('video::empty_means_beginning')})",:size => 30})
       xml << text_field_row(@ver, :end_time, {:label => "#{local('video_event_recording::end_time')} (#{local('video::empty_means_end')})",:size => 30})
-      xml << text_field_row(@ver, :event_recording_base_name, {:label => "#{local('video_event_recording::event_recording_base_name')} (#{local('video::just_short_form')})",:size => 60})
+      xml << text_field_row(@ve, :event_base_name, {:label => "#{local('video_event::event_base_name')} (#{local('video::just_short_form')})",:size => 60})
     end
-    xml.input({:type=>:submit,:value=>local(:submit)})
+    xml.input({:type=>:submit, :name=>"finish", :value=>local(:finish_review)})
+    xml << "if recording and event are both completely accounted for"
+    xml.br
+    xml.input({:type=>:submit, :name=>"finish-recording",
+                :value=>local(:finish_recording)})
+    xml << "if event has another recording"
+    xml.br
+    xml.input({:type=>:submit, :name=>"finish-event",
+                :value=>local(:finish_event)})
+    xml << "if recording has another event"
   end
 end

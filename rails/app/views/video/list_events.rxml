@@ -6,6 +6,7 @@ xml.div({:id=>:data}) do
       xml.th(local("event::title"))
       xml.th(local("event::conference_room"))
       xml.th(local("video::associated_recordings"))
+      xml.th(local("video::claimed"))
     end
     xml.tbody do
       @events.each do |event|
@@ -30,6 +31,26 @@ xml.div({:id=>:data}) do
                 first = false
                 vr = Video_recording.select_single(:id => ver.recording_id)
                 xml.text("#{vr.recording_filename} (#{ver.start_time} - #{ver.end_time})")
+              end
+            end
+          end
+          xml.td do
+            ve = Video_event.select({:event_id => event.event_id})
+            if ve.length != 0 && ve[0].locked_by != nil
+              xml.text(local("video::claimed_by") + " #{Person.select_single({:person_id => ve[0].locked_by}).name}")
+              if ve[0].locked_by == POPE.user.person_id then
+                unlock_label = local("Unclaim")
+              elsif POPE.permission?("video_admin")
+                unlock_label = local("Force Unclaim")
+              else
+                unlock_label = nil
+              end
+              if unlock_label
+                xml.br
+                xml.a(unlock_label,
+                      :href => url_for({:action => :unlock_event,
+                                         :event_id => event.event_id}),
+                      :class => :videolisting)
               end
             end
           end
