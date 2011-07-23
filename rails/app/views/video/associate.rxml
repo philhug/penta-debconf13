@@ -17,14 +17,15 @@ xml.div({:id=>:data}) do
 
     xml.tbody do
       @distances.each do |d|
-        ev = Video_event_view.select({:event_id=>d.event_id}).first
+        ev = Event.select_single({:event_id=>d.event_id})  # must exist
+        ve = Video_event.select({:event_id=>d.event_id}).first  # may not exist
         ver = Video_event_recording.select({:recording_id=>@video.id, :event_id=>d.event_id}).first
         xml.tr do
           xml.td do xml << format_event(ev).to_s end
           xml.td(display_time(d.start_datetime))
           xml.td(d.distance)
           xml.td do
-            if ev.locked_by != nil && ev.locked_by != POPE.user.person_id
+            if ve != nil && ve.locked_by != nil && ve.locked_by != POPE.user.person_id
               xml.text(local("video::claimed"))
             elsif(ver.nil?)
               xml.a( local("video::link_event_to_recording"), {:href => url_for({:action => :link_to_event, :id => @video.id, :event_id => d.event_id})})
