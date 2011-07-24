@@ -162,10 +162,10 @@ module ApplicationHelper
   def format_event( event )
     xml = Builder::XmlMarkup.new
     href = (POPE.permission?('pentabarf_login') ?
-            {:href=>url_for(:controller=>'pentabarf',:action=>:event,:id=>event.event_id)} :
+            url_for(:controller=>'pentabarf',:action=>:event,:id=>event.event_id) :
             '%s/events/%s.en.html' % [ Conference.select_single({:conference_id => event.conference_id}).export_base_url, event.event_id ]
             )
-    xml.a(href) do
+    xml.a({:href => href}) do
       xml.strong event.title
       if event.subtitle
         xml.br
