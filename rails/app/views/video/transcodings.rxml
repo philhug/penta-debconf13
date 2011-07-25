@@ -28,11 +28,13 @@ xml.div({:id=>:data}) do
               xml.br()
             end
           end
-          file_set[:target].each do |vtf|
+          for i in 0...@formats.length
+	    f = @formats[i]
+	    vtf = file_set[:target][i]
             if vtf
               st = @map_vfs_to_s[vtf.file_status_id]
               xml.td(:class => "recording_status_#{st}") do
-                xml.a(local(:file),:href => "#{@video_base}/#{f.target_format_abbr}/#{ve.event_base_name.gsub(/^\/+/, '')}.#{f.filename_extension.gsub(/^\.+/, '')}", :title => vtf.comments)
+                xml.a(local(:file),:href => "#{@video_base}/#{f.target_format_abbr}/#{event.event_base_name.gsub(/^\/+/, '')}.#{f.filename_extension.gsub(/^\.+/, '')}", :title => vtf.comments)
                 xml.br
                 if vtf.locked_by
                   if vtf.locked_by != POPE.user.person_id
