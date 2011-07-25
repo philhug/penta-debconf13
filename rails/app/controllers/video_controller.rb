@@ -108,9 +108,7 @@ class VideoController < ApplicationController
   def rate_file
     @content_subtitle = local("video::rate_file")
     @vtf = Video_target_file.select_single({:id => params[:id]})
-    @ver = Video_event_recording.select_single({:id => @vtf.event_recording_id})
-    @event = Event.select_single({:event_id => @ver.event_id})
-    @rec = Video_recording.select_single({:id => @ver.recording_id})
+    @event = Video_event_view.select_single({:event_id => @vtf.event_id})
     @format = Video_target_format.select_single({:id => @vtf.target_format_id})
   end
 

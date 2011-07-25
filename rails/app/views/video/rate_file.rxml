@@ -1,6 +1,6 @@
 xml.div({:id=>:data}) do
   xml.h1(@content_subtitle)
-  file = "#{@format.target_format_abbr}/#{@ver.event_recording_base_name.gsub(/^\/+/, '')}.#{@format.filename_extension.gsub(/^\.+/, '')}"
+  file = "#{@format.target_format_abbr}/#{@event.event_base_name.gsub(/^\/+/, '')}.#{@format.filename_extension.gsub(/^\.+/, '')}"
   xml.h2 do
     xml << local(:rating).capitalize
     xml.a(file,:href => "#{@video_base}/#{file}")
