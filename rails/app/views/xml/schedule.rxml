@@ -54,7 +54,7 @@ xml.schedule do
                 xml.recordings do
                   vers.each do | ver |
                     formats.each do |f|
-                      vtf = Video_target_file.select(:event_recording_id => ver.id, :target_format_id => f.id, :file_status_id => {:ne => 6})
+                      vtf = Video_target_file.select(:event_id => ver.id, :target_format_id => f.id, :file_status_id => {:ne => 6})
                       if vtf.length > 0
                         #evenworsehack to get this stuff right for dc10, up to (including) dc16
                         vtlink=""
