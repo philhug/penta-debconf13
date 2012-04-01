@@ -71,8 +71,8 @@ INSERT INTO debconf.dc_participant_category (participant_category_id, conference
 INSERT INTO debconf.dc_participant_category (participant_category_id, conference_id, participant_category) VALUES (20, 6, 'Basic; want sponsored accommodation');
 INSERT INTO debconf.dc_participant_category (participant_category_id, conference_id, participant_category) VALUES (21, 6, 'Basic; want sponsored food');
 INSERT INTO debconf.dc_participant_category (participant_category_id, conference_id, participant_category) VALUES (22, 6, 'Basic; want sponsored food and accommodation');
-INSERT INTO debconf.dc_participant_category (participant_category_id, conference_id, participant_category) VALUES (23, 6, 'Professional registration (US$???)');
-INSERT INTO debconf.dc_participant_category (participant_category_id, conference_id, participant_category) VALUES (24, 6, 'Corporate registration (US$???)');
+INSERT INTO debconf.dc_participant_category (participant_category_id, conference_id, participant_category) VALUES (23, 6, 'Professional registration (US$650)');
+INSERT INTO debconf.dc_participant_category (participant_category_id, conference_id, participant_category) VALUES (24, 6, 'Corporate registration (US$1300)');
 
 INSERT INTO debconf.dc_food_preferences (food_id, conference_id, food) VALUES (37, 6, ' --- Please select one --- ');
 INSERT INTO debconf.dc_food_preferences (food_id, conference_id, food) VALUES (38, 6, 'No dietary restrictions');
@@ -86,9 +86,9 @@ INSERT INTO debconf.dc_accomodation (accom_id, conference_id, accom) VALUES (18,
 INSERT INTO debconf.dc_accomodation (accom_id, conference_id, accom) VALUES (19, 6, 'I will arrange my own accomodation');
 
 INSERT INTO debconf.dc_debian_role (debian_role_id, description) VALUES (0, ' --- Please select one --- ');
-INSERT INTO debconf.dc_debian_role (debian_role_id, description) VALUES (1, 'Debian Developer');
-INSERT INTO debconf.dc_debian_role (debian_role_id, description) VALUES (2, 'Debian Developer (non-uploading)');
-INSERT INTO debconf.dc_debian_role (debian_role_id, description) VALUES (3, 'Debian Maintainer');
+INSERT INTO debconf.dc_debian_role (debian_role_id, description) VALUES (1, 'Debian Project Member (all DDs)');
+INSERT INTO debconf.dc_debian_role (debian_role_id, description) VALUES (2, 'Debian Maintainer');
+INSERT INTO debconf.dc_debian_role (debian_role_id, description) VALUES (3, 'Debian contributor (including artist, translator, etc.)');
 INSERT INTO debconf.dc_debian_role (debian_role_id, description) VALUES (4, 'Otherwise involved in Debian');
 INSERT INTO debconf.dc_debian_role (debian_role_id, description) VALUES (5, 'Not yet involved but interested');
 INSERT INTO debconf.dc_debian_role (debian_role_id, description) VALUES (6, 'Accompanying a Debian participant');
