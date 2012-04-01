@@ -14,6 +14,8 @@ xml.div(:id=>'content-travel') do
         xml.b "visit to New York City or the United States."
       elsif @thisconf == :bosnia
         xml.b "visit to Bosnia and Herzegovina."
+      elsif @thisconf == :managua
+        xml.b "visit to Nicaragua."
       end
       xml.b do
         xml << " For travel coordination among attendees, please use the wiki instead."
@@ -111,7 +113,7 @@ xml.div(:id=>'content-travel') do
       xml.ul do
         xml.li { xml << 'First, tell us if you do need help for your travel.' }
         xml.li { xml << 'Second, tell us the full cost for your travel, indicating the currency. Do this as accurately as possible, even if you do not yet have the final price.' }
-        xml.li { xml << 'Third, tell us how much help you need — this means the amount you are requesting from us. For example, if your ticket costs €700 and you can pay €500, enter €200 here.' }
+        xml.li { xml << 'Third, tell us how much help you need — this means the amount you are requesting from us. For example, if your ticket costs US$700 and you can pay US$500, enter US$200 here.' }
       end
     end
 
