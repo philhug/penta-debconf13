@@ -159,5 +159,10 @@ INSERT INTO ui_message (ui_message) VALUES ('table::dc_conference_person::debian
 INSERT INTO ui_message (ui_message) VALUES ('table::dc_conference_person::debconf_role_id');
 INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::debian_role_id', 'en', 'Role in Debian');
 INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::debconf_role_id', 'en', 'Role in DebConf');
+-- table::dc_conference_person::amount_to_pay displayed a currency,
+-- but as it changes from conference to conference, we should omit it.
+UPDATE ui_message_localized SET name = 'Amount to pay' WHERE ui_message='table::dc_conference_person::amount_to_pay' AND translated='en';
+UPDATE ui_message_localized SET name = 'Zu Zahlen' WHERE ui_message='table::dc_conference_person::amount_to_pay' AND translated='de';
+UPDATE ui_message_localized SET name = 'Quantidade a ser paga' WHERE ui_message='table::dc_conference_person::amount_to_pay' AND translated='pt_BR';
 
 COMMIT TRANSACTION;
