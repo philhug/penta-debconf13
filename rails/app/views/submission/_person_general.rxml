@@ -47,7 +47,7 @@ xml.div(:id=>'content-general') do
         xml << check_box_row( @dc_conference_person, :assassins )
       end
 
-      if @thisconf != :bosnia
+      if [:edinburgh, :argentina, :caceres, :nyc].include? @thisconf
         xml << select_row( @dc_conference_person, :daytrip_id, DebConf::Dc_daytrip.select.map{|e| [e.daytrip_id,e.daytrip_option]} )
       end
 
@@ -58,7 +58,9 @@ xml.div(:id=>'content-general') do
         end
       end
 
-      xml << check_box_row( @dc_conference_person, :proceedings )
+      if [:edinburgh, :argentina, :caceres, :nyc, :bosnia].include? @thisconf
+        xml << check_box_row( @dc_conference_person, :proceedings )
+      end
       if @conference.f_reconfirmation_enabled
         xml.tr do
           xml.td do xml.b do xml << 'Room preference' end end

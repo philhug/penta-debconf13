@@ -3,6 +3,13 @@ xml.div(:id=>'content-general') do
   xml.fieldset do
     xml.legend local('view::pentabarf::person::tab::general')
 
+    xml.p do
+      xml << 'Please keep in mind this is an '
+      xml.em { xml << 'administrative interface. '}
+      xml << 'This means, it will show some fields that might not yet (or '
+      xml << 'not anymore) be relevant. It might even allow you to do stupid '
+      xml << 'stuff! Treat this with care.'
+
     xml.table do
       xml << text_field_row( @person, :first_name )
       xml << text_field_row( @person, :last_name )
@@ -15,18 +22,27 @@ xml.div(:id=>'content-general') do
       xml << check_box_row( @conference_person, :arrived )
       xml << check_box_row( @conference_person, :reconfirmed ) if @conference.f_reconfirmation_enabled
       xml << check_box_row ( @dc_conference_person, :attend )
-      xml << select_row( @dc_conference_person, :person_type_id, DebConf::Dc_person_type.select.map{|e| [e.person_type_id,e.description]}, {:master=>:dc_participant_category_id})
-      xml << select_row( @dc_conference_person, :dc_participant_category_id, DebConf::Dc_view_participant.select.map{|e| [e.participant_mapping_id,e.person_type_id,e.participant_category]},{:slave=>true,:with_empty=>false})
-      xml.script("$('dc_conference_person[person_type_id]').onchange()",{:type=>"text/javascript"})
+
+      if [:edinburgh, :argentina, :caceres, :nyc, :bosnia].include? @thisconf
+        xml << select_row( @dc_conference_person, :person_type_id, DebConf::Dc_person_type.select.map{|e| [e.person_type_id,e.description]}, {:master=>:dc_participant_category_id})
+        xml << select_row( @dc_conference_person, :dc_participant_category_id, DebConf::Dc_view_participant.select.map{|e| [e.participant_mapping_id,e.person_type_id,e.participant_category]},{:slave=>true,:with_empty=>false, :selected => @dc_conference_person.dc_participant_category_id || 0})
+        xml.script("$('dc_conference_person[person_type_id]').onchange()",{:type=>"text/javascript"})
+      else
+        xml << select_row( @dc_conference_person, :debian_role_id, DebConf::Dc_debian_role.select({}, {:order => Momomoto.asc(:debian_role_id)}).map{|e| [e.debian_role_id,e.description]})
+        xml << select_row( @dc_conference_person, :debconf_role_id, DebConf::Dc_debconf_role.select({}, {:order => Momomoto.asc(:debconf_role_id)}).map{|e| [e.debconf_role_id,e.description]}, {:master=>:dc_participant_category_id, :selected => @dc_conference_person.debconf_role_id || 0})
+        xml << select_row( @dc_conference_person, :dc_participant_category_id, DebConf::Dc_view_participant.select.map{|e| [e.participant_mapping_id,e.debconf_role_id,e.participant_category]},{:slave=>true,:with_empty=>false, :selected => @dc_conference_person.dc_participant_category_id || 0})
+	xml.script("$('dc_conference_person[debconf_role_id]').onchange()",{:type=>"text/javascript"})
+      end
+
       xml << select_row(  @dc_conference_person, :t_shirt_sizes_id, DebConf::Dc_t_shirt_sizes.select.map{|e| [e.t_shirt_sizes_id,e.t_shirt_size]} )
 
       xml << select_row( @dc_conference_person, :food_id, DebConf::Dc_food_preferences.select(:conference_id=>@conference.conference_id).map{|e| [e.food_id,e.food]} )
-      if @thisconf != :bosnia
-        xml << check_box_row( @dc_conference_person, :disabilities )
-        xml << select_row(  @dc_conference_person, :daytrip_id, DebConf::Dc_daytrip.select.map{|e| [e.daytrip_id,e.daytrip_option]} )
-        xml << select_row(  @dc_conference_person, :computer_id, DebConf::Dc_computer.select.map{|e| [e.computer_id,e.computer]} )
-      end
+      xml << check_box_row( @dc_conference_person, :disabilities )
+
       xml << select_row(  @dc_conference_person, :daytrip_id, DebConf::Dc_daytrip.select.map{|e| [e.daytrip_id,e.daytrip_option]} )
+      xml << select_row(  @dc_conference_person, :computer_id, DebConf::Dc_computer.select.map{|e| [e.computer_id,e.computer]} )
+      xml << select_row(  @dc_conference_person, :daytrip_id, DebConf::Dc_daytrip.select.map{|e| [e.daytrip_id,e.daytrip_option]} )
+
       xml << select_row( @dc_conference_person, :debcamp_id, DebConf::Dc_debcamp.select.map{|e| [e.debcamp_id,e.debcamp_option]} )
       xml << text_field_row( @dc_conference_person, :debcamp_reason, {:size=>90} )
       if @conference.f_reconfirmation_enabled
@@ -39,9 +55,7 @@ xml.div(:id=>'content-general') do
       end
 
       xml << check_box_row( @dc_conference_person, :proceedings )
-      if @thisconf != :bosnia
-        xml << check_box_row( @dc_conference_person, :assassins )
-      end
+      xml << check_box_row( @dc_conference_person, :assassins )
 
       xml << check_box_row( @dc_conference_person, :has_to_pay )
       xml << check_box_row( @dc_conference_person, :has_paid )
