@@ -155,6 +155,8 @@ INSERT INTO debconf.dc_participant_mapping (participant_mapping_id, participant_
 INSERT INTO debconf.dc_participant_mapping (participant_mapping_id, participant_category_id, debconf_role_id) VALUES (174, 22, 2);
 INSERT INTO debconf.dc_participant_mapping (participant_mapping_id, participant_category_id, debconf_role_id) VALUES (175, 22, 3);
 
+INSERT INTO ui_message (ui_message) VALUES ('table::dc_conference_person::debian_role_id');
+INSERT INTO ui_message (ui_message) VALUES ('table::dc_conference_person::debconf_role_id');
 INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::debian_role_id', 'en', 'Role in Debian');
 INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::debconf_role_id', 'en', 'Role in DebConf');
 
