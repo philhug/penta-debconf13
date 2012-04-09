@@ -15,7 +15,7 @@ xml.div( :id => 'sidebar' ) do
       xml.a( 'New Event', {:href=> url_for(:action => :event, :id=>:new), :class => 'menu-item'} )
       xml.a( 'Events', {:href=> url_for(:action=>:events), :class => 'menu-item'} )
 
-      xml.a( 'DebConf11', {:href=>"http://debconf11.debconf.org/", :class => 'menu-item'} )
+      xml.a( 'DebConf12', {:href=>"http://debconf12.debconf.org/", :class => 'menu-item'} )
     end if @conference
 
   end
