@@ -74,6 +74,8 @@ INSERT INTO debconf.dc_participant_category (participant_category_id, conference
 INSERT INTO debconf.dc_participant_category (participant_category_id, conference_id, participant_category) VALUES (23, 6, 'Professional registration (US$650)');
 INSERT INTO debconf.dc_participant_category (participant_category_id, conference_id, participant_category) VALUES (24, 6, 'Corporate registration (US$1300)');
 
+UPDATE debconf.dc_debcamp SET debcamp_option = 'I don''t have a specific plan for DebCamp (week payment (US$650) required)' WHERE debcamp_id = 3;
+
 INSERT INTO debconf.dc_food_preferences (food_id, conference_id, food) VALUES (37, 6, ' --- Please select one --- ');
 INSERT INTO debconf.dc_food_preferences (food_id, conference_id, food) VALUES (38, 6, 'No dietary restrictions');
 INSERT INTO debconf.dc_food_preferences (food_id, conference_id, food) VALUES (39, 6, 'Vegetarian');
