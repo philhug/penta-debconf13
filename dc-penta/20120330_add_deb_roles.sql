@@ -84,7 +84,7 @@ INSERT INTO debconf.dc_food_preferences (food_id, conference_id, food) VALUES (4
 INSERT INTO debconf.dc_food_preferences (food_id, conference_id, food) VALUES (42, 6, 'Not eating with the group ');
 
 INSERT INTO debconf.dc_accomodation (accom_id, conference_id, accom) VALUES (17, 6, ' --- Please select one --- ');
-INSERT INTO debconf.dc_accomodation (accom_id, conference_id, accom) VALUES (18, 6, 'Regular room');
+INSERT INTO debconf.dc_accomodation (accom_id, conference_id, accom) VALUES (18, 6, 'Regular DebConf accomodation');
 INSERT INTO debconf.dc_accomodation (accom_id, conference_id, accom) VALUES (19, 6, 'I will arrange my own accomodation');
 
 INSERT INTO debconf.dc_debian_role (debian_role_id, description) VALUES (0, ' --- Please select one --- ');
