@@ -399,7 +399,7 @@ function check_debcamp(){
 }
 function check_dates() {
 	var dcampstart = new Date(2012, 7, 1);
-	var dconfstart = new Date(2012, 7, 8);
+	var dconfstart = new Date(2012, 7, 7);
 	var dconfend = new Date(2012, 7, 15);
 	var debcamp = $('dc_conference_person[debcamp_id]').value;
 	var arrivalst = $("conference_person_travel[arrival_date]").value;
