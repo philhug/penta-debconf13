@@ -1,4 +1,5 @@
-rails/log/*.log
+rails/log/*.pid
+rails/log/*.gz
 rails/tmp/**/*
 rails/config/mongrel_cluster.yml
 rails/config/mail.yml
