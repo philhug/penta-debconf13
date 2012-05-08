@@ -1,0 +1,6 @@
+rails/log/*.log
+rails/tmp/**/*
+rails/config/mongrel_cluster.yml
+rails/config/mail.yml
+rails/config/database.yml
+
