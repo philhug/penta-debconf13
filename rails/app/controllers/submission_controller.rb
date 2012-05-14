@@ -138,48 +138,48 @@ class SubmissionController < ApplicationController
     #   params[:dc_conference_person][:dc_participant_category_id]= map_id.participant_mapping_id
     # end
 
-    if @thisconf == :bosnia
+    if @thisconf == :managua
       # Sponsored registration from DC11: participant_mapping_id
-      # (debconf.dc_participant_mapping) where participant_category=15
-      # and conference_id=5
+      # (debconf.dc_participant_mapping) where participant_category in (20, 21, 22)
+      # and conference_id=6
       sponsored = [118, 119, 120, 121, 122]
 
-      # Basic registration means no regular room will be provided
-      basic = [110, 111, 112, 113, 114, 115, 116, 117]
-      if params[:dc_conference_person][:accom_id] == '15'
-        if basic.include? params[:dc_conference_person][:dc_participant_category_id].to_i
-          raise 'Your requested category («Basic registration») is incompatible with ' +
-            '«Regular» accomodation. Please fix it!'
-        end
-      else
-        if sponsored.include? params[:dc_conference_person][:dc_participant_category_id].to_i
-          raise 'Your requested category («Sponsored») is incompatible with ' +
-            'accomodations other than «Regular». Please fix it!'
-        end
-      end
+      # # Basic registration means no regular room will be provided
+      # basic = [110, 111, 112, 113, 114, 115, 116, 117]
+      # if params[:dc_conference_person][:accom_id] == '15'
+      #   if basic.include? params[:dc_conference_person][:dc_participant_category_id].to_i
+      #     raise 'Your requested category («Basic registration») is incompatible with ' +
+      #       '«Regular» accomodation. Please fix it!'
+      #   end
+      # else
+      #   if sponsored.include? params[:dc_conference_person][:dc_participant_category_id].to_i
+      #     raise 'Your requested category («Sponsored») is incompatible with ' +
+      #       'accomodations other than «Regular». Please fix it!'
+      #   end
+      # end
 
-      # No more Sponsored Accomodation accepted after May 19 23:59
+      # No more Sponsored Accomodation accepted after May 15 23:59
       if sponsored.include?(params[:dc_conference_person][:dc_participant_category_id].to_i) and
           !sponsored.include?(old_dc_conference_person.dc_participant_category_id.to_i) and
-          Time.now > Time.gm(2011,5,20)
-          raise "The deadline for sponsored attendees' registration was May 19, so your changes were not accepted. Contact registration@debconf.org if changes are needed."
+          Time.now > Time.gm(2012,5,16)
+          raise "The deadline for sponsored attendees' registration was May 15, so your changes were not accepted. Contact registration@debconf.org if changes are needed."
       end
 
-      # Regular rooms cannot be accepted anymore after July 3 for
-      # those not yet having it
-      if Time.now > Time.gm(2011,7,3) and params[:dc_conference_person][:accom_id] == '15' and
-          !(old_dc_conference_person.accom_id == 15)
-        raise "We are sorry, you cannot select 'regular room' anymore. Please set your accomodation to 'I will arrange my own accommodation' and try again. Please mail registration@debconf.org if you need to make changes."
-      end
+      # # Regular rooms cannot be accepted anymore after July 3 for
+      # # those not yet having it
+      # if Time.now > Time.gm(2011,7,3) and params[:dc_conference_person][:accom_id] == '15' and
+      #     !(old_dc_conference_person.accom_id == 15)
+      #   raise "We are sorry, you cannot select 'regular room' anymore. Please set your accomodation to 'I will arrange my own accommodation' and try again. Please mail registration@debconf.org if you need to make changes."
+      # end
 
-      # People lodging at the hotel should not change their
-      # arrival/departure dates anymore (also, retroactively since
-      # July 3 :-P )
-      if Time.now > Time.gm(2011,7,3) and params[:dc_conference_person][:accom_id] == '15' and
-          (old_conference_person_travel[:arrival_date].to_s != params[:conference_person_travel][:arrival_date]) or
-          (old_conference_person_travel[:departure_date].to_s != params[:conference_person_travel][:departure_date])
-        raise 'Hey, hey, not so fast! You cannot change your arrival/departure dates anymore. Please contact registration@debconf.org if you need to make changes.'
-      end
+      # # People lodging at the hotel should not change their
+      # # arrival/departure dates anymore (also, retroactively since
+      # # July 3 :-P )
+      # if Time.now > Time.gm(2011,7,3) and params[:dc_conference_person][:accom_id] == '15' and
+      #     (old_conference_person_travel[:arrival_date].to_s != params[:conference_person_travel][:arrival_date]) or
+      #     (old_conference_person_travel[:departure_date].to_s != params[:conference_person_travel][:departure_date])
+      #   raise 'Hey, hey, not so fast! You cannot change your arrival/departure dates anymore. Please contact registration@debconf.org if you need to make changes.'
+      # end
     end
 
     params[:person][:person_id] = POPE.user.person_id
