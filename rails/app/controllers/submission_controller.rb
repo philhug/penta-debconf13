@@ -138,11 +138,11 @@ class SubmissionController < ApplicationController
     #   params[:dc_conference_person][:dc_participant_category_id]= map_id.participant_mapping_id
     # end
 
-    if @thisconf == :managua
+    if params[:conference] == "dc12"
       # Sponsored registration from DC11: participant_mapping_id
       # (debconf.dc_participant_mapping) where participant_category in (20, 21, 22)
       # and conference_id=6
-      sponsored = [118, 119, 120, 121, 122]
+      sponsored = [167, 168, 169, 170, 171, 172, 173, 174, 175]
 
       # # Basic registration means no regular room will be provided
       # basic = [110, 111, 112, 113, 114, 115, 116, 117]
