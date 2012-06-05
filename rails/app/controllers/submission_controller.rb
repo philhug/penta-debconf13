@@ -165,6 +165,20 @@ class SubmissionController < ApplicationController
           raise "The deadline for sponsored attendees' registration was May 15, so your changes were not accepted. Contact registration@debconf.org if changes are needed."
       end
 
+      # Enabling the "reconfirmed" checkbox requires dates to be
+      # entered.  Checking whether the dates are valid will be left to
+      # the client-side JS (and that allows admins to enter
+      # nonstandard dates, were it to be needed)
+      if params[:conference_person][:reconfirmed]
+        arrive_date = params[:conference_person_travel][:arrival_date]
+        depart_date = params[:conference_person_travel][:departure_date]
+        if arrive_date.nil? or arrive_date.empty? or
+            depart_date.nil? or depart_date.empty?
+          raise 'You have marked your presence in Debconf as "Reconfirmed" (in the "General" tab).' + "\n" +
+            'In order to accept the reconfirmation, we need you to enter arrival and departure dates (in the "Travel" tab).'
+        end
+      end
+
       # # Regular rooms cannot be accepted anymore after July 3 for
       # # those not yet having it
       # if Time.now > Time.gm(2011,7,3) and params[:dc_conference_person][:accom_id] == '15' and
