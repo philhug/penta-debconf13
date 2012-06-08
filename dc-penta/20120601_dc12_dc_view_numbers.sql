@@ -77,5 +77,7 @@ CREATE VIEW debconf.dc_view_participant_changes AS
      FULL JOIN log.conference_person_travel lcpt ON lcpt.log_transaction_id = llt.log_transaction_id
   WHERE llt.log_timestamp >= '2010-02-03 18:08:38'::timestamp without time zone
   ORDER BY llt.log_timestamp;
+GRANT SELECT ON debconf.dc_view_participant_changes TO readonly;
+GRANT SELECT ON debconf.dc_view_numbers TO readonly;
 
 COMMIT TRANSACTION;
