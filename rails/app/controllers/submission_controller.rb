@@ -92,6 +92,7 @@ class SubmissionController < ApplicationController
   end
 
   def save_person
+    old_conference_person = Conference_person.select_or_new({:conference_id=>@conference.conference_id, :person_id=>POPE.user.person_id})
     old_dc_conference_person = DebConf::Dc_conference_person.select_or_new({:conference_id=>@conference.conference_id, :person_id=>POPE.user.person_id})
     old_conference_person_travel = Conference_person_travel.select_or_new({:conference_person_id=>params[:conference_person][:conference_person_id].to_i})
 
@@ -177,6 +178,10 @@ class SubmissionController < ApplicationController
           raise 'You have marked your presence in Debconf as "Reconfirmed" (in the "General" tab).' + "\n" +
             'In order to accept the reconfirmation, we need you to enter arrival and departure dates (in the "Travel" tab).'
         end
+      end
+
+      if params[:dc_conference_person][:debcamp_id].to_i == 2 and old_dc_conference_person.debcamp_id != 2
+        raise "It's too late to register a plan for DebCamp — Sorry. You can still attend unsponsored, though"
       end
 
       # # Regular rooms cannot be accepted anymore after July 3 for
