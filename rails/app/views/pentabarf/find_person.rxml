@@ -70,9 +70,19 @@ xml.div({:id=>:data}) do
         xml << select_tag('search_person[row_id][value]', DebConf::Dc_debcamp.select.map{|c| [c.debcamp_option, c.debcamp_option]})
       end
       # search for person_type
-      xml.li({:class=>:person_type,:title=>local(:person_type)}) do
+      xml.li({:class=>:person_type,:title=>local('person_type (DebConf <= 11)')}) do
         xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:person_type})
         xml << select_tag('search_person[row_id][value]', DebConf::Dc_person_type.select.map{|c| [c.description, c.description]})
+      end
+      # search for debconf_role
+      xml.li({:class=>:debconf_role,:title=>local('debconf_role (DebConf >= 12)')}) do
+        xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:debconf_role})
+        xml << select_tag('search_person[row_id][value]', DebConf::Dc_debconf_role.select.map{|c| [c.description, c.description]})
+      end
+      # search for debian_role
+      xml.li({:class=>:debian_role,:title=>local('debian_role (DebConf >= 12)')}) do
+        xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:debian_role})
+        xml << select_tag('search_person[row_id][value]', DebConf::Dc_debian_role.select.map{|c| [c.description, c.description]})
       end
       # search for category
       xml.li({:class=>:participant_category,:title=>local(:participant_category)}) do
