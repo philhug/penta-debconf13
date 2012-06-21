@@ -187,7 +187,7 @@ class SubmissionController < ApplicationController
       if Date.today > Date.parse('2012-06-20')
         old_arr_date = old_conference_person_travel.arrival_date
         arr_date = Date.parse(params[:conference_person_travel][:arrival_date])
-        old_dep_date = old_conference_person_travel.depart_date
+        old_dep_date = old_conference_person_travel.departure_date
         dep_date = Date.parse(params[:conference_person_travel][:departure_date])
 
         if (old_arr_date and arr_date != old_arr_date) or
