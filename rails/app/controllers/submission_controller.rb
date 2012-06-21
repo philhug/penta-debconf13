@@ -184,11 +184,14 @@ class SubmissionController < ApplicationController
         raise "It's too late to register a plan for DebCamp — Sorry. You can still attend unsponsored, though"
       end
 
-      if Time.now > Time.gm(2012, 6, 20)
-        arrive_date = Time.gm(params[:conference_person_travel][:arrival_date])
-        depart_date = Time.gm(params[:conference_person_travel][:departure_date])
-        if arrive_date != old_conference_person_travel.arrival_date or
-            depart_date != old_conference_person_travel.depart_date
+      if Date.today > Date.parse('2012-06-20')
+        old_arr_date = old_conference_person_travel.arrival_date
+        arr_date = Date.parse(params[:conference_person_travel][:arrival_date])
+        old_dep_date = old_conference_person_travel.depart_date
+        dep_date = Date.parse(params[:conference_person_travel][:departure_date])
+
+        if (old_arr_date and arr_date != old_arr_date) or
+            (old_dep_date and dep_date != old_dep_date)
           raise 'Reconfirmation period is over - You cannot change arrival/departure dates anymore! ' +
             'Please mail registration@debconf.org to let them know your new travel plans.'
         end
