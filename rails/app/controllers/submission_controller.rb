@@ -255,7 +255,7 @@ class SubmissionController < ApplicationController
     # Set the symbolic @thisconf variable, to avoid filling the views
     # with meaningless numeric comparisons.
     # We started using Pentabarf for Edinburgh - which got conference_id == 1.
-    confs = [nil, :edinburgh, :argentina, :caceres, :nyc, :bosnia]
+    confs = [nil, :edinburgh, :argentina, :caceres, :nyc, :bosnia, :managua]
 
     @current_language = POPE.user ? POPE.user.current_language : 'en'
     begin
