@@ -44,10 +44,10 @@ xml.div(:id=>'content-general') do
 
       if [:edinburgh, :argentina, :caceres, :nyc].include? @thisconf
         xml << select_row( @dc_conference_person, :computer_id, DebConf::Dc_computer.select.map{|e| [e.computer_id,e.computer]} )
-        xml << select_row( @dc_conference_person, :daytrip_id, DebConf::Dc_daytrip.select.map{|e| [e.daytrip_id,e.daytrip_option]} )
       end
 
       if [:edinburgh, :argentina, :caceres, :nyc, :managua].include? @thisconf
+        xml << select_row( @dc_conference_person, :daytrip_id, DebConf::Dc_daytrip.select.map{|e| [e.daytrip_id,e.daytrip_option]} )
         xml << check_box_row( @dc_conference_person, :assassins )
       end
 
