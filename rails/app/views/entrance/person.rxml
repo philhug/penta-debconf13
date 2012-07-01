@@ -4,8 +4,9 @@ xml.div( :id => 'data') do
     xml << hidden_field( @conference_person, :conference_person_id )
 
     fields = [:name, :first_name, :last_name, :nickname, :email]
-    change = [:badge, :foodtickets, :has_to_pay, :has_paid, :shirt, :bag, :proceedings, :proceeded, :arrived, :paiddaytrip]
-    change << :has_sim_card if @thisconf == :bosnia
+    # No longer using (at least for this year):
+    # :proceedings, :proceeded, :has_sim_card
+    change = [:badge, :foodtickets, :has_to_pay, :has_paid, :shirt, :bag, :arrived, :paiddaytrip]
 
     xml.table do
       fields.each do | category |
@@ -24,9 +25,21 @@ xml.div( :id => 'data') do
         xml.td( DebConf::Dc_t_shirt_sizes.select_single(:t_shirt_sizes_id => @dc_conference_person.t_shirt_sizes_id).t_shirt_size )
       end
 
-      xml << select_row( @dc_conference_person, :person_type_id, DebConf::Dc_person_type.select.map{|e| [e.person_type_id,e.description]}, {:master=>:dc_participant_category_id,:disabled=>true})
+      # Roles and participant category can be shown, but modified, from this controller.
+      xml.tr do
+        xml.td do xml.b( local( :debian_role ) ) end
+        xml.td( DebConf::Dc_debian_role.select_single({:debian_role_id => @dc_conference_person.debian_role_id }).description )
+      end
 
-      xml << select_row( @dc_conference_person, :dc_participant_category_id, DebConf::Dc_view_participant.select.map{|e| [e.participant_mapping_id,e.person_type_id,e.participant_category]},{:slave=>true,:with_empty=>false,:disabled=>true})
+      xml.tr do
+        xml.td do xml.b( local( :debconf_role ) ) end
+        xml.td( DebConf::Dc_debconf_role.select_single({:debconf_role_id => @dc_conference_person.debconf_role_id }).description )
+      end
+
+      xml.tr do
+        xml.td do xml.b( local( :participant_category ) ) end
+        xml.td( DebConf::Dc_view_participant.select({:participant_mapping_id => @dc_conference_person.dc_participant_category_id}) )
+      end
 
       change.each do | category |
           xml << check_box_row(@conference_person, category)
