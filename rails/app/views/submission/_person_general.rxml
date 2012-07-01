@@ -27,8 +27,15 @@ xml.div(:id=>'content-general') do
         xml << select_row( @dc_conference_person, :dc_participant_category_id, DebConf::Dc_view_participant.select.map{|e| [e.participant_mapping_id,e.debconf_role_id,e.participant_category]},{:slave=>true,:with_empty=>false, :selected => @dc_conference_person.dc_participant_category_id || 0})
 	xml.script("$('dc_conference_person[debconf_role_id]').onchange()",{:type=>"text/javascript"})
       end
-      xml << select_row( @dc_conference_person, :t_shirt_sizes_id, DebConf::Dc_t_shirt_sizes.select.map{|e| [e.t_shirt_sizes_id,e.t_shirt_size]}, {:with_empty=>false, :selected => @dc_conference_person.t_shirt_sizes_id || 0})
 
+      if [:edinburgh, :argentina, :caceres, :nyc, :bosnia, :managua].include? @thisconf
+        # It is no longer time to specify your shirt size, sorry
+        xml.tr do
+          xml.td do xml.b( local :t_shirt_size) end
+          xml.td( DebConf::Dc_t_shirt_sizes.select_single({:t_shirt_sizes_id => @dc_conference_person.t_shirt_sizes_id}).t_shirt_size)
+      else
+        xml << select_row( @dc_conference_person, :t_shirt_sizes_id, DebConf::Dc_t_shirt_sizes.select.map{|e| [e.t_shirt_sizes_id,e.t_shirt_size]}, {:with_empty=>false, :selected => @dc_conference_person.t_shirt_sizes_id || 0})
+      end
     end
   end
 
