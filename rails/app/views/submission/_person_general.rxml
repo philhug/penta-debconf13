@@ -33,6 +33,7 @@ xml.div(:id=>'content-general') do
         xml.tr do
           xml.td do xml.b( local :t_shirt_size) end
           xml.td( DebConf::Dc_t_shirt_sizes.select_single({:t_shirt_sizes_id => @dc_conference_person.t_shirt_sizes_id}).t_shirt_size)
+        end
       else
         xml << select_row( @dc_conference_person, :t_shirt_sizes_id, DebConf::Dc_t_shirt_sizes.select.map{|e| [e.t_shirt_sizes_id,e.t_shirt_size]}, {:with_empty=>false, :selected => @dc_conference_person.t_shirt_sizes_id || 0})
       end
