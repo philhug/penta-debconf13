@@ -6,7 +6,7 @@ xml.div( :id => 'data') do
     fields = [:name, :first_name, :last_name, :nickname, :email]
     # No longer using (at least for this year):
     # :proceedings, :proceeded, :has_sim_card, :badge, :shirt, :has_to_pay, :has_paid, :paiddaytrip
-    change = [:foodtickets, :bag, :arrived]
+    change = [:foodtickets, :bag, :arrived, :coffee_mug]
 
     xml.table do
       fields.each do | category |
