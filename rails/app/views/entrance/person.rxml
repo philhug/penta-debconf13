@@ -6,7 +6,8 @@ xml.div( :id => 'data') do
     fields = [:name, :first_name, :last_name, :nickname, :email]
     # No longer using (at least for this year):
     # :proceedings, :proceeded, :has_sim_card, :badge, :shirt, :has_to_pay, :has_paid, :paiddaytrip
-    change = [:foodtickets, :bag, :arrived, :coffee_mug]
+    change = [:foodtickets, :bag, :arrived]
+    dc_change = [:coffee_mug]
 
     xml.table do
       fields.each do | category |
@@ -43,6 +44,9 @@ xml.div( :id => 'data') do
 
       change.each do | category |
           xml << check_box_row(@conference_person, category)
+      end
+      dc_change.each do | category |
+          xml << check_box_row(@dc_conference_person, category)
       end
 #      xml << check_box_row( @dc_conference_person, :has_sim_card) if @thisconf == :bosnia
 
