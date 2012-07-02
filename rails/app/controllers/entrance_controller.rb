@@ -143,10 +143,11 @@ class EntranceController < ApplicationController
   def arrivals_by_date
     @dates = {}
     DebConf::Dc_when_do_they_get_here.select().each do |arrival|
-      if not @dates["#{arrival[:arrival_date]}"].kind_of? Array
-        @dates["#{arrival[:arrival_date]}"] = Array.new
+      arr_date = arrival[:arrival_time].to_date.to_s
+      if not @dates[arr_date].kind_of? Array
+        @dates[arr_date] = Array.new
       end
-      @dates["#{arrival[:arrival_date]}"] << arrival
+      @dates[arr_date] << arrival
     end
     @content_title = "Front Desk"
     @content_subtitle = "Arrivals By Date"
@@ -158,9 +159,9 @@ class EntranceController < ApplicationController
     # Set the symbolic @thisconf variable, to avoid filling the views
     # with meaningless numeric comparisons.
     # We started using Pentabarf for Edinburgh - which got conference_id == 1.
-    confs = [nil, :edinburgh, :argentina, :caceres, :nyc, :bosnia]
+    confs = [nil, :edinburgh, :argentina, :caceres, :nyc, :bosnia, :managua]
 
-    @current_conference = Conference.select_single(:conference_id => POPE.user.current_conference_id) rescue Conference.new(:conference_id=>0)
+    @current_conference = Conference.select_single(:conference_id => POPE.user.current_conference_id) rescue Conference.new(:conference_id=>confs.size)
     @preferences = POPE.user.preferences
     @current_language = POPE.user.current_language || 'en'
     @thisconf = confs[@current_conference.conference_id]

@@ -1,7 +1,7 @@
 xml.div(:id=>"content-#{tab_arrivals_by_date}") do
   xml.text "#{@dates[tab_arrivals_by_date].length} people scheduled to arrive on #{tab_arrivals_by_date}"
   xml.table({:id=>'arrivals',:class=>'sortable'}) do
-    fields = [:nickname, :country, :description, :first_name, :last_name, :arrived, :arrival_date, :departure_date]
+    fields = [:nickname, :country, :description, :first_name, :last_name, :arrived, :arrival_time, :departure_time]
 
     xml.thead do
       xml.tr do
