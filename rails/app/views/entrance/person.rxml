@@ -6,7 +6,7 @@ xml.div( :id => 'data') do
     fields = [:name, :first_name, :last_name, :nickname, :email]
     # No longer using (at least for this year):
     # :proceedings, :proceeded, :has_sim_card, :badge, :shirt, :has_to_pay, :has_paid, :paiddaytrip
-    change = [:foodtickets, :bag, :arrived]
+    change = [:arrived, :bag, :foodtickets]
     dc_change = [:coffee_mug]
 
     xml.table do
@@ -40,6 +40,11 @@ xml.div( :id => 'data') do
       xml.tr do
         xml.td do xml.b( local( :participant_category ) ) end
         xml.td( DebConf::Dc_view_participant.select_single({:participant_mapping_id => @dc_conference_person.dc_participant_category_id}).participant_category )
+      end
+
+      xml.tr do
+        xml.td do xml.b( local( :food_preferences ) ) end
+        xml.td ( DebConf::Dc_food_preferences.select_single({:food_id => @dc_conference_person.food_id }).food )
       end
 
       change.each do | category |
