@@ -1,7 +1,9 @@
+xml.h3('I know about %d potential killers:' % @killers.size)
+
 xml.table({:id => 'assassins_list', :class => :sortable}) do
   xml.thead do
     xml.tr do
-      ['Name', 'Reconfirmed', 'Arrived', 'Alive', 'Action'].each do |field|
+      ['ID', 'Name', 'Reconfirmed', 'Arrived', 'Alive', 'Victim', 'Action'].each do |field|
         xml.th field
       end
     end
@@ -12,11 +14,18 @@ xml.table({:id => 'assassins_list', :class => :sortable}) do
       xml.tr do
         alive = @kills.select{|kill| kill.person_id==killer.person_id}.empty?
 
-        xml.td '%s %s' % [killer.first_name, killer.last_name]
-        xml.td killer.reconfirmed? ? 'Yes' : 'No'
-        xml.td killer.arrived? ? 'Yes' : 'No'
+        xml.td killer.person_id
+        xml.td do
+          xml.a({:href => "/penta/pentabarf/person/#{killer.person_id}"}, killer.name)
+	end
+        xml.td killer.reconfirmed ? 'Yes' : 'No'
+        xml.td killer.arrived ? 'Yes' : 'No'
         xml.td alive ? 'Yes' : 'No'
-        
+        xml.td @targets[killer.person_id]
+        xml.td do
+          xml << link_to('Remove', {:action => :admin_rm, :person_id => killer.person_id},
+                         {:confirm => 'This person will surely hate you. Are you sure?'})
+        end
       end
     end
   end

@@ -106,13 +106,53 @@ class AssassinsController < ApplicationController
   end
 
   def admin_list
-    @killers = DebConf::View_dc_conference_person.select({:conference_id => @current_conference.conference_id,
+    @content_title = "Assassins"
+    @content_subtitle = "...So you want to play God"
+
+    conf = @current_conference.conference_id
+
+    @killers = DebConf::View_dc_conference_person.select({:conference_id => conf,
                                                            :assassins => true
                                                          })
-    @kills = DebConf::Dc_assassins_kills.select({:conference_id => @current_conference.conference_id})
+    @kills = DebConf::Dc_assassins_kills.select({:conference_id => conf})
+    @targets = {}
+    DebConf::Dc_assassins.select({:conference_id => conf}).map do |mission|
+      @targets[mission.person_id] = mission.target_id
+    end
   end
 
-  def admin_kill
+  def admin_rm
+    @content_title = "Assassins"
+    @content_subtitle = "You did it: Somebody hates you!"
+    conf = @current_conference.conference_id
+
+    person_id = params[:person_id]
+    begin
+      @old_killer = DebConf::Dc_assassins.select_single({:conference_id => conf, 
+                                                          :person_id => person_id})
+      @old_person = Person.select_single({:person_id => person_id})
+      old_dccp = DebConf::Dc_conference_person.select_single({:conference_id => conf, 
+                                                               :person_id => person_id})
+      old_dccp.assassins = false
+      old_dccp.write
+
+      # Whoever was looking for this person, should now look for his target
+      @its_killer = DebConf::Dc_assassins.select_single({:conference_id => conf,
+                                                        :target_id => person_id})
+      if @its_killer
+        @its_killer.target_id = @old_person.target_id
+        
+        @its_killer.write
+
+        @killer = Person.select_single({:person_id => its_killer.person_id})
+      end
+      @old_person.delete
+    rescue
+      @might_have_failed = true
+    end
+
+
+
   end
 
   def winners

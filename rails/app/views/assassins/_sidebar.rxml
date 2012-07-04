@@ -16,6 +16,9 @@ xml.div( :id => 'sidebar' ) do
         
     xml.div( :class=>'menu-item-group' ) do
       xml.a( local('assassins::index'), {:href=> url_for(:controller => 'assassins', :action => :index), :class => 'menu-item'} )
+      if POPE.permission?('pentabarf_login')
+        xml.a( local('assassins::list'),  {:href=> url_for(:controller => 'assassins', :action => :admin_list), :class => 'menu-item'} )
+      end
     end
 
     xml.div( :class=>'menu-item-group' ) do

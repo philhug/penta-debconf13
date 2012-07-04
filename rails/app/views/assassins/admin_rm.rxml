@@ -1,0 +1,23 @@
+if @might_have_failed
+  xml.h2('This might have failed!')
+  xml.p('Something does not feel quite right. Make sure things are as they should.')
+  xml.p('This probably means: Check the removed person is no longer on the list, '+
+        'that his/her target and killer have been updated, and that his/her ' +
+        '"play assassins" record is now false.')
+end
+
+if @old_killer
+  xml.h3('You removed %d from the game.' % @old_person.person_id)
+
+  if @killer
+    xml.p('Now go and find %s %s (%s), and inform him/her of the change' %
+          [@killer.first_name, @killer.last_name, @killer.email])
+  else
+    xml.p('Nobody was after that person. Has the game started yet?')
+  end
+else
+  xml.h3('Huh?!')
+  xml.p('I should have removed somebody from the assassins list... But there is no '+
+        'record of it. Maybe you are a reloader, double-clicker, or want to '+
+        'play games on me. Have fun solving the puzzle...')
+end
