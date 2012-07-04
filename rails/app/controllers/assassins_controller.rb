@@ -105,6 +105,16 @@ class AssassinsController < ApplicationController
                                                           {:ignore_empty => true} )
   end
 
+  def admin_list
+    @killers = DebConf::View_dc_conference_person.select({:conference_id => @current_conference.conference_id,
+                                                           :assassins => true
+                                                         })
+    @kills = DebConf::Dc_assassins_kills.select({:conference_id => @current_conference.conference_id})
+  end
+
+  def admin_kill
+  end
+
   def winners
     @content_title = "Assassins"
     @content_subtitle = "No winner yet"
@@ -193,7 +203,7 @@ class AssassinsController < ApplicationController
 
   def check_permission
     case params[:action]
-    when 'admin', 'admin_start'
+    when 'admin', 'admin_start', 'admin_list', 'admin_kill'
       return true if POPE.permission?('pentabarf_login')
     else
       return true if POPE.permission?('submission_login')

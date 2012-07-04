@@ -1,0 +1,23 @@
+xml.table({:id => 'assassins_list', :class => :sortable}) do
+  xml.thead do
+    xml.tr do
+      ['Name', 'Reconfirmed', 'Arrived', 'Alive', 'Action'].each do |field|
+        xml.th field
+      end
+    end
+  end
+
+  xml.tbody do
+    @killers.each do |killer|
+      xml.tr do
+        alive = @kills.select{|kill| kill.person_id==killer.person_id}.empty?
+
+        xml.td '%s %s' % [killer.first_name, killer.last_name]
+        xml.td killer.reconfirmed? ? 'Yes' : 'No'
+        xml.td killer.arrived? ? 'Yes' : 'No'
+        xml.td alive ? 'Yes' : 'No'
+        
+      end
+    end
+  end
+end
