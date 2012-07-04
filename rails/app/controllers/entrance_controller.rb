@@ -49,12 +49,15 @@ class EntranceController < ApplicationController
     dcp.each do |field|
       dcpv[field] = params[:dc_view_find_person_entrance][field] || 'f'
     end
-    if @this_conference == :managua
-      dcpv[:coffee_mug] = params[:dc_conference_person][:coffee_mig] || 'f'
+    if @thisconf == :managua
+      begin
+        dcpv[:coffee_mug] = params[:dc_conference_person][:coffee_mug] || 'f'
+      rescue
+        dcpv[:coffee_mug] = 'f'
+      end
     end
-#    if @this_conference == :bosnia
+#    if @thisconf == :bosnia
 #      dcpv[:has_sim_card] = params[:dc_conference_person][:has_sim_card] || 'f'
-#      raise Exception, dcpv.to_yaml if params[:dc_view_find_person_entrance].person_id=120
 #    end
 
     options = params[:dc_view_find_person_entrance]
