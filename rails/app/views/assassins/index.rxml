@@ -22,7 +22,7 @@ xml.div({:id=>:data}) do
         xml.p ("Until they confirm the kill, we cannot give you a new target.")
       end
     end
-    xml.p ("Should the target not confirm this kill within 2 hours, or outright refuse to do it, please contact this years assassins admins at assassins@debconf.org or talk to one of your 2 beloved admins, Ganneff or Sgran")
+    xml.p ("Should the target not confirm this kill within 2 hours, or outright refuse to do it, please contact this years assassins admin, Christian Perrier (bubulle), or talk to your admin, Gunnar Wolf (gwolf)")
 
     if @victims.to_ary.length > 0
       xml.fieldset do 
