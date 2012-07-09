@@ -276,7 +276,7 @@ function cookie_write( name, value ) {
   document.cookie = name + "=" + value + "; expires="+date.toGMTString()+"; path=/";
 }
 
-//reads data stored in the cookie
+// reads data stored in the cookie
 function cookie_read( name ) {
   name = name + "=";
   var cookies = document.cookie.split( ';' );
