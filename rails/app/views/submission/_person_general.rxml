@@ -23,9 +23,13 @@ xml.div(:id=>'content-general') do
         # Starting at managua, we separate "role in Debian" and "role in DebConf".
         # The dc_participant_category_id slave depends on the DebConf role.
         xml << select_row( @dc_conference_person, :debian_role_id, DebConf::Dc_debian_role.select({}, {:order => Momomoto.asc(:debian_role_id)}).map{|e| [e.debian_role_id,e.description]})
-        xml << select_row( @dc_conference_person, :debconf_role_id, DebConf::Dc_debconf_role.select({}, {:order => Momomoto.asc(:debconf_role_id)}).map{|e| [e.debconf_role_id,e.description]}, {:master=>:dc_participant_category_id, :selected => @dc_conference_person.debconf_role_id || 0})
-        xml << select_row( @dc_conference_person, :dc_participant_category_id, DebConf::Dc_view_participant.select.map{|e| [e.participant_mapping_id,e.debconf_role_id,e.participant_category]},{:slave=>true,:with_empty=>false, :selected => @dc_conference_person.dc_participant_category_id || 0})
-	xml.script("$('dc_conference_person[debconf_role_id]').onchange()",{:type=>"text/javascript"})
+        if [:swiss].include? @thisconf
+          xml << select_row( @dc_conference_person, :debconf_role_id, DebConf::Dc_debconf_role.select({}, {:order => Momomoto.asc(:debconf_role_id)}).map{|e| [e.debconf_role_id,e.description]})
+        else
+          xml << select_row( @dc_conference_person, :debconf_role_id, DebConf::Dc_debconf_role.select({}, {:order => Momomoto.asc(:debconf_role_id)}).map{|e| [e.debconf_role_id,e.description]}, {:master=>:dc_participant_category_id, :selected => @dc_conference_person.debconf_role_id || 0})
+          xml << select_row( @dc_conference_person, :dc_participant_category_id, DebConf::Dc_view_participant.select.map{|e| [e.participant_mapping_id,e.debconf_role_id,e.participant_category]},{:slave=>true,:with_empty=>false, :selected => @dc_conference_person.dc_participant_category_id || 0})
+          xml.script("$('dc_conference_person[debconf_role_id]').onchange()",{:type=>"text/javascript"})
+        end
       end
 
       if [:edinburgh, :argentina, :caceres, :nyc, :bosnia, :managua].include? @thisconf
