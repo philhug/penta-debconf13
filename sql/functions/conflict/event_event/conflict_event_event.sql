@@ -1,6 +1,6 @@
-
+DROP FUNCTION conflict.conflict_event_event(conference_id INTEGER);
 -- returns all conclicts related to events
-CREATE OR REPLACE FUNCTION conflict.conflict_event_event(conference_id INTEGER) RETURNS SETOF conflict.conflict_event_event_conflict AS $$
+CREATE OR REPLACE FUNCTION conflict.conflict_event_event(conf_id INTEGER) RETURNS SETOF conflict.conflict_event_event_conflict AS $$
   DECLARE
     cur_conflict_event_event conflict.conflict_event_event_conflict%ROWTYPE;
     cur_conflict RECORD;
@@ -15,10 +15,10 @@ CREATE OR REPLACE FUNCTION conflict.conflict_event_event(conference_id INTEGER) 
              INNER JOIN conference USING (conference_phase)
        WHERE conflict_type = 'event_event' AND
              conflict_level <> 'silent' AND
-             conference.conference_id = conference_id
+             conference.conference_id = conf_id
     LOOP
       FOR cur_conflict_event_event IN
-        EXECUTE 'SELECT '|| quote_literal(cur_conflict.conflict) ||' AS conflict, event_id1, event_id2 FROM conflict.conflict_' || cur_conflict.conflict || '(' || conference_id || ');'
+        EXECUTE 'SELECT '|| quote_literal(cur_conflict.conflict) ||' AS conflict, event_id1, event_id2 FROM conflict.conflict_' || cur_conflict.conflict || '(' || conf_id || ');'
       LOOP
         RETURN NEXT cur_conflict_event_event;
       END LOOP;
