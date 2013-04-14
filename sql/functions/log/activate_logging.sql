@@ -30,7 +30,7 @@ CREATE OR REPLACE FUNCTION log.activate_logging() RETURNS VOID AS $$
       fundef = $f$CREATE OR REPLACE FUNCTION log.$f$ || quote_ident( procname ) || $f$() RETURNS TRIGGER AS $i$
         BEGIN
           IF ( current_setting('pentabarf.transaction_id') IN ('','unset') ) THEN
-            PERFORM set_config('pentabarf.transaction_id',nextval('base.log_transaction_log_transaction_id_seq'),TRUE); 
+            PERFORM set_config('pentabarf.transaction_id',nextval('base.log_transaction_log_transaction_id_seq')::text,TRUE);
             INSERT INTO log.log_transaction( log_transaction_id, person_id ) 
               VALUES ( currval('base.log_transaction_log_transaction_id_seq'), 
                 CASE current_setting('pentabarf.person_id') WHEN '' THEN NULL WHEN 'unset' THEN NULL ELSE current_setting('pentabarf.person_id')::INTEGER END
