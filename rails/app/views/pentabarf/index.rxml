@@ -27,7 +27,7 @@ xml.div({:id=>'data'}) do
   xml.fieldset do
     xml.legend local(:conflicts)
     xml.ul do
-      Conflict_statistics.call({:conference_id=>@current_conference.conference_id}).reverse_each do | level |
+      Conflict_statistics.call({:conf_id=>@current_conference.conference_id}).reverse_each do | level |
         xml.li do
           xml.a( "#{level.conflicts} Conflicts with severity '#{level.conflict_level}'", {:href=>url_for(:action=>:conflicts,:anchor=>level.conflict_level)} )
         end
