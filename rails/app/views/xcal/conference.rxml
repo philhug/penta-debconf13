@@ -10,7 +10,6 @@
     xml.tag!( "pentabarf:language-code", event.language )
     xml.dtstart( event.start_date.strftime('%Y%m%dT%H%M%S') )
     xml.dtend( event.end_date.strftime('%Y%m%dT%H%M%S') )
-    xml.duration( event.duration.strftime('%HH%MM%SS') )
     xml.summary( event.title + ( event.subtitle ? "- #{event.subtitle}" : "" ) )
     xml.description( event.abstract )
     xml.class( "PUBLIC" )
