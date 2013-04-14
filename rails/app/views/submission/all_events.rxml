@@ -49,7 +49,7 @@ xml.div(:id=>'event-index',:class=>'section') do
             end
             xml.div(:id=>'abstract',:class=>'abstract') do
               xml.div(:id=>'abstract-title',:class=>'abstract') do
-                xml.strong local ( 'Abstract')
+                xml.strong local( 'Abstract')
                 xml.text! ':'
               end
               xml.div(:id=>'abstract-text',:class=>'abstract') do
@@ -58,7 +58,7 @@ xml.div(:id=>'event-index',:class=>'section') do
             end
             xml.div(:id=>'description',:class=>'description') do
               xml.div(:id=>'description-title',:class=>'description') do
-                xml.strong local ( 'Description')
+                xml.strong local( 'Description')
                 xml.text! ':'
               end
               xml.div(:id=>'description-text',:class=>'description') do

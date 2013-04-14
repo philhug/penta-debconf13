@@ -30,11 +30,11 @@ xml.div(:id=>'content-account') do
 
     xml.table do
       xml.tr do
-        xml.td ( local('debconf-announce') )
+        xml.td( local('debconf-announce') )
         xml.td do xml.a( 'subscribe', {:href=>"http://lists.debconf.org/mailman/subscribe/debconf-announce?email=#{u(@conference_person.email || @person.email)}&fullname=#{u(@person.name)}"} ) end
       end
       xml.tr do
-        xml.td ( local('debconf-discuss') )
+        xml.td( local('debconf-discuss') )
         xml.td do xml.a( 'subscribe', {:href=>"http://lists.debconf.org/mailman/subscribe/debconf-discuss?email=#{u(@conference_person.email || @person.email)}&fullname=#{u(@person.name)}"} ) end
       end
     end

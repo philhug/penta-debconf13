@@ -44,7 +44,7 @@ xml.div(:id=>'content-general') do
     xml.legend( local('DebConf') )
 
     xml.table do
-      xml << check_box_row ( @dc_conference_person, :attend )
+      xml << check_box_row( @dc_conference_person, :attend )
       xml << check_box_row( @conference_person, :reconfirmed ) if @conference.f_reconfirmation_enabled
       xml << check_box_row( @dc_conference_person, :disabilities ) if @thisconf != :bosnia
       xml << select_row( @dc_conference_person, :accom_id, DebConf::Dc_accomodation.select(:conference_id=>@conference.conference_id).map{|e| [e.accom_id,e.accom]} )
