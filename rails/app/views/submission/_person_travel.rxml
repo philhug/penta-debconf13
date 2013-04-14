@@ -129,8 +129,10 @@ xml.div(:id=>'content-travel') do
 
   end
 
-  xml << text_area_fieldset( @dc_conference_person, :debianwork, {:rows=>5,:cols=>60})
-
+  if not [:swiss].include? @thisconf
+    xml << text_area( @dc_conference_person, :debianwork, {:rows=>5,:cols=>60})
+  end
+  
   if 1 == 2
     xml.fieldset do
       xml.legend local('accommodation')

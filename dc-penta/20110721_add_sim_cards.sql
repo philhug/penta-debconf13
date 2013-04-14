@@ -1,4 +1,4 @@
-ALTER TABLE debconf.dc_conference_person ADD COLUMN has_sim_card boolean NOT NULL DEFAULT FALSE;
+ALTER TABLE base.dc_conference_person ADD COLUMN has_sim_card boolean NOT NULL DEFAULT FALSE;
 INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::has_sim_card', 'en', 'Has received a SIM card?');
 INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_view_find_person_entrance::has_sim_card', 'en', 'Has received a SIM card?');
 DROP VIEW debconf.dc_view_find_person_entrance;

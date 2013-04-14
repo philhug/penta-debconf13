@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
     return check_permission
    rescue => e
     warn( e.to_s ) unless e.class == Pope::NoUserData
-    response.headers["Status"] = "Unauthorized"
+#    response.headers["Status"] = "Unauthorized"
     response.headers["WWW-Authenticate"] = "Basic realm=Pentabarf"
     render( :file=>'auth_failed',:status=>401,:use_full_path=>true,:content_type=>'text/html' )
     return false

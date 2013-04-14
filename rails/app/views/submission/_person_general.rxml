@@ -23,11 +23,9 @@ xml.div(:id=>'content-general') do
         # Starting at managua, we separate "role in Debian" and "role in DebConf".
         # The dc_participant_category_id slave depends on the DebConf role.
         xml << select_row( @dc_conference_person, :debian_role_id, DebConf::Dc_debian_role.select({}, {:order => Momomoto.asc(:debian_role_id)}).map{|e| [e.debian_role_id,e.description]})
-        if [:swiss].include? @thisconf
-          xml << select_row( @dc_conference_person, :debconf_role_id, DebConf::Dc_debconf_role.select({}, {:order => Momomoto.asc(:debconf_role_id)}).map{|e| [e.debconf_role_id,e.description]})
-        else
-          xml << select_row( @dc_conference_person, :debconf_role_id, DebConf::Dc_debconf_role.select({}, {:order => Momomoto.asc(:debconf_role_id)}).map{|e| [e.debconf_role_id,e.description]}, {:master=>:dc_participant_category_id, :selected => @dc_conference_person.debconf_role_id || 0})
-          xml << select_row( @dc_conference_person, :dc_participant_category_id, DebConf::Dc_view_participant.select.map{|e| [e.participant_mapping_id,e.debconf_role_id,e.participant_category]},{:slave=>true,:with_empty=>false, :selected => @dc_conference_person.dc_participant_category_id || 0})
+          xml << select_row( @dc_conference_person, :debconf_role_id, DebConf::Dc_debconf_role.select({:conference_id=>@conference.conference_id}, {:order => Momomoto.asc(:debconf_role_id)}).map{|e| [e.debconf_role_id,e.description]}, {:master=>:dc_participant_category_id, :selected => @dc_conference_person.debconf_role_id || 0})
+        if [:edinburgh, :argentina, :caceres, :nyc, :bosnia, :managua].include? @thisconf
+          xml << select_row( @dc_conference_person, :dc_participant_category_id, DebConf::Dc_view_participant.select(:conference_id=>@conference.conference_id).map{|e| [e.participant_mapping_id,e.debconf_role_id,e.participant_category]},{:slave=>true,:with_empty=>false, :selected => @dc_conference_person.dc_participant_category_id || 0})
           xml.script("$('dc_conference_person[debconf_role_id]').onchange()",{:type=>"text/javascript"})
         end
       end
@@ -51,8 +49,25 @@ xml.div(:id=>'content-general') do
       xml << check_box_row( @dc_conference_person, :attend )
       xml << check_box_row( @conference_person, :reconfirmed ) if @conference.f_reconfirmation_enabled
       xml << check_box_row( @dc_conference_person, :disabilities ) if @thisconf != :bosnia
+
+      if [:swiss].include? @thisconf
+        xml << select_row( @dc_conference_person, :dc_participant_category_id, DebConf::Dc_view_participant.select(:conference_id=>@conference.conference_id).map{|e| [e.participant_mapping_id,e.debconf_role_id,e.participant_category]},{:slave=>true,:with_empty=>false, :selected => @dc_conference_person.dc_participant_category_id || 0})
+        xml.script("$('dc_conference_person[debconf_role_id]').onchange()",{:type=>"text/javascript"})
+      end
+      
+      if [:swiss].include? @thisconf
+        xml.tr do
+          xml.td do xml.b() end
+          xml.td do xml.a( 'Explanation of room types', {:href=>"https://wiki.debconf.org/wiki/DebConf13/Accommodation"} ) end
+        end
+      end
       xml << select_row( @dc_conference_person, :accom_id, DebConf::Dc_accomodation.select(:conference_id=>@conference.conference_id).map{|e| [e.accom_id,e.accom]} )
+      if [:swiss].include? @thisconf
+        xml << check_box_row( @dc_conference_person, :camping )
+        xml << select_row( @dc_conference_person, :com_accom, [[true,'Yes'],[false,'No']], {:with_empty=>true})
+      end
       xml << select_row( @dc_conference_person, :food_id, DebConf::Dc_food_preferences.select({:conference_id=>@conference.conference_id}, {:order => Momomoto.asc(:food_id)}).map{|e| [e.food_id,e.food]} )
+      xml << select_row( @dc_conference_person, :food_select, DebConf::Dc_food_select.select({}, {:order => Momomoto.asc(:food_select_id)}).map{|e| [e.food_select_id,e.description]} )
 
       if [:edinburgh, :argentina, :caceres, :nyc].include? @thisconf
         xml << select_row( @dc_conference_person, :computer_id, DebConf::Dc_computer.select.map{|e| [e.computer_id,e.computer]} )
@@ -88,12 +103,32 @@ xml.div(:id=>'content-general') do
     xml.legend( local('DebCamp') )
 
     xml.table do
-      xml << select_row( @dc_conference_person, :debcamp_id, DebConf::Dc_debcamp.select.map{|e| [e.debcamp_id,e.debcamp_option]}, {:onchange=>'check_debcamp();check_dates();'})
-      xml.tr do
-        xml.td do xml.b do xml << 'DebCamp work plan<span id="debcamp_description_err" style="color: red;"> (must be filled in)</span>' end end
-        xml.td do
-          xml.textarea( @dc_conference_person.debcamp_reason, {:name=>'dc_conference_person[debcamp_reason]',:rows=>5,:id=>'dc_conference_person[debcamp_reason]'} )
+      if [:swiss].include? @thisconf
+        xml << check_box_row( @dc_conference_person, :debcampdc13 )
+      else
+        xml << select_row( @dc_conference_person, :debcamp_id, DebConf::Dc_debcamp.select.map{|e| [e.debcamp_id,e.debcamp_option]}, {:onchange=>'check_debcamp();check_dates();'})
+        xml.tr do
+          xml.td do xml.b do xml << 'DebCamp work plan<span id="debcamp_description_err" style="color: red;"> (must be filled in)</span>' end end
+          xml.td do
+            xml.textarea( @dc_conference_person.debcamp_reason, {:name=>'dc_conference_person[debcamp_reason]',:rows=>5,:id=>'dc_conference_person[debcamp_reason]'} )
+          end
         end
+      end
+    end
+  end
+
+  if [:swiss].include? @thisconf
+    xml.fieldset do
+      xml.legend( local('If you request any kind of sponsorship') )
+      xml.table do
+        xml.tr do
+          xml.ul do
+            xml.li { xml << 'What are your current contributions to Debian?' }
+            xml.li { xml << 'How will your attending this DebConf benefit Debian? Examples include collaboration with other attendees, giving talks, and volunteering at DebConf?' }
+            xml.li { xml << 'Why do you request help paying for your costs?' }
+          end
+        end
+        xml << text_area_fieldset( @dc_conference_person, :debianwork, {:rows=>5,:cols=>60})
       end
     end
   end
