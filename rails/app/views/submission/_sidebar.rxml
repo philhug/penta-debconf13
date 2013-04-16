@@ -53,7 +53,7 @@ xml.div( :id => 'sidebar' ) do
       end
       xml.a( 'Logout', {:href=>"#{request.protocol}logout@#{request.host_with_port}/logout", :class => 'menu-item'} ) if POPE.user
 
-      xml.a( 'DebConf12 Website', {:href=>"http://debconf12.debconf.org/", :class => 'menu-item'} )
+      xml.a( 'DebConf13 Website', {:href=>"http://debconf13.debconf.org/", :class => 'menu-item'} )
 
     end if @conference
 
