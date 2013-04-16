@@ -398,9 +398,9 @@ function check_debcamp(){
 	return ret;
 }
 function check_dates() {
-	var dcampstart = new Date(2013, 8, 17);
-	var dconfstart = new Date(2013, 8, 17);
-	var dconfend = new Date(2013, 8, 25);
+	var dcampstart = new Date(2013, 8, 11);
+	var dconfstart = new Date(2013, 8, 11);
+	var dconfend = new Date(2013, 8, 18);
 	var debcamp = $('dc_conference_person[debcampdc13]').value;
 	var arrivalst = $("conference_person_travel[arrival_date]").value;
 	var departst = $("conference_person_travel[departure_date]").value;
