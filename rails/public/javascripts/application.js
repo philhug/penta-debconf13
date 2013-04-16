@@ -378,6 +378,8 @@ function logout() {
 }
 
 function check_debcamp(){
+	// check_debcamp() not used yet
+	return true;
 	var desc = $('dc_conference_person[debcamp_reason]');
 	var descerr = $('debcamp_description_err');
 	var ret = true;
@@ -449,10 +451,10 @@ function check_dates() {
 	return ret;
 }
 function validate_form() {
-	// if(! check_debcamp()) {
-	// 	alert("Check DebCamp attendance data");
-	// 	return false;
-	// }
+	if(! check_debcamp()) {
+		alert("Check DebCamp attendance data");
+		return false;
+	}
 	if(! check_dates()) {
 		alert("Check arrival and departure dates");
 		return false;
