@@ -42,6 +42,13 @@ xml.div(:id=>'content-general') do
       else
         xml << select_row( @dc_conference_person, :t_shirt_sizes_id, DebConf::Dc_t_shirt_sizes.select.map{|e| [e.t_shirt_sizes_id,e.t_shirt_size]}, {:with_empty=>false, :selected => @dc_conference_person.t_shirt_sizes_id || 0})
       end
+
+      xml.tr do
+        xml.td do xml.b do xml << 'OK being photographed or filmed?' end end
+        xml.td do
+          xml << select_tag( 'dc_person[photo_or_film_ok]', [[true, 'Yes in public areas, unless I say otherwise'], [false, 'No, unless I give my permission']], {:selected => @dc_person.photo_or_film_ok} )
+        end
+      end
     end
   end
 
@@ -79,13 +86,6 @@ xml.div(:id=>'content-general') do
       if [:edinburgh, :argentina, :caceres, :nyc, :managua].include? @thisconf
         xml << select_row( @dc_conference_person, :daytrip_id, DebConf::Dc_daytrip.select.map{|e| [e.daytrip_id,e.daytrip_option]} )
         xml << check_box_row( @dc_conference_person, :assassins )
-      end
-
-      xml.tr do
-        xml.td do xml.b do xml << 'OK being photographed or filmed?' end end
-        xml.td do
-          xml << select_tag( 'dc_person[photo_or_film_ok]', [[true, 'Yes in public areas, unless I say otherwise'], [false, 'No, unless I give my permission']], {:selected => @dc_person.photo_or_film_ok} )
-        end
       end
 
       if [:edinburgh, :argentina, :caceres, :nyc, :bosnia].include? @thisconf
