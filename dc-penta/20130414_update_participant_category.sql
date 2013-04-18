@@ -10,6 +10,8 @@ DROP VIEW debconf.dc_view_participant;
 
 ALTER TABLE base.dc_accomodation ALTER COLUMN accom TYPE varchar(120);
 ALTER TABLE base.dc_debconf_role ADD conference_id INTEGER NOT NULL DEFAULT 6;
+ALTER TABLE base.dc_conference_person ADD debconfbenefit text;
+ALTER TABLE base.dc_conference_person ADD whyrequest text;
 
 CREATE VIEW debconf.view_dc_accomodation AS
     SELECT debconf.dc_accomodation.accom_id, debconf.dc_accomodation.accom FROM debconf.dc_accomodation;
