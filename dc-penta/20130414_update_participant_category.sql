@@ -178,10 +178,10 @@ INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_rol
 INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 11);
 INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 12);
 INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 13);
---- INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 14);
---- INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 15);
---- INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 16);
---- INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 17);
+INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 14);
+INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 15);
+INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 16);
+INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 17);
 
 --- professional
 INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (27, 11);
@@ -249,9 +249,9 @@ ALTER TABLE ONLY debconf.dc_conference_person
 -- Add the logging tables
 CREATE TABLE log.dc_food_select () INHERITS (base.logging, base.dc_food_select);
 
-INSERT INTO debconf.dc_food_select(food_select_id, description) VALUES (1, 'Am staying off-site and will provide own food');
-INSERT INTO debconf.dc_food_select(food_select_id, description) VALUES (2, 'I request sponsored food (sponsored attendees only)');
-INSERT INTO debconf.dc_food_select(food_select_id, description) VALUES (3, 'I wish to pay for food at the conference (25 CHF/day)');
+INSERT INTO debconf.dc_food_select(food_select_id, description) VALUES (1, 'I wish to pay for food at the conference (25 CHF/day)');
+INSERT INTO debconf.dc_food_select(food_select_id, description) VALUES (2, 'I request sponsored food');
+INSERT INTO debconf.dc_food_select(food_select_id, description) VALUES (3, 'I will care for my own food and understand that there are no shops or restaurants nearby.');
 
 INSERT INTO ui_message(ui_message) VALUES ('table::dc_conference_person::food_select');
 UPDATE ui_message_localized SET name='Food preferences' WHERE name='Food';
