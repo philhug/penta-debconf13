@@ -261,7 +261,17 @@ INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::
 
 UPDATE ui_message_localized SET name='Full Name (for e.g. badges)' WHERE ui_message='table::person::public_name' AND translated='en';
 UPDATE ui_message_localized SET name='Nome Completo' WHERE ui_message='table::person::public_name' AND translated='pt_BR';
- 
+
+
+INSERT INTO ui_message(ui_message) VALUES ('table::dc_conference_person::food_select');
+UPDATE ui_message_localized SET name='Food preferences' WHERE name='Food';
+INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::food_select', 'en', 'Food');
+
+INSERT INTO ui_message(ui_message) VALUES ('table::dc_conference_person::debconfbenefit');
+INSERT INTO ui_message(ui_message) VALUES ('table::dc_conference_person::whyrequest');
+INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::debconfbenefit', 'en', 'How will your attending this DebConf benefit Debian?');
+INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::whyrequest', 'en', 'Why do you request help paying for your costs?');
+
 SELECT log.activate_logging();
 
 COMMIT TRANSACTION;
