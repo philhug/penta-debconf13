@@ -257,6 +257,9 @@ INSERT INTO ui_message(ui_message) VALUES ('table::dc_conference_person::food_se
 UPDATE ui_message_localized SET name='Food preferences' WHERE name='Food';
 INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::food_select', 'en', 'Food');
 
+UPDATE ui_message_localized SET name='Full Name (for e.g. badges)' WHERE ui_message='table::person::public_name' AND translated='en';
+UPDATE ui_message_localized SET name='Nome Completo' WHERE ui_message='table::person::public_name' AND translated='pt_BR';
+ 
 SELECT log.activate_logging();
 
 COMMIT TRANSACTION;
