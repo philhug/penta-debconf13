@@ -122,12 +122,17 @@ xml.div(:id=>'content-general') do
 
   if [:swiss].include? @thisconf
     xml.fieldset do
-      xml.legend( local('If you request any kind of sponsorship') )
-      xml.table do
-        xml << text_field_row( @dc_conference_person, :debianwork )
-        xml << text_field_row( @dc_conference_person, :debconfbenefit )
-        xml << text_field_row( @dc_conference_person, :whyrequest )
+      xml.legend( local('Sponsorship') )
+      xml.p do
+        xml << 'Answer '
+        xml.em {xml << 'all'}
+        xml << 'the questions below if you request '
+        xml.em {xml << 'any'}
+        xml << 'kind of sponsorship.'
       end
+      xml << text_area( @dc_conference_person, :debianwork, {:rows=>5,:cols=>60} )
+      xml << text_area( @dc_conference_person, :debconfbenefit, {:rows=>5,:cols=>60} )
+      xml << text_area( @dc_conference_person, :whyrequest, {:rows=>5,:cols=>60} )
     end
   end
 
