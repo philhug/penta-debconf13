@@ -10,6 +10,8 @@ DROP VIEW debconf.dc_view_participant;
 
 ALTER TABLE base.dc_accomodation ALTER COLUMN accom TYPE varchar(120);
 ALTER TABLE base.dc_debconf_role ADD conference_id INTEGER NOT NULL DEFAULT 6;
+ALTER TABLE base.dc_conference_person ADD debconfbenefit text;
+ALTER TABLE base.dc_conference_person ADD whyrequest text;
 
 CREATE VIEW debconf.view_dc_accomodation AS
     SELECT debconf.dc_accomodation.accom_id, debconf.dc_accomodation.accom FROM debconf.dc_accomodation;
@@ -178,10 +180,10 @@ INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_rol
 INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 11);
 INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 12);
 INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 13);
---- INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 14);
---- INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 15);
---- INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 16);
---- INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 17);
+INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 14);
+INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 15);
+INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 16);
+INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (26, 17);
 
 --- professional
 INSERT INTO debconf.dc_participant_mapping (participant_category_id, debconf_role_id) VALUES (27, 11);
@@ -249,9 +251,9 @@ ALTER TABLE ONLY debconf.dc_conference_person
 -- Add the logging tables
 CREATE TABLE log.dc_food_select () INHERITS (base.logging, base.dc_food_select);
 
-INSERT INTO debconf.dc_food_select(food_select_id, description) VALUES (1, 'Am staying off-site and will provide own food');
-INSERT INTO debconf.dc_food_select(food_select_id, description) VALUES (2, 'I request sponsored food (sponsored attendees only)');
-INSERT INTO debconf.dc_food_select(food_select_id, description) VALUES (3, 'I wish to pay for food at the conference (25 CHF/day)');
+INSERT INTO debconf.dc_food_select(food_select_id, description) VALUES (1, 'I wish to pay for food at the conference (25 CHF/day)');
+INSERT INTO debconf.dc_food_select(food_select_id, description) VALUES (2, 'I request sponsored food');
+INSERT INTO debconf.dc_food_select(food_select_id, description) VALUES (3, 'I will care for my own food and understand that there are no shops or restaurants nearby.');
 
 INSERT INTO ui_message(ui_message) VALUES ('table::dc_conference_person::food_select');
 UPDATE ui_message_localized SET name='Food preferences' WHERE name='Food';
@@ -259,7 +261,17 @@ INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::
 
 UPDATE ui_message_localized SET name='Full Name (for e.g. badges)' WHERE ui_message='table::person::public_name' AND translated='en';
 UPDATE ui_message_localized SET name='Nome Completo' WHERE ui_message='table::person::public_name' AND translated='pt_BR';
- 
+
+
+INSERT INTO ui_message(ui_message) VALUES ('table::dc_conference_person::food_select');
+UPDATE ui_message_localized SET name='Food preferences' WHERE name='Food';
+INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::food_select', 'en', 'Food');
+
+INSERT INTO ui_message(ui_message) VALUES ('table::dc_conference_person::debconfbenefit');
+INSERT INTO ui_message(ui_message) VALUES ('table::dc_conference_person::whyrequest');
+INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::debconfbenefit', 'en', 'How will your attending this DebConf benefit Debian?');
+INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::whyrequest', 'en', 'Why do you request help paying for your costs?');
+
 SELECT log.activate_logging();
 
 COMMIT TRANSACTION;

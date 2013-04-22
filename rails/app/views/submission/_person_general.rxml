@@ -124,14 +124,9 @@ xml.div(:id=>'content-general') do
     xml.fieldset do
       xml.legend( local('If you request any kind of sponsorship') )
       xml.table do
-        xml.tr do
-          xml.ul do
-            xml.li { xml << 'What are your current contributions to Debian?' }
-            xml.li { xml << 'How will your attending this DebConf benefit Debian? Examples include collaboration with other attendees, giving talks, and volunteering at DebConf?' }
-            xml.li { xml << 'Why do you request help paying for your costs?' }
-          end
-        end
-        xml << text_area_fieldset( @dc_conference_person, :debianwork, {:rows=>5,:cols=>60})
+        xml << text_field_row( @dc_conference_person, :debianwork )
+        xml << text_field_row( @dc_conference_person, :debconfbenefit )
+        xml << text_field_row( @dc_conference_person, :whyrequest )
       end
     end
   end
