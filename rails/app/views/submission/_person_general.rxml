@@ -68,7 +68,7 @@ xml.div(:id=>'content-general') do
       if [:swiss].include? @thisconf
         xml.tr do
           xml.td do xml.b() end
-          xml.td do xml.a( 'Explanation of room types', {:href=>"https://wiki.debconf.org/wiki/DebConf13/Accommodation", :target=>"_blank"} ) end
+          xml.td do xml.a( 'Explanation of room types', {:href=>"https://wiki.debconf.org/wiki/DebConf13/Accommodation", :target=>"_blank", :class=>"visible-link"} ) end
         end
       end
       xml << select_row( @dc_conference_person, :accom_id, DebConf::Dc_accomodation.select(:conference_id=>@conference.conference_id).map{|e| [e.accom_id,e.accom]} )
