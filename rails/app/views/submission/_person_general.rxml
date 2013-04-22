@@ -130,9 +130,26 @@ xml.div(:id=>'content-general') do
         xml.em {xml << 'any'}
         xml << 'kind of sponsorship.'
       end
-      xml << text_area( @dc_conference_person, :debianwork, {:rows=>5,:cols=>60} )
-      xml << text_area( @dc_conference_person, :debconfbenefit, {:rows=>5,:cols=>60} )
-      xml << text_area( @dc_conference_person, :whyrequest, {:rows=>5,:cols=>60} )
+      xml.table do
+        xml.tr do
+          xml.td do xml.b do xml << 'What are you doing for Debian? Why do you request sponsorship?' end end
+          xml.td do
+            xml.textarea( @dc_conference_person.debianwork, {:name=>'dc_conference_person[debianwork]',:rows=>5,:cols=>60,:id=>'dc_conference_person[debianwork]'} )
+          end
+        end
+        xml.tr do
+          xml.td do xml.b do xml << 'How will your attending this DebConf benefit Debian?' end end
+          xml.td do
+            xml.textarea( @dc_conference_person.debconfbenefit, {:name=>'dc_conference_person[debconfbenefit]',:rows=>5,:cols=>60,:id=>'dc_conference_person[debconfbenefit]'} )
+          end
+        end
+        xml.tr do
+          xml.td do xml.b do xml << 'Why do you request help paying for your costs?' end end
+          xml.td do
+      xml.textarea( @dc_conference_person.whyrequest, {:name=>'dc_conference_person[whyrequest]', :rows=>5,:cols=>60,:id=>'dc_conference_person[whyrequest]'} )
+          end
+        end
+      end
     end
   end
 
