@@ -125,10 +125,10 @@ xml.div(:id=>'content-general') do
       xml.legend( local('Sponsorship') )
       xml.p do
         xml << 'Answer '
-        xml.em {xml << 'all'}
+        xml.b {xml << 'all'}
         xml << 'the questions below if you request '
-        xml.em {xml << 'any'}
-        xml << 'kind of sponsorship.'
+        xml.b {xml << 'food, accomodation or travel'}
+        xml << ' sponsorship.'
       end
       xml.table do
         xml.tr do
