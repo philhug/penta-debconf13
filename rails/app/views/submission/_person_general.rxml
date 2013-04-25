@@ -103,6 +103,12 @@ xml.div(:id=>'content-general') do
       xml.legend( local('Sponsored Accomodation Survey') )
 
       xml.table do
+        xml.tr do
+          xml.td do
+            xml << 'Sponsored accomodation will typically be communal accommodation. At a later stage we may offer some room upgrades (possibly with a fee), according to room availability. In order to be able to better adjust room availability, we ask you to indicate through the survey if you would accept sponsored communal accomodation should this be the only option available.'
+          end
+          xml.td do xml << '&nbsp' end
+        end
         xml << check_box_row( @dc_conference_person, :camping )
         xml << select_row( @dc_conference_person, :com_accom, [[true,'Yes'],[false,'No']], {:with_empty=>true})        
       end
