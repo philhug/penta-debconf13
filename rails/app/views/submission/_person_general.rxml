@@ -72,10 +72,6 @@ xml.div(:id=>'content-general') do
         end
       end
       xml << select_row( @dc_conference_person, :accom_id, DebConf::Dc_accomodation.select(:conference_id=>@conference.conference_id).map{|e| [e.accom_id,e.accom]} )
-      if [:swiss].include? @thisconf
-        xml << check_box_row( @dc_conference_person, :camping )
-        xml << select_row( @dc_conference_person, :com_accom, [[true,'Yes'],[false,'No']], {:with_empty=>true})
-      end
       xml << select_row( @dc_conference_person, :food_id, DebConf::Dc_food_preferences.select({:conference_id=>@conference.conference_id}, {:order => Momomoto.asc(:food_id)}).map{|e| [e.food_id,e.food]} )
       xml << select_row( @dc_conference_person, :food_select, DebConf::Dc_food_select.select({}, {:order => Momomoto.asc(:food_select_id)}).map{|e| [e.food_select_id,e.description]} )
 
@@ -98,6 +94,17 @@ xml.div(:id=>'content-general') do
             xml.textarea( @dc_conference_person.room_preference, {:name=>'dc_conference_person[room_preference]',:rows=>5,:id=>'dc_conference_person[room_preference]'} )
           end
         end
+      end
+    end
+  end
+
+  if [:swiss].include? @thisconf
+    xml.fieldset do
+      xml.legend( local('Sponsored Accomodation Survey') )
+
+      xml.table do
+        xml << check_box_row( @dc_conference_person, :camping )
+        xml << select_row( @dc_conference_person, :com_accom, [[true,'Yes'],[false,'No']], {:with_empty=>true})        
       end
     end
   end
