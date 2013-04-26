@@ -222,7 +222,7 @@ INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::
 
 ALTER TABLE base.dc_conference_person ADD COLUMN camping boolean NOT NULL DEFAULT FALSE;
 INSERT INTO ui_message(ui_message) VALUES ('table::dc_conference_person::camping');
-INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::camping', 'en', 'I prefer camping (in my own tent) over communal accommodation if possible (sponsored attendees only)');
+INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::camping', 'en', 'I prefer camping (in my own tent) over communal accommodation if possible');
 
 ALTER TABLE base.dc_conference_person ADD COLUMN com_accom boolean;
 INSERT INTO ui_message(ui_message) VALUES ('table::dc_conference_person::com_accom');
