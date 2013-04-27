@@ -137,9 +137,9 @@ DELETE FROM debconf.dc_accomodation WHERE conference_id = 7;
 DELETE FROM debconf.dc_food_preferences WHERE conference_id = 7;
 
 INSERT INTO debconf.dc_participant_category (participant_category_id, conference_id, participant_category) VALUES (25, 7, ' --- Please select one --- ');
-INSERT INTO debconf.dc_participant_category (participant_category_id, conference_id, participant_category) VALUES (26, 7, 'Basic (free)');
-INSERT INTO debconf.dc_participant_category (participant_category_id, conference_id, participant_category) VALUES (27, 7, 'Professional (200 CHF)');
-INSERT INTO debconf.dc_participant_category (participant_category_id, conference_id, participant_category) VALUES (28, 7, 'Corporate (500 CHF)');
+INSERT INTO debconf.dc_participant_category (participant_category_id, conference_id, participant_category) VALUES (26, 7, 'Basic registration (free)');
+INSERT INTO debconf.dc_participant_category (participant_category_id, conference_id, participant_category) VALUES (27, 7, 'Professional registration (200 CHF)');
+INSERT INTO debconf.dc_participant_category (participant_category_id, conference_id, participant_category) VALUES (28, 7, 'Corporate registration (500 CHF)');
 
 INSERT INTO debconf.dc_accomodation (accom_id, conference_id, accom) VALUES (20, 7, ' --- Please select one --- ');
 INSERT INTO debconf.dc_accomodation (accom_id, conference_id, accom) VALUES (21, 7, 'I will arrange my own accomodation off-site (no fee)');
