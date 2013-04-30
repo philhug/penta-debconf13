@@ -68,14 +68,10 @@ xml.div(:id=>'content-general') do
       if [:swiss].include? @thisconf
         xml.tr do
           xml.td do xml.b() end
-          xml.td do xml.a( 'Explanation of room types', {:href=>"https://wiki.debconf.org/wiki/DebConf13/Accommodation", :target=>"_blank"} ) end
+          xml.td do xml.a( 'Explanation of room types', {:href=>"https://wiki.debconf.org/wiki/DebConf13/Accommodation", :target=>"_blank", :class=>"visible-link"} ) end
         end
       end
       xml << select_row( @dc_conference_person, :accom_id, DebConf::Dc_accomodation.select(:conference_id=>@conference.conference_id).map{|e| [e.accom_id,e.accom]} )
-      if [:swiss].include? @thisconf
-        xml << check_box_row( @dc_conference_person, :camping )
-        xml << select_row( @dc_conference_person, :com_accom, [[true,'Yes'],[false,'No']], {:with_empty=>true})
-      end
       xml << select_row( @dc_conference_person, :food_id, DebConf::Dc_food_preferences.select({:conference_id=>@conference.conference_id}, {:order => Momomoto.asc(:food_id)}).map{|e| [e.food_id,e.food]} )
       xml << select_row( @dc_conference_person, :food_select, DebConf::Dc_food_select.select({}, {:order => Momomoto.asc(:food_select_id)}).map{|e| [e.food_select_id,e.description]} )
 
@@ -102,6 +98,19 @@ xml.div(:id=>'content-general') do
     end
   end
 
+  if [:swiss].include? @thisconf
+    xml.fieldset do
+      xml.legend( local('Sponsored Accomodation Survey') )
+      xml.p do
+        xml << 'Sponsored accomodation will typically be communal accommodation. At a later stage we may offer some room upgrades (possibly with a fee), according to room availability. In order to be able to better adjust room availability, we ask you to indicate through the survey if you would accept sponsored communal accomodation should this be the only option available.'
+      end
+      xml.table do
+        xml << check_box_row( @dc_conference_person, :camping )
+        xml << select_row( @dc_conference_person, :com_accom, [[true,'Yes'],[false,'No']], {:with_empty=>true})        
+      end
+    end
+  end
+
   xml.fieldset do
     xml.legend( local('DebCamp') )
 
@@ -122,11 +131,33 @@ xml.div(:id=>'content-general') do
 
   if [:swiss].include? @thisconf
     xml.fieldset do
-      xml.legend( local('If you request any kind of sponsorship') )
+      xml.legend( local('Sponsorship') )
+      xml.p do
+        xml << 'Answer '
+        xml.b {xml << 'all'}
+        xml << 'the questions below if you request '
+        xml.b {xml << 'food, accomodation or travel'}
+        xml << ' sponsorship.'
+      end
       xml.table do
-        xml << text_field_row( @dc_conference_person, :debianwork )
-        xml << text_field_row( @dc_conference_person, :debconfbenefit )
-        xml << text_field_row( @dc_conference_person, :whyrequest )
+        xml.tr do
+          xml.td do xml.b do xml << 'What are you doing for Debian? Why do you request sponsorship?' end end
+          xml.td do
+            xml.textarea( @dc_conference_person.debianwork, {:name=>'dc_conference_person[debianwork]',:rows=>5,:cols=>60,:id=>'dc_conference_person[debianwork]'} )
+          end
+        end
+        xml.tr do
+          xml.td do xml.b do xml << 'How will your attending this DebConf benefit Debian?' end end
+          xml.td do
+            xml.textarea( @dc_conference_person.debconfbenefit, {:name=>'dc_conference_person[debconfbenefit]',:rows=>5,:cols=>60,:id=>'dc_conference_person[debconfbenefit]'} )
+          end
+        end
+        xml.tr do
+          xml.td do xml.b do xml << 'Why do you request help paying for your costs?' end end
+          xml.td do
+      xml.textarea( @dc_conference_person.whyrequest, {:name=>'dc_conference_person[whyrequest]', :rows=>5,:cols=>60,:id=>'dc_conference_person[whyrequest]'} )
+          end
+        end
       end
     end
   end
