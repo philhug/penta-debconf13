@@ -223,10 +223,12 @@ INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::
 ALTER TABLE base.dc_conference_person ADD COLUMN camping boolean NOT NULL DEFAULT FALSE;
 INSERT INTO ui_message(ui_message) VALUES ('table::dc_conference_person::camping');
 INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::camping', 'en', 'I prefer camping (in my own tent) over communal accommodation if possible');
+INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::camping', 'de', 'Ich bevorzuge Camping (in meinem eigenen Zelt) gegenüber Gruppenunterbringung falls möglich');
 
 ALTER TABLE base.dc_conference_person ADD COLUMN com_accom boolean;
 INSERT INTO ui_message(ui_message) VALUES ('table::dc_conference_person::com_accom');
 INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::com_accom', 'en', 'I will accept sponsored communal accommodation (12 or more beds per room)');
+INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::com_accom', 'de', 'Ich werde gesponsorte Gruppenunterbringung (12 oder mehr Betten pro Raum) akzeptieren');
 
 
 -- Create/modify base tables
@@ -258,6 +260,7 @@ INSERT INTO debconf.dc_food_select(food_select_id, description) VALUES (3, 'I wi
 INSERT INTO ui_message(ui_message) VALUES ('table::dc_conference_person::food_select');
 UPDATE ui_message_localized SET name='Food preferences' WHERE name='Food';
 INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::food_select', 'en', 'Food');
+INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::food_select', 'de', 'Mahlzeiten');
 
 UPDATE ui_message_localized SET name='Full Name (for e.g. badges)' WHERE ui_message='table::person::public_name' AND translated='en';
 UPDATE ui_message_localized SET name='Nome Completo' WHERE ui_message='table::person::public_name' AND translated='pt_BR';
@@ -266,11 +269,14 @@ UPDATE ui_message_localized SET name='Registration type' WHERE ui_message='table
 INSERT INTO ui_message(ui_message) VALUES ('table::dc_conference_person::food_select');
 UPDATE ui_message_localized SET name='Food preferences' WHERE name='Food';
 INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::food_select', 'en', 'Food');
+INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::food_select', 'de', 'Mahlzeiten');
 
 INSERT INTO ui_message(ui_message) VALUES ('table::dc_conference_person::debconfbenefit');
 INSERT INTO ui_message(ui_message) VALUES ('table::dc_conference_person::whyrequest');
 INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::debconfbenefit', 'en', 'How will your attending this DebConf benefit Debian?');
+INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::debconfbenefit', 'de', 'Wie wird Debian von Deiner Teilnahme an der DebConf profitieren?');
 INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::whyrequest', 'en', 'Why do you request help paying for your costs?');
+INSERT INTO ui_message_localized (ui_message, translated, name) VALUES ('table::dc_conference_person::whyrequest', 'de', 'Warum beantragst Du Unterstützung beim Tragen der Kosten?');
 
 SELECT log.activate_logging();
 
