@@ -55,12 +55,20 @@ xml.div(:id=>'content-travel') do
   end
 
   xml << text_area_fieldset( @dc_conference_person, :debianwork, {:rows=>5,:cols=>60})
+  if [:swiss].include? @thisconf
+    xml << text_field_row( @dc_conference_person, :debconfbenefit, {:rows=>5,:cols=>60} )
+    xml << text_field_row( @dc_conference_person, :whyrequest, {:rows=>5,:cols=>60} )
+  end
 
   xml.fieldset do
     xml.legend local('accommodation_sponsored')
 
     xml.table do
       xml << select_row(  @dc_conference_person, :accom_id, DebConf::Dc_accomodation.select(:conference_id=>@conference.conference_id).map{|e| [e.accom_id,e.accom]} )
+      if [:swiss].include? @thisconf
+        xml << check_box_row( @dc_conference_person, :camping )
+        xml << select_row( @dc_conference_person, :com_accom, [[true,'Yes'],[false,'No']], {:with_empty=>true})
+      end
     end
   end
 

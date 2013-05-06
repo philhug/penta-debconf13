@@ -94,6 +94,23 @@ xml.div({:id=>:data}) do
         xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:food})
         xml << select_tag('search_person[row_id][value]', DebConf::Dc_food_preferences.select.map{|c| [c.food, c.food]})
       end
+      # search for food_select
+      xml.li({:class=>:food_select,:title=>local(:food_select)}) do
+        xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:food_select})
+        xml << select_tag('search_person[row_id][value]', DebConf::Dc_food_select.select.map{|c| [c.food_select, c.food_select]})
+      end
+      # swiss-only
+      # search for camping flag
+      xml.li({:class=>:camping,:title=>local(:camping)}) do
+        xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:camping})
+        xml << select_tag('search_person[row_id][value]', [['t','Yes'],['f','No']])
+      end
+      # search for debcampdc13 flag
+      xml.li({:class=>:debcampdc13,:title=>local(:debcampdc13)}) do
+        xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:debcampdc13})
+        xml << select_tag('search_person[row_id][value]', [['t','Yes'],['f','No']])
+      end
+
     end
 
     xml.ul({:id=>:search_template,:style=>"display:none"}) do
