@@ -56,8 +56,8 @@ xml.div(:id=>'content-travel') do
 
   xml << text_area_fieldset( @dc_conference_person, :debianwork, {:rows=>5,:cols=>60})
   if [:swiss].include? @thisconf
-    xml << text_field_row( @dc_conference_person, :debconfbenefit, {:rows=>5,:cols=>60} )
-    xml << text_field_row( @dc_conference_person, :whyrequest, {:rows=>5,:cols=>60} )
+    xml << text_area_fieldset( @dc_conference_person, :debconfbenefit, {:rows=>5,:cols=>60} )
+    xml << text_area_fieldset( @dc_conference_person, :whyrequest, {:rows=>5,:cols=>60} )
   end
 
   xml.fieldset do
