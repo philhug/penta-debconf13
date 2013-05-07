@@ -101,6 +101,11 @@ xml.div({:id=>:data}) do
 
       end
       # swiss-only
+      # search for communal accomodation flag
+      xml.li({:class=>:com_accom,:title=>local(:com_accom)}) do
+        xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:com_accom})
+        xml << select_tag('search_person[row_id][value]', [['t','Yes'],['f','No']])
+      end
       # search for camping flag
       xml.li({:class=>:camping,:title=>local(:camping)}) do
         xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:camping})
