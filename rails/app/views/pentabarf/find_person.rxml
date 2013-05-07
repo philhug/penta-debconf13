@@ -64,11 +64,12 @@ xml.div({:id=>:data}) do
         xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:accom})
         xml << select_tag('search_person[row_id][value]', DebConf::Dc_accomodation.select.map{|c| [c.accom, c.accom]})
       end
-      # search for debcamp
-      xml.li({:class=>:debcamp_option,:title=>local(:debcamp)}) do
-        xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:debcamp_option})
-        xml << select_tag('search_person[row_id][value]', DebConf::Dc_debcamp.select.map{|c| [c.debcamp_option, c.debcamp_option]})
-      end
+#hide for dc13
+#     # search for debcamp
+#     xml.li({:class=>:debcamp_option,:title=>local(:debcamp)}) do
+#       xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:debcamp_option})
+#       xml << select_tag('search_person[row_id][value]', DebConf::Dc_debcamp.select.map{|c| [c.debcamp_option, c.debcamp_option]})
+#     end
       # search for person_type
       xml.li({:class=>:person_type,:title=>local('person_type (DebConf <= 11)')}) do
         xml.input({:type=>:hidden,:name=>'search_person[row_id][key]',:value=>:person_type})
