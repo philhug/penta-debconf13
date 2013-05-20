@@ -162,14 +162,14 @@ class SubmissionController < ApplicationController
       # No more Sponsored Accomodation accepted after May 19 23:59
       if sponsored.include?(params[:dc_conference_person][:dc_participant_category_id].to_i) and
           !sponsored.include?(old_dc_conference_person.dc_participant_category_id.to_i) and
-          Time.now > Time.gm(2014,5,19)
+          Time.now > Time.gm(2013,5,19)
           raise "The deadline for sponsored attendees' registration was May 19, so your changes were not accepted. Contact registration@debconf.org if changes are needed."
       end
 
       # No more Sponsored food accepted after May 19 23:59
       if (params[:dc_conference_person][:food_select].to_i == 2) and
           (old_dc_conference_person.food_select.to_i != 2) and
-        Time.now > Time.gm(2014,5,19)
+        Time.now > Time.gm(2013,5,19)
         raise "The deadline for sponsored attendees' registration was May 19, so your changes to your food selection were not accepted. Contact registration@debconf.org if changes are needed."
       end
 
