@@ -143,7 +143,7 @@ class SubmissionController < ApplicationController
       # Sponsored registration from DC13: participant_mapping_id
       # (debconf.dc_participant_mapping) where participant_category in (26)
       # and conference_id=6
-      sponsored = [232, 233, 234]
+      sponsored = [233, 234]
 
       # # Basic registration means no regular room will be provided
       # basic = [110, 111, 112, 113, 114, 115, 116, 117]
