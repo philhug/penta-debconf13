@@ -139,11 +139,11 @@ class SubmissionController < ApplicationController
     #   params[:dc_conference_person][:dc_participant_category_id]= map_id.participant_mapping_id
     # end
 
-    if params[:conference] == "dc12"
-      # Sponsored registration from DC11: participant_mapping_id
-      # (debconf.dc_participant_mapping) where participant_category in (20, 21, 22)
+    if params[:conference] == "dc13"
+      # Sponsored registration from DC13: participant_mapping_id
+      # (debconf.dc_participant_mapping) where participant_category in (26)
       # and conference_id=6
-      sponsored = [167, 168, 169, 170, 171, 172, 173, 174, 175]
+      sponsored = [232, 233, 234]
 
       # # Basic registration means no regular room will be provided
       # basic = [110, 111, 112, 113, 114, 115, 116, 117]
@@ -159,11 +159,18 @@ class SubmissionController < ApplicationController
       #   end
       # end
 
-      # No more Sponsored Accomodation accepted after May 15 23:59
+      # No more Sponsored Accomodation accepted after May 19 23:59
       if sponsored.include?(params[:dc_conference_person][:dc_participant_category_id].to_i) and
           !sponsored.include?(old_dc_conference_person.dc_participant_category_id.to_i) and
-          Time.now > Time.gm(2012,5,16)
-          raise "The deadline for sponsored attendees' registration was May 15, so your changes were not accepted. Contact registration@debconf.org if changes are needed."
+          Time.now > Time.gm(2014,5,19)
+          raise "The deadline for sponsored attendees' registration was May 19, so your changes were not accepted. Contact registration@debconf.org if changes are needed."
+      end
+
+      # No more Sponsored food accepted after May 19 23:59
+      if (params[:dc_conference_person][:food_select].to_i == 2) and
+          (old_dc_conference_person.food_select.to_i != 2) and
+        Time.now > Time.gm(2014,5,19)
+        raise "The deadline for sponsored attendees' registration was May 19, so your changes to your food selection were not accepted. Contact registration@debconf.org if changes are needed."
       end
 
       # Enabling the "reconfirmed" checkbox requires dates to be
@@ -180,22 +187,23 @@ class SubmissionController < ApplicationController
         end
       end
 
-      if params[:dc_conference_person][:debcamp_id].to_i == 2 and old_dc_conference_person.debcamp_id != 2
-        raise "It's too late to register a plan for DebCamp — Sorry. You can still attend unsponsored, though"
-      end
+      # if params[:dc_conference_person][:debcamp_id].to_i == 2 and old_dc_conference_person.debcamp_id != 2
+      #   raise "It's too late to register a plan for DebCamp — Sorry. You can still attend unsponsored, though"
+      # end
 
-      if Date.today > Date.parse('2012-06-20')
-        old_arr_date = old_conference_person_travel.arrival_date
-        arr_date = Date.parse(params[:conference_person_travel][:arrival_date])
-        old_dep_date = old_conference_person_travel.departure_date
-        dep_date = Date.parse(params[:conference_person_travel][:departure_date])
+      # Reconfirm period
+      # if Date.today > Date.parse('2013-06-20')
+      #   old_arr_date = old_conference_person_travel.arrival_date
+      #   arr_date = Date.parse(params[:conference_person_travel][:arrival_date])
+      #   old_dep_date = old_conference_person_travel.departure_date
+      #   dep_date = Date.parse(params[:conference_person_travel][:departure_date])
 
-        if (old_arr_date and arr_date != old_arr_date) or
-            (old_dep_date and dep_date != old_dep_date)
-          raise 'Reconfirmation period is over - You cannot change arrival/departure dates anymore! ' +
-            'Please mail registration@debconf.org to let them know your new travel plans.'
-        end
-      end
+      #   if (old_arr_date and arr_date != old_arr_date) or
+      #       (old_dep_date and dep_date != old_dep_date)
+      #     raise 'Reconfirmation period is over - You cannot change arrival/departure dates anymore! ' +
+      #       'Please mail registration@debconf.org to let them know your new travel plans.'
+      #   end
+      # end
 
       # # Regular rooms cannot be accepted anymore after July 3 for
       # # those not yet having it
