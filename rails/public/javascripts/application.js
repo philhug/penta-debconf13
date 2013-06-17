@@ -400,7 +400,7 @@ function check_debcamp(){
 	return ret;
 }
 function check_dates() {
-	var dcampstart = new Date(2013, 8, 10);
+	var dcampstart = new Date(2013, 8, 6);
 	var dconfstart = new Date(2013, 8, 10);
 	var dconfend = new Date(2013, 8, 18);
 	var debcamp = $('dc_conference_person[debcampdc13]').value;
