@@ -143,7 +143,7 @@ class SubmissionController < ApplicationController
       # Sponsored registration from DC13: participant_mapping_id
       # (debconf.dc_participant_mapping) where participant_category in (26)
       # and conference_id=6
-      sponsored = [233, 234]
+      # sponsored = [233, 234]
 
       # # Basic registration means no regular room will be provided
       # basic = [110, 111, 112, 113, 114, 115, 116, 117]
@@ -160,8 +160,9 @@ class SubmissionController < ApplicationController
       # end
 
       # No more Sponsored Accomodation accepted after May 19 23:59
-      if sponsored.include?(params[:dc_conference_person][:dc_participant_category_id].to_i) and
-          !sponsored.include?(old_dc_conference_person.dc_participant_category_id.to_i) and
+      sponsored_accom = [22, 27]
+      if sponsored_accom.include?(params[:dc_conference_person][:accom_id].to_i) and
+          !sponsored_accom.include?(old_dc_conference_person.accom_id.to_i) and
           Time.now > Time.gm(2013,5,19)
           raise "The deadline for sponsored attendees' registration was May 19, so your changes were not accepted. Contact registration@debconf.org if changes are needed."
       end
