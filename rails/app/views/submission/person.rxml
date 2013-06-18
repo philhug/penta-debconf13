@@ -30,7 +30,7 @@ xml.div( :id => 'data' ) do
   xml.script( "new Form.EventObserver('content_form', function(element, value ) { enable_save_button() } );", { :type => 'text/javascript' } )
   xml.script( "window.addEventListener('DOMContentLoaded', function() { new Form.Observer('content_form', 2, function(element, value ) { enable_save_button() } ); }, false);", { :type => 'text/javascript' } )
   xml.script( "switch_tab();", { :type => 'text/javascript' } )
-  xml.script( "check_dates();", { :type => 'text/javascript' } )
+  xml.script( "check_debcamp(); check_dates();", { :type => 'text/javascript' } )
 
 
 end
