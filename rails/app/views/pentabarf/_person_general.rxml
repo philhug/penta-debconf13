@@ -44,12 +44,9 @@ xml.div(:id=>'content-general') do
       xml << select_row(  @dc_conference_person, :daytrip_id, DebConf::Dc_daytrip.select.map{|e| [e.daytrip_id,e.daytrip_option]} )
       xml << select_row(  @dc_conference_person, :computer_id, DebConf::Dc_computer.select.map{|e| [e.computer_id,e.computer]} )
 
-      if [:swiss].include? @thisconf
-        xml << check_box_row( @dc_conference_person, :debcampdc13 )
-      else
-        xml << select_row( @dc_conference_person, :debcamp_id, DebConf::Dc_debcamp.select.map{|e| [e.debcamp_id,e.debcamp_option]} )
-        xml << text_field_row( @dc_conference_person, :debcamp_reason, {:size=>90} )
-      end
+      xml << select_row( @dc_conference_person, :debcamp_id, DebConf::Dc_debcamp.select.map{|e| [e.debcamp_id,e.debcamp_option]} )
+      xml << text_field_row( @dc_conference_person, :debcamp_reason, {:size=>90} )
+
       if @conference.f_reconfirmation_enabled
         xml.tr do
           xml.td do xml.b do xml << 'Room preference' end end
