@@ -188,30 +188,44 @@ class SubmissionController < ApplicationController
         end
       end
 
-      # if params[:dc_conference_person][:debcamp_id].to_i == 2 and old_dc_conference_person.debcamp_id != 2
-      #   raise "It's too late to register a plan for DebCamp — Sorry. You can still attend unsponsored, though"
-      # end
+      # DebCamp closed
+      if Time.now > Time.gm(2013,7,3)
+        if params[:dc_conference_person][:debcamp_id].to_i == 2 and old_dc_conference_person.debcamp_id != 2
+          raise "It's too late to register for DebCamp — Sorry."
+        end
+        if params[:dc_conference_person][:debcamp_id].to_i == 3 and old_dc_conference_person.debcamp_id != 3
+          raise "It's too late to register for DebCamp — Sorry."
+        end
+      end
 
       # Reconfirm period
-      # if Date.today > Date.parse('2013-06-20')
-      #   old_arr_date = old_conference_person_travel.arrival_date
-      #   arr_date = Date.parse(params[:conference_person_travel][:arrival_date])
-      #   old_dep_date = old_conference_person_travel.departure_date
-      #   dep_date = Date.parse(params[:conference_person_travel][:departure_date])
+      if Time.now > Time.gm(2013,7,7)
 
-      #   if (old_arr_date and arr_date != old_arr_date) or
-      #       (old_dep_date and dep_date != old_dep_date)
-      #     raise 'Reconfirmation period is over - You cannot change arrival/departure dates anymore! ' +
-      #       'Please mail registration@debconf.org to let them know your new travel plans.'
-      #   end
-      # end
+        old_arr_date = old_conference_person_travel.arrival_date
+        arr_date = Date.parse(params[:conference_person_travel][:arrival_date])
+        old_dep_date = old_conference_person_travel.departure_date
+        dep_date = Date.parse(params[:conference_person_travel][:departure_date])
 
-      # # Regular rooms cannot be accepted anymore after July 3 for
-      # # those not yet having it
-      # if Time.now > Time.gm(2011,7,3) and params[:dc_conference_person][:accom_id] == '15' and
-      #     !(old_dc_conference_person.accom_id == 15)
-      #   raise "We are sorry, you cannot select 'regular room' anymore. Please set your accomodation to 'I will arrange my own accommodation' and try again. Please mail registration@debconf.org if you need to make changes."
-      # end
+        if (old_arr_date and arr_date != old_arr_date) or
+            (old_dep_date and dep_date != old_dep_date)
+          raise 'Reconfirmation period is over - You cannot change arrival/departure dates anymore! ' +
+            'Please mail registration@debconf.org to let them know your new travel plans.'
+        end
+      end
+
+      # Camping is full and cannot be accepted anymore after July 3 for
+      # those not yet having it
+      if Time.now > Time.gm(2013,7,3) and params[:dc_conference_person][:accom_id] == '24' and
+          !(old_dc_conference_person.accom_id == 24)
+        raise "We are sorry, you cannot select this category anymore, because it's full. Please chose another type of accomodation and try again. Please mail registration@debconf.org if you need to make changes."
+      end
+
+      # 2bed is full and cannot be accepted anymore after July 3 for
+      # those not yet having it
+      if Time.now > Time.gm(2013,7,3) and params[:dc_conference_person][:accom_id] == '26' and
+          !(old_dc_conference_person.accom_id == 26)
+        raise "We are sorry, you cannot select this category anymore, because it's full. Please chose another type of accomodation and try again. Please mail registration@debconf.org if you need to make changes."
+      end
 
       # # People lodging at the hotel should not change their
       # # arrival/departure dates anymore (also, retroactively since
