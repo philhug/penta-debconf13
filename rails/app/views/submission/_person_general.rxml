@@ -64,7 +64,7 @@ xml.div(:id=>'content-general') do
         xml << select_row( @dc_conference_person, :dc_participant_category_id, DebConf::Dc_view_participant.select(:conference_id=>@conference.conference_id).map{|e| [e.participant_mapping_id,e.debconf_role_id,e.participant_category]},{:slave=>true,:with_empty=>false, :selected => @dc_conference_person.dc_participant_category_id || 0})
         xml.script("$('dc_conference_person[debconf_role_id]').onchange()",{:type=>"text/javascript"})
       end
-      
+
       if [:swiss].include? @thisconf
         xml.tr do
           xml.td do xml.b() end
@@ -107,7 +107,7 @@ xml.div(:id=>'content-general') do
 #      end
 #      xml.table do
 #        xml << check_box_row( @dc_conference_person, :camping )
-#        xml << select_row( @dc_conference_person, :com_accom, [[true,'Yes'],[false,'No']], {:with_empty=>true})        
+#        xml << select_row( @dc_conference_person, :com_accom, [[true,'Yes'],[false,'No']], {:with_empty=>true})
 #      end
 #    end
 #  end
@@ -180,7 +180,7 @@ xml.div(:id=>'content-general') do
       end
     end
 
-    xml.script(:type=>'text/javascript') do 
+    xml.script(:type=>'text/javascript') do
       Person_language.select( :person_id => @person.person_id ).each do | c |
         xml << js_function( 'table_add_row', 'person_language', c.language )
       end
