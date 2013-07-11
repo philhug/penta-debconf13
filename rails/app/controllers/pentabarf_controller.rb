@@ -168,7 +168,7 @@ class PentabarfController < ApplicationController
     write_rows( Event_person, params[:event_person], {:preset=>{:person_id => person.person_id}})
 
     dc_options = {:preset=>{:person_id => person.person_id,:conference_id=>@current_conference.conference_id},
-      :always=>[:assassins,:public_data,:proceedings,:attend,:travel_to_venue,:has_to_pay,:has_paid,:travel_from_venue,:coffee_mug,:camping]}
+      :always=>[:assassins,:public_data,:proceedings,:attend,:travel_to_venue,:has_to_pay,:has_paid,:travel_from_venue,:coffee_mug,:camping,:com_accom,:whyrequest,:debconfbenefit,:debianwork]}
     write_row(DebConf::Dc_conference_person, params[:dc_conference_person], dc_options)
     write_row(DebConf::Dc_person, params[:dc_person], {:preset=>{:person_id => person.person_id}})
 
