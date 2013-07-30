@@ -79,7 +79,13 @@ xml.div(:id=>'content-general') do
         xml << select_row( @dc_conference_person, :computer_id, DebConf::Dc_computer.select.map{|e| [e.computer_id,e.computer]} )
       end
 
-      if [:edinburgh, :argentina, :caceres, :nyc, :managua].include? @thisconf
+      if [:swiss].include? @thisconf
+        xml.tr do
+          xml.td do xml.b() end
+          xml.td do xml.a( 'Daytrip options', {:href=>"https://wiki.debconf.org/wiki/DebConf13/DayTrip", :target=>"_blank", :class=>"visible-link"} ) end
+        end
+      end
+      if [:edinburgh, :argentina, :caceres, :nyc, :managua, :swiss].include? @thisconf
         xml << select_row( @dc_conference_person, :daytrip_id, DebConf::Dc_daytrip.select.map{|e| [e.daytrip_id,e.daytrip_option]} )
       end
 
