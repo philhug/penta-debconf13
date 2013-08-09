@@ -67,6 +67,10 @@ xml.div(:id=>'content-general') do
       if @thisconf == :managua
         xml << check_box_row( @dc_conference_person, :coffee_mug )
       end
+      if @thisconf == :swiss
+        xml << check_box_row( @dc_conference_person, :coffee_mug )
+        xml << check_box_row( @dc_conference_person, :shirt )
+      end
       xml << text_field_row( @dc_conference_person, :amount_to_pay )
     end
   end
