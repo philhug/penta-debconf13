@@ -174,6 +174,11 @@ class SubmissionController < ApplicationController
         raise "The deadline for sponsored attendees' registration was May 19, so your changes to your food selection were not accepted. Contact registration@debconf.org if changes are needed."
       end
 
+      # No more daytrip changes
+      if (params[:dc_conference_person][:daytrip_option].to_i != old_dc_conference_person.daytrip_option.to_i)
+        raise "Daytrip option locked. Contact registration@debconf.org if changes are needed."
+      end
+
       # Enabling the "reconfirmed" checkbox requires dates to be
       # entered.  Checking whether the dates are valid will be left to
       # the client-side JS (and that allows admins to enter
